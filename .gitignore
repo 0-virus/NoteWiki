@@ -1,2 +1,5 @@
 # obsidian local cache
 .obsidian/workspace.json
+
+# claude code: machine-local settings (permissions etc.)
+.claude/settings.local.json

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Pull memory after rebase / commit --amend (post-merge does not fire here).
+node "$(git rev-parse --show-toplevel)/.claude/scripts/sync-memory.mjs" pull || true

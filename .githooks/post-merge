@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Pull memory from repo into machine memory dir after merge (e.g., git pull).
+node "$(git rev-parse --show-toplevel)/.claude/scripts/sync-memory.mjs" pull || true

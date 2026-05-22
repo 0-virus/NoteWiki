@@ -47,6 +47,37 @@
 
 ---
 
+# 메모리 동기화 (`.claude-memory/`)
+
+클로의 "너에 대한 기억"은 기본적으로 머신 글로벌 경로(`~/.claude/projects/<slug>/memory/`)에 있어 클론으로 따라가지 않는다.
+이를 저장소와 함께 옮기기 위해 `.claude-memory/`를 두고 자동 동기화한다.
+
+- **저장소 안 사본**: `.claude-memory/` (git 추적)
+- **머신의 실제 메모리**: `~/.claude/projects/<slug>/memory/` (Claude Code가 실제로 읽고 쓰는 곳)
+- **동기화 스크립트**: `.claude/scripts/sync-memory.mjs` (Node, 양방향 mirror)
+- **수동 실행**: `/sync-memory [push|pull|init]`
+- **자동 push**: 매 응답 종료 시 (Stop 훅, `.claude/settings.json`)
+- **자동 pull**: `git pull`·`git merge`·`git checkout`·`git rebase` 직후 (`.githooks/`)
+
+## 새 머신 셋업
+
+```bash
+git clone <repo>
+cd NoteWiki
+git config core.hooksPath .githooks   # 저장소 훅 활성화 (1회)
+node .claude/scripts/sync-memory.mjs pull   # 머신 메모리 폴더 채우기
+```
+
+또는 Claude Code 안에서 `/sync-memory init` 한 줄로 끝.
+
+## 주의
+
+- `pull`은 머신 메모리를 **mirror**한다 → 머신에만 있는 변경은 사라진다. 우려되면 먼저 `push`.
+- 양 머신에서 동시에 메모리가 수정되면 **마지막 push가 이긴다**. 자동 머지 없음.
+- 현재 대화의 메모리는 이미 로드된 상태이므로, 변경 반영은 **다음 대화부터**.
+
+---
+
 # 위키 운영 규칙 (LLM Wiki Pattern)
 
 이 저장소는 Karpathy의 _LLM Wiki_ 패턴을 따른다. RAG처럼 매번 원본을 재검색하는 대신,
