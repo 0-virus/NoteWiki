@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "🎬 유튜브 (YouTube)",
+  "behavior": "create",
+  "noteContentFormat": "> [!info] 영상\n> {{url}}\n\n![썸네일]({{image}})\n\n## 설명\n{{description}}\n\n## 자막·핵심 내용\n<!-- 자막 또는 핵심 구간 메모를 붙여넣기 -->\n{{content}}\n\n---\n\n## 💭 내 메모\n<!-- 클리핑 후 직접 작성 — 왜 저장했나 · 핵심 takeaway · 궁금한 점. 인제스트 시 이 메모를 우선 반영한다. -->\n",
+  "properties": [
+    {
+      "name": "source_type",
+      "value": "youtube",
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "value": "{{title}}",
+      "type": "text"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "channel",
+      "value": "{{author}}",
+      "type": "text"
+    },
+    {
+      "name": "duration",
+      "value": "{{schema:@VideoObject:duration}}",
+      "type": "text"
+    },
+    {
+      "name": "published",
+      "value": "{{published}}",
+      "type": "date"
+    },
+    {
+      "name": "clipped",
+      "value": "{{date}}",
+      "type": "date"
+    },
+    {
+      "name": "description",
+      "value": "{{description}}",
+      "type": "text"
+    },
+    {
+      "name": "tags",
+      "value": "clippings/youtube",
+      "type": "multitext"
+    }
+  ],
+  "triggers": [
+    "https://www.youtube.com/watch",
+    "https://youtu.be/"
+  ],
+  "noteNameFormat": "{{title}}",
+  "path": "raw/youtube"
+}

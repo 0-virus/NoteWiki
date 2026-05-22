@@ -1,0 +1,146 @@
+# Wiki Index
+
+> 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
+> 형식: `- [[page-name]] — 한 줄 요약`
+
+_마지막 갱신: 2026-05-21 (query — Spring MVC 도식 HTML 환류: [[dispatcher-servlet]] 신설, [[spring-mvc-request-flow]] 신설, [[domain]]·[[dto-vs-entity]] 보강)_
+
+---
+
+## 개념 (Concepts) — `concepts/`
+
+### 도구 / 지식관리
+- [[markdown]] — 위키의 토대가 되는 경량 마크업 언어
+- [[obsidian]] — 로컬 기반 마크다운 노트 앱, Vault
+- [[wikilink]] — `[[연결]]`로 노트를 잇는 핵심 기능
+- [[graph-view]] — 노트 연결망을 시각화
+- [[obsidian-tags]] — 태그·중첩 태그로 가로지르는 검색
+- [[obsidian-properties]] — frontmatter 메타데이터
+- [[web-clipper]] — 웹 페이지를 Vault로 수집하는 확장
+
+### CSS / 프론트엔드
+- [[css-selector]] — DOM 요소를 가리키는 주소 문법, JS·크롤러·클리퍼가 공통 차용
+- [[css-specificity]] — CSS 우선순위: 중요도 → 명시도 → 작성 순서
+- [[css-modules]] — `.module.css`로 클래스명을 격리해 전역 충돌 방지
+
+### JavaScript
+- [[es-modules]] — import/export, named vs default, 동적 import
+- [[javascript-async]] — 동기 vs 비동기, JS 싱글 스레드와 블로킹
+- [[callback]] — 가장 오래된 비동기 방식, 콜백 지옥
+- [[promise]] — 비동기 결과를 담는 객체, 3상태와 정적 메서드
+- [[async-await]] — Promise를 동기 코드처럼 쓰는 문법 설탕
+
+### Node.js / npm
+- [[node-modules]] — 프로젝트별 의존성 격리 폴더
+- [[npm-dependency-files]] — package.json / package-lock.json / .package-lock.json
+
+### 데이터베이스
+- [[orm]] — 객체-관계 매핑, 장점과 한계
+- [[prisma]] — JS/TS 전용 ORM, 스키마와 클라이언트
+- [[n-plus-1-problem]] — ORM에서 흔한 쿼리 비효율과 해결
+
+### Java / 언어 기초
+- [[jvm-memory]] — Method Area / Heap / Stack 3대 메모리 영역
+- [[static-keyword]] — 객체와 무관하게 클래스에 속하는 멤버
+- [[equals-hashcode]] — 동등 비교와 해시, 함께 오버라이딩해야 하는 이유
+- [[mutable-immutable]] — 가변 vs 불변 객체, 불변의 이점과 비용
+- [[string-pool]] — 같은 문자열 리터럴을 공유하는 Heap 영역
+- [[java-buffer]] — 버퍼 원리, Scanner의 nextLine 함정
+- [[short-circuit]] — `&&`·`||`의 단축 평가, Java/JS 차이
+- [[generics]] — 타입을 파라미터처럼 받는 기능
+- [[functional-interface]] — 추상 메서드 1개짜리 인터페이스, 람다의 타겟 타입
+- [[lambda]] — 함수형 인터페이스 구현을 짧게 쓰는 문법
+- [[anonymous-class]] — 즉석 구현체, 람다의 전신
+- [[java-record]] — JDK 16+ 불변 데이터 클래스를 한 줄로 정의
+
+### 시스템 디자인 / 인프라
+- [[proxy]] — 네트워크 통신의 중간자, Forward와 Reverse는 위치만 다른 한 쌍
+- [[forward-proxy]] — 클라이언트 측 프록시, 사내망 게이트웨이·콘텐츠 필터링
+- [[reverse-proxy]] — 서버 측 프록시, IP 은닉·캐싱·로드 밸런싱 게이트
+- [[load-balancer]] — 여러 서버 앞단에서 요청을 분산하는 장치, 성능 + 고가용성
+- [[load-balancing-algorithm]] — Round Robin / Weighted RR / Least Connection / IP Hash
+- [[horizontal-vs-vertical-scaling]] — 한 대를 키우기 vs 여러 대로 늘리기
+- [[high-availability]] — SPOF를 없애는 다중화, Active-Active / Active-Passive
+- [[nginx]] — 리버스 프록시·LB 대표 구현, 실습 가능한 설정 예시 수록
+
+### Java / 웹 (Servlet·Spring)
+- [[servlet]] — 웹 요청을 처리하는 주체가 되는 Java 클래스
+- [[jsp]] — HTML에 Java를 삽입한 문서, "JSP는 결국 Servlet"
+- [[jstl-el]] — JSP의 `${...}`·`<c:forEach>`, 스크립틀릿을 대체하는 표현 도구
+- [[servlet-container]] — Tomcat: HTTP 처리를 대신하는 런타임
+- [[servlet-lifecycle]] — init/service/destroy와 싱글톤 관리
+- [[mvc-pattern]] — Servlet(Controller) + JSP(View) 역할 분리
+- [[dispatcher-servlet]] — Spring MVC의 Front Controller, 4부품(HandlerMapping/Adapter/ViewResolver/Converter)에 위임
+- [[filter]] — 서블릿 스펙의 가로채기, 정문 경비원 (인코딩·XSS·CORS)
+- [[interceptor]] — 스프링 MVC의 가로채기, 컨트롤러 문 앞 비서 (인증·권한)
+- [[dao-pattern]] — 데이터 접근을 전담 객체로 분리하는 패턴
+- [[jdbc]] — Java의 표준 DB 접근 API, Driver/Connection/ResultSet
+- [[forward-vs-redirect]] — 서버 내부 이동 vs 브라우저 재요청
+- [[prg-pattern]] — POST 후 Redirect로 중복 처리 방지
+- [[concurrency-problem]] — 공유 자원 동시 접근 (Servlet ↔ DB 트랜잭션)
+
+### Spring / 코어
+- [[spring-framework]] — Spring 전체 메타 페이지, 학습 트리 진입점
+- [[spring-boot]] — 자동 설정·내장 WAS·jar 배포로 Spring을 쉽게 쓰는 도구
+- [[dependency-injection]] — 의존 객체를 외부에서 주입받는 패턴
+- [[inversion-of-control]] — 제어의 역전, 객체 생성·결합을 컨테이너로 넘김
+- [[spring-bean]] — Spring IoC Container가 관리하는 객체
+- [[solid-principles]] — SRP/OCP/LSP/ISP/DIP, Spring이 자동화하는 5원칙
+- [[pojo]] — 어떤 상속·구현도 없는 평범한 Java 객체
+- [[maven]] — XML 기반 Java 빌드 도구, `pom.xml`
+- [[gradle]] — Groovy 기반 Java 빌드 도구, `build.gradle`
+
+### Spring / 웹·아키텍처
+- [[three-tier-architecture]] — Web/Service/Repository 계층, MVC와 다른 축
+- [[dto-vs-entity]] — 운반체와 도메인 본체의 분리
+- [[domain]] — "이 소프트웨어가 다루는 현실 영역" + 네트워크 도메인 분기
+
+### 웹 / HTTP·REST
+- [[restful-api]] — URI=명사, 동사=HTTP 메서드의 API 설계
+- [[content-negotiation]] — Accept·Content-Type, JSON/XML 자동 선택
+- [[http-method-override]] — `X-HTTP-Method-Override`, Filter로만 가능한 이유
+- [[etag]] — 리소스 버전 도장, `If-None-Match`·304로 캐싱·동시성 제어
+- [[swagger-oas]] — OpenAPI Spec과 Swagger UI, API 자동 문서화
+
+## 흐름 (Flows) — `flows/`
+
+- [[js-async-evolution]] — Callback → Promise → async/await 발전 흐름
+- [[npm-install-flow]] — package.json → lock → node_modules 설치·동기화
+- [[prisma-workflow]] — 설치 → init → schema → migrate → CRUD
+- [[servlet-to-spring-mvc]] — Servlet/JSP가 Spring MVC로 이어지는 진입 흐름
+- [[anonymous-class-to-lambda]] — 제네릭 → 함수형 인터페이스 → 익명 클래스 → 람다
+- [[scaling-a-web-app]] — 단일 Tomcat → 리버스 프록시 → LB → 멀티 LB까지 단계적 확장
+- [[manual-di-to-spring-ioc]] — 직접 `new` → DI → 인터페이스 → IoC 컨테이너 4단계 진화
+- [[filter-vs-interceptor]] — 두 가로채기 기술의 위치·책임·선택 기준 비교
+- [[spring-mvc-request-flow]] — 한 요청의 풀 파이프라인 (Filter → DispatcherServlet → Interceptor → Controller → Service → DAO → DB)
+
+## 소스 (Sources) — `sources/`
+
+- [[css-cascade-priority]] — `raw/notes/CSS 참조 우선순위.md` (해커톤 CSS 우선순위 정리)
+- [[js-import-export]] — `raw/notes/JavaScript - Import와 export.md`
+- [[nodejs-dependency-management]] — `raw/notes/Node.js - node_modules와 의존성 관리.md`
+- [[prisma-orm]] — `raw/notes/Prisma 필기.md` (블로그 프로젝트 백엔드 학습)
+- [[js-async]] — `raw/notes/비동기의 모든 것.md`
+- [[obsidian-basics-video]] — `raw/youtube/옵시디언 쌩 기초는 탄탄하게…` (옵시디언 입문 강의)
+- [[servlet-jsp-dialogue]] — `raw/dialogues/Servlet과 JSP의 차이 및 활용.md` (Spring 진입 전 기초)
+- [[servlet-jdbc-debugging]] — `raw/dialogues/conversation.md` (jwbook 실습 디버깅 17건)
+- [[jvm-memory-note]] — `raw/notes/JVM의 메모리 할당.md`
+- [[static-note]] — `raw/notes/static의 개념과 활용.md`
+- [[equals-hashcode-note]] — `raw/notes/hashCode와 equals.md`
+- [[mutable-immutable-note]] — `raw/notes/가변 객체 vs 불변 객체.md`
+- [[java-buffer-note]] — `raw/notes/Java의 버퍼.md`
+- [[short-circuit-note]] — `raw/notes/Java의 쇼트 서킷.md`
+- [[functional-interface-table]] — `raw/notes/Functional Interface.md`
+- [[generics-lambda-note]] — `raw/notes/제네릭, 람다, 함수형 인터페이스, 익명 클래스.md`
+- [[proxy-forward-reverse-video]] — `raw/youtube/Proxy(프록시)란 Forward vs Reverse Proxy…` (코딩문)
+- [[load-balancing-video]] — `raw/youtube/Load Balancing 로드 밸런싱이 뭔가요…` (코딩문)
+- [[spring-framework-1-note]] — `raw/notes/Spring Framework.md` (부트캠프 강의자료 §1~§3)
+
+---
+
+### 통계
+
+- 개념 페이지: 71
+- 흐름 페이지: 9
+- 소스 페이지: 19
+- 통합한 원본 수: 19

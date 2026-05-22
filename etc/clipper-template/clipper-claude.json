@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "🤖 Claude 대화",
+  "behavior": "create",
+  "noteContentFormat": "> [!info] 원본 대화\n> {{url}}\n\n## 🗂 컨텍스트\n<!-- AI 인제스트 시 이 섹션을 우선 읽는다. 대화의 배경·목적을 한 줄로 요약. -->\n{{description}}\n\n## 💬 대화 본문\n{{content}}\n\n---\n\n## 💭 내 메모\n<!-- 왜 저장했나 · 핵심 takeaway · 후속 액션 · 궁금한 점.\n     AI 인제스트 시 이 메모를 컨텍스트로 최우선 반영한다. -->\n\n## 🔗 관련 노트\n<!-- 연결되는 프로젝트·TIL·문서 링크 -->\n",
+  "properties": [
+    {
+      "name": "source_type",
+      "value": "claude-conversation",
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "value": "{{title}}",
+      "type": "text"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "clipped",
+      "value": "{{date}}",
+      "type": "date"
+    },
+    {
+      "name": "description",
+      "value": "{{description}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "raw",
+      "type": "text"
+    },
+    {
+      "name": "tags",
+      "value": "clippings/claude",
+      "type": "multitext"
+    }
+  ],
+  "triggers": [
+    "https://claude.ai/chat/",
+    "https://claude.ai/project/",
+    "https://claude.ai/design/",
+    "https://claude.ai/code/"
+  ],
+  "noteNameFormat": "{{date:YYYY-MM-DD}} {{title}}",
+  "path": "raw/dialogues"
+}

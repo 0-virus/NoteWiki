@@ -1,0 +1,152 @@
+{
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\CLAUDE.md": {
+    "mtime": 1779111096.0388014,
+    "ast_hash": "d032449c30acc547191af0e1f254e117",
+    "semantic_hash": "d032449c30acc547191af0e1f254e117"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\index.md": {
+    "mtime": 1779116028.620563,
+    "ast_hash": "9ff7620cd279fd7995891be10472e894",
+    "semantic_hash": "9ff7620cd279fd7995891be10472e894"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\log.md": {
+    "mtime": 1779116029.6272986,
+    "ast_hash": "f2d1155d1a0547a3978dfe6ab73bf693",
+    "semantic_hash": "f2d1155d1a0547a3978dfe6ab73bf693"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\async-await.md": {
+    "mtime": 1779115228.730384,
+    "ast_hash": "4725ea359fa45ee32e78226fdf1e0166",
+    "semantic_hash": "4725ea359fa45ee32e78226fdf1e0166"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\callback.md": {
+    "mtime": 1779115200.7121694,
+    "ast_hash": "0da287c631c4213b57e373cf67e5a9cf",
+    "semantic_hash": "0da287c631c4213b57e373cf67e5a9cf"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\css-modules.md": {
+    "mtime": 1779115024.6421845,
+    "ast_hash": "fab9cd5e10ed722dfe5604e71822b7ec",
+    "semantic_hash": "fab9cd5e10ed722dfe5604e71822b7ec"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\css-specificity.md": {
+    "mtime": 1779115023.0832603,
+    "ast_hash": "695716c3b39344cac615b046551fd67d",
+    "semantic_hash": "695716c3b39344cac615b046551fd67d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\es-modules.md": {
+    "mtime": 1779115030.0191796,
+    "ast_hash": "2b623b641cf77d6663036ccd628d6e5b",
+    "semantic_hash": "2b623b641cf77d6663036ccd628d6e5b"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\graph-view.md": {
+    "mtime": 1779115952.1737866,
+    "ast_hash": "f0ff6a376f44c33e25af31149c3c9a47",
+    "semantic_hash": "f0ff6a376f44c33e25af31149c3c9a47"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\javascript-async.md": {
+    "mtime": 1779115199.754504,
+    "ast_hash": "7931bdae24706bf8fdd507f816eb2ce8",
+    "semantic_hash": "7931bdae24706bf8fdd507f816eb2ce8"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\n-plus-1-problem.md": {
+    "mtime": 1779115198.6672084,
+    "ast_hash": "3f2232858a556acdedd5b3987bd3ae34",
+    "semantic_hash": "3f2232858a556acdedd5b3987bd3ae34"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\node-modules.md": {
+    "mtime": 1779115038.4485354,
+    "ast_hash": "fd17749072527fdd27666f4c621c8651",
+    "semantic_hash": "fd17749072527fdd27666f4c621c8651"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\npm-dependency-files.md": {
+    "mtime": 1779115049.7389562,
+    "ast_hash": "6b3e6286f063107ba962ec3a2c2fc653",
+    "semantic_hash": "6b3e6286f063107ba962ec3a2c2fc653"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\obsidian-properties.md": {
+    "mtime": 1779115972.207656,
+    "ast_hash": "1f1533271611ac6752d8287d5bff7290",
+    "semantic_hash": "1f1533271611ac6752d8287d5bff7290"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\obsidian-tags.md": {
+    "mtime": 1779115962.046446,
+    "ast_hash": "c45f456dafe603d749c7cf807ee638cb",
+    "semantic_hash": "c45f456dafe603d749c7cf807ee638cb"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\obsidian.md": {
+    "mtime": 1779115922.25247,
+    "ast_hash": "1ac4c746f9eb5900fcb1505f33ac14a7",
+    "semantic_hash": "1ac4c746f9eb5900fcb1505f33ac14a7"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\orm.md": {
+    "mtime": 1779115194.641949,
+    "ast_hash": "38500c978c8fd5843c8a9fe6d4aa63d9",
+    "semantic_hash": "38500c978c8fd5843c8a9fe6d4aa63d9"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\prisma.md": {
+    "mtime": 1779115196.0106335,
+    "ast_hash": "2841a25218fc005128cff8fdff78cf2a",
+    "semantic_hash": "2841a25218fc005128cff8fdff78cf2a"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\promise.md": {
+    "mtime": 1779115225.5705116,
+    "ast_hash": "d8214ccdfe79e89022f4ab93f7b86889",
+    "semantic_hash": "d8214ccdfe79e89022f4ab93f7b86889"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\web-clipper.md": {
+    "mtime": 1779115985.0289123,
+    "ast_hash": "cfad8d2e43ee6dfa2af461273cee4e7a",
+    "semantic_hash": "cfad8d2e43ee6dfa2af461273cee4e7a"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\wikilink.md": {
+    "mtime": 1779115933.0072887,
+    "ast_hash": "dafa79349550bbefe23445ed4133891c",
+    "semantic_hash": "dafa79349550bbefe23445ed4133891c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\js-async-evolution.md": {
+    "mtime": 1779115244.2626915,
+    "ast_hash": "1dbd96748a150b24b13a59fc9ad22b4f",
+    "semantic_hash": "1dbd96748a150b24b13a59fc9ad22b4f"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\npm-install-flow.md": {
+    "mtime": 1779115256.1851156,
+    "ast_hash": "51d0dafebe54224871d98b2dbf55498e",
+    "semantic_hash": "51d0dafebe54224871d98b2dbf55498e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\prisma-workflow.md": {
+    "mtime": 1779115267.504106,
+    "ast_hash": "bdc7a56521328c640c2077c45ed6170e",
+    "semantic_hash": "bdc7a56521328c640c2077c45ed6170e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\css-cascade-priority.md": {
+    "mtime": 1779114966.5705984,
+    "ast_hash": "2ab907a2ab7e16c22ce42fcd2b515d1d",
+    "semantic_hash": "2ab907a2ab7e16c22ce42fcd2b515d1d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\js-async.md": {
+    "mtime": 1779114990.2285376,
+    "ast_hash": "93818e85b276bb92c2c3a39c24aa58a2",
+    "semantic_hash": "93818e85b276bb92c2c3a39c24aa58a2"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\js-import-export.md": {
+    "mtime": 1779114967.707834,
+    "ast_hash": "adb7b8d2d1dd7952d37fe44ca16286b4",
+    "semantic_hash": "adb7b8d2d1dd7952d37fe44ca16286b4"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\nodejs-dependency-management.md": {
+    "mtime": 1779114975.3667772,
+    "ast_hash": "7ad099fdd99540570b1a7f6c6604888d",
+    "semantic_hash": "7ad099fdd99540570b1a7f6c6604888d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\obsidian-basics-video.md": {
+    "mtime": 1779115907.7699397,
+    "ast_hash": "28c46c960f73d62eb91e851580f6e884",
+    "semantic_hash": "28c46c960f73d62eb91e851580f6e884"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\prisma-orm.md": {
+    "mtime": 1779114984.8511095,
+    "ast_hash": "f47353dca488f563e1f5b57c10f47219",
+    "semantic_hash": "f47353dca488f563e1f5b57c10f47219"
+  }
+}

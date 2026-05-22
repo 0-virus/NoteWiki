@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "🔬 연구 자료 (Research)",
+  "behavior": "create",
+  "noteContentFormat": "## 초록 (Abstract)\n{{description}}\n\n## 본문·핵심 내용\n{{content}}\n\n---\n\n## 💭 내 메모\n<!-- 왜 저장했나 · 핵심 기여 · 내 학습/프로젝트와의 관련성. 인제스트 시 이 메모를 우선 반영한다. -->\n",
+  "properties": [
+    {
+      "name": "source_type",
+      "value": "research",
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "value": "{{title}}",
+      "type": "text"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "authors",
+      "value": "{{author|split:\", \"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "venue",
+      "value": "{{schema:publisher.name}}",
+      "type": "text"
+    },
+    {
+      "name": "published",
+      "value": "{{published}}",
+      "type": "date"
+    },
+    {
+      "name": "doi",
+      "value": "{{schema:doi}}",
+      "type": "text"
+    },
+    {
+      "name": "clipped",
+      "value": "{{date}}",
+      "type": "date"
+    },
+    {
+      "name": "description",
+      "value": "{{description}}",
+      "type": "text"
+    },
+    {
+      "name": "tags",
+      "value": "clippings/research",
+      "type": "multitext"
+    }
+  ],
+  "triggers": [
+    "https://arxiv.org/",
+    "https://dl.acm.org/",
+    "https://ieeexplore.ieee.org/",
+    "https://www.semanticscholar.org/"
+  ],
+  "noteNameFormat": "{{title}}",
+  "path": "raw/research"
+}

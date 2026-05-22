@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Filter & Interceptor — 박영균</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <style>
+      :root {
+        --bg: #fdf8f0;
+        --bg-alt: #fff6e8;
+        --ink: #2e2a26;
+        --ink-soft: #6b625b;
+        --accent: #e7773a; /* 따뜻한 오렌지 — Filter */
+        --accent-2: #4e8a8a; /* 차분한 청록 — Dispatcher / 중립 */
+        --accent-3: #7a5ec4; /* 보라 — Interceptor */
+        --line: #e6dccd;
+        --card: #ffffff;
+        --code-bg: #f4ecdb;
+        --shadow: 0 12px 36px rgba(160, 120, 60, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+        overflow: hidden;
+      }
+
+      /* ── 프레젠테이션 컨테이너 ─────────────────────── */
+      .deck {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: none;
+        padding: 4.5vh 7vw;
+        flex-direction: column;
+        justify-content: center;
+        animation: fadeIn 0.45s ease;
+      }
+      .slide.active {
+        display: flex;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── 진행 표시 / 컨트롤 ─────────────────────── */
+      .progress {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 4px;
+        background: var(--accent);
+        width: 0%;
+        transition: width 0.3s ease;
+        z-index: 10;
+      }
+      .nav {
+        position: fixed;
+        right: 2vw;
+        bottom: 2vh;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        z-index: 10;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--ink-soft);
+        background: rgba(255, 255, 255, 0.7);
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        backdrop-filter: blur(4px);
+      }
+      .nav button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        color: var(--accent);
+        padding: 2px 6px;
+      }
+      .nav button:hover {
+        color: var(--ink);
+      }
+      .hint {
+        position: fixed;
+        left: 2vw;
+        bottom: 2vh;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--ink-soft);
+        background: rgba(255, 255, 255, 0.7);
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        z-index: 10;
+      }
+      /* 전체화면일 때 좌하단 가이드 숨김 */
+      :fullscreen .hint,
+      :-webkit-full-screen .hint {
+        display: none;
+      }
+
+      /* ── 타이포그래피 ─────────────────────── */
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+      }
+      h1.title {
+        font-size: clamp(48px, 7vw, 96px);
+        line-height: 1.1;
+      }
+      h1.section {
+        font-size: clamp(60px, 9vw, 100px);
+        line-height: 1;
+        color: var(--accent);
+      }
+      h2 {
+        font-size: clamp(28px, 3.4vw, 48px);
+        margin-bottom: 18px;
+      }
+      h3 {
+        font-size: clamp(20px, 2vw, 28px);
+      }
+      p,
+      li {
+        font-size: clamp(16px, 1.5vw, 22px);
+        line-height: 1.7;
+        color: var(--ink);
+      }
+      .sub {
+        color: var(--ink-soft);
+        font-size: clamp(18px, 1.8vw, 26px);
+        margin-top: 16px;
+      }
+      .tag {
+        display: inline-block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+        padding: 4px 10px;
+        border-radius: 999px;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+      }
+      .accent {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .accent2 {
+        color: var(--accent-2);
+        font-weight: 700;
+      }
+      .accent3 {
+        color: var(--accent-3);
+        font-weight: 700;
+      }
+
+      code {
+        font-family: "JetBrains Mono", monospace;
+        background: var(--code-bg);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+
+      /* ── FontAwesome 아이콘 스타일 ─────────────────────── */
+      .fa-ico {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink);
+      }
+      .fa-ico.filter {
+        color: var(--accent);
+      }
+      .fa-ico.intc {
+        color: var(--accent-3);
+      }
+      .fa-ico.disp {
+        color: var(--accent-2);
+      }
+
+      /* ── 슬라이드 1 : 타이틀 ─────────────────────── */
+      .title-slide {
+        align-items: center;
+        text-align: center;
+      }
+      .title-slide .icons {
+        display: flex;
+        gap: 70px;
+        margin-bottom: 40px;
+        font-size: 88px;
+        line-height: 1;
+      }
+      .title-slide h1.title {
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-2) 60%,
+          var(--accent-3) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .title-slide .author {
+        margin-top: 28px;
+        font-family: "Gowun Dodum", serif;
+        font-size: clamp(20px, 2vw, 28px);
+        color: var(--ink-soft);
+      }
+
+      /* ── 섹션 슬라이드 ─────────────────────── */
+      .section-slide {
+        align-items: center;
+        text-align: center;
+        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+      }
+      .section-slide .section-num {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--ink-soft);
+        letter-spacing: 0.3em;
+        margin-bottom: 16px;
+        font-size: 18px;
+      }
+      .section-slide .big-ico {
+        font-size: 100px;
+        margin-bottom: 24px;
+        line-height: 1;
+      }
+
+      /* ── 카드 / 그리드 ─────────────────────── */
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+        margin-top: 16px;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        margin-top: 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 28px 26px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .card .ico {
+        font-size: 44px;
+        line-height: 1;
+        margin-bottom: 4px;
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+        background: var(--bg-alt);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+      }
+      .card.intc .ico {
+        color: var(--accent-3);
+        background: #f1ecfa;
+      }
+      .card.cool .ico {
+        color: var(--accent-2);
+        background: #e6f0f0;
+      }
+      .card h3 {
+        color: var(--accent);
+      }
+      .card.intc h3 {
+        color: var(--accent-3);
+      }
+      .card.cool h3 {
+        color: var(--accent-2);
+      }
+      .card p {
+        font-size: clamp(14px, 1.2vw, 17px);
+        color: var(--ink-soft);
+        margin: 0;
+      }
+
+      .callout {
+        background: var(--bg-alt);
+        border-left: 5px solid var(--accent);
+        padding: 18px 22px;
+        border-radius: 0 12px 12px 0;
+        margin-top: 22px;
+        font-size: clamp(16px, 1.3vw, 20px);
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .callout.cool {
+        border-color: var(--accent-2);
+        background: #eef5f5;
+      }
+      .callout.purple {
+        border-color: var(--accent-3);
+        background: #f1ecfa;
+      }
+      .callout .ic {
+        font-size: 22px;
+        color: var(--accent);
+        margin-top: 4px;
+        flex: 0 0 auto;
+      }
+      .callout.cool .ic {
+        color: var(--accent-2);
+      }
+      .callout.purple .ic {
+        color: var(--accent-3);
+      }
+
+      /* ── 비유 다이어그램 (정문/문앞) ─────────────────────── */
+      .scene {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+      .scene .figure {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px 20px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 150px;
+      }
+      .scene .figure .ico {
+        font-size: 48px;
+        line-height: 1;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--bg-alt);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink-soft);
+      }
+      .scene .figure.filter .ico {
+        color: var(--accent);
+        background: #fdebdc;
+      }
+      .scene .figure.intc .ico {
+        color: var(--accent-3);
+        background: #f1ecfa;
+      }
+      .scene .figure.disp .ico {
+        color: var(--accent-2);
+        background: #e6f0f0;
+      }
+      .scene .figure .label {
+        margin-top: 12px;
+        font-weight: 700;
+        font-size: 15px;
+        color: var(--ink);
+        text-align: center;
+      }
+      .scene .figure .sub {
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: var(--ink-soft);
+      }
+      .scene .arrow {
+        font-size: 26px;
+        color: var(--accent);
+      }
+
+      /* ── 흐름 다이어그램 (요청 경로) ─────────────────────── */
+      .flow {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      .flow .step {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px 16px;
+        box-shadow: var(--shadow);
+        text-align: center;
+        min-width: 130px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .flow .step.filter {
+        border-top: 4px solid var(--accent);
+      }
+      .flow .step.intc {
+        border-top: 4px solid var(--accent-3);
+      }
+      .flow .step.disp {
+        border-top: 4px solid var(--accent-2);
+      }
+      .flow .step .ico {
+        font-size: 30px;
+        line-height: 1;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--bg-alt);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink-soft);
+      }
+      .flow .step.filter .ico {
+        color: var(--accent);
+        background: #fdebdc;
+      }
+      .flow .step.intc .ico {
+        color: var(--accent-3);
+        background: #f1ecfa;
+      }
+      .flow .step.disp .ico {
+        color: var(--accent-2);
+        background: #e6f0f0;
+      }
+      .flow .step .label {
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .flow .step .sub {
+        font-size: 11px;
+        color: var(--ink-soft);
+        margin: 0;
+      }
+      .flow .arrow {
+        align-self: center;
+        font-size: 22px;
+        color: var(--ink-soft);
+      }
+
+      /* ── 비교 표 ─────────────────────── */
+      table.compare {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      table.compare th,
+      table.compare td {
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        font-size: clamp(14px, 1.2vw, 18px);
+      }
+      table.compare th {
+        background: var(--bg-alt);
+        font-weight: 700;
+      }
+      table.compare th.filter-h {
+        color: var(--accent);
+      }
+      table.compare th.intc-h {
+        color: var(--accent-3);
+      }
+      table.compare th i {
+        margin-right: 8px;
+      }
+      table.compare td:first-child {
+        font-weight: 700;
+        color: var(--ink-soft);
+        width: 22%;
+      }
+
+      /* ── 마무리 ─────────────────────── */
+      .thanks-slide {
+        align-items: center;
+        text-align: center;
+        background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+      }
+      .thanks-slide h1.title {
+        /* descender(y, p 등)가 클리핑되지 않도록 라인 높이와 하단 패딩 확보 */
+        line-height: 1.25;
+        padding-bottom: 0.12em;
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent-3) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .thanks-slide .icon-row {
+        font-size: 72px;
+        margin-bottom: 24px;
+        display: flex;
+        gap: 40px;
+        line-height: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress" id="progress"></div>
+
+    <div class="deck" id="deck">
+      <!-- ───── 슬라이드 1 : 타이틀 ───── -->
+      <section class="slide title-slide active">
+        <div class="icons">
+          <i class="fa-solid fa-shield-halved fa-ico filter"></i>
+          <i
+            class="fa-solid fa-arrows-left-right fa-ico"
+            style="color: var(--accent-2)"
+          ></i>
+          <i class="fa-solid fa-user-tie fa-ico intc"></i>
+        </div>
+        <h1 class="title">Filter &amp; Interceptor</h1>
+        <p class="author">발표자 · 박영균</p>
+      </section>
+
+      <!-- ───── 슬라이드 2 : Intro 섹션 표지 ───── -->
+      <section class="slide section-slide">
+        <div class="section-num">— 01 —</div>
+        <div class="big-ico">
+          <i
+            class="fa-solid fa-magnifying-glass"
+            style="color: var(--accent)"
+          ></i>
+        </div>
+        <h1 class="section">Intro</h1>
+      </section>
+
+      <!-- ───── 슬라이드 3 : 도입 (공통 작업의 문제) ───── -->
+      <section class="slide">
+        <h2>모든 페이지가 똑같이 필요한 일들</h2>
+        <p class="sub">컨트롤러마다 복붙? &nbsp;→&nbsp; 코드가 엉망이 된다.</p>
+
+        <div class="grid-3" style="margin-top: 32px">
+          <div class="card">
+            <span class="ico"><i class="fa-solid fa-lock"></i></span>
+            <h3>로그인 체크</h3>
+            <p>모든 페이지가 매번 "로그인 했나?"를 확인해야 한다.</p>
+          </div>
+          <div class="card">
+            <span class="ico"><i class="fa-solid fa-id-badge"></i></span>
+            <h3>권한 검사</h3>
+            <p>관리자만 들어가는 URL을 매번 if문으로 막을 수는 없다.</p>
+          </div>
+          <div class="card">
+            <span class="ico"><i class="fa-solid fa-language"></i></span>
+            <h3>인코딩 설정</h3>
+            <p>모든 요청에 UTF-8을 똑같이 세팅해야 한글이 안 깨진다.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <i class="fa-solid fa-lightbulb ic"></i>
+          <div>
+            <strong>한 곳에서 가로채서 한 번에 처리</strong>할 수는 없을까?<br />
+            바로 그 "가로채는 자"가 <span class="accent">필터</span>와
+            <span class="accent3">인터셉터</span>다.
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 4 : Filter 섹션 표지 ───── -->
+      <section class="slide section-slide">
+        <div class="section-num">— 02 —</div>
+        <div class="big-ico">
+          <i class="fa-solid fa-shield-halved" style="color: var(--accent)"></i>
+        </div>
+        <h1 class="section">Filter</h1>
+      </section>
+
+      <!-- ───── 슬라이드 5 : Filter 개념과 위치 ───── -->
+      <section class="slide">
+        <h2>아파트 단지 정문의 경비원</h2>
+        <p class="sub">
+          <strong>서블릿 컨테이너(Tomcat)</strong>의 최전방. 스프링 건물에
+          <strong>들어가기 전</strong>에 방문객을 검사한다.
+        </p>
+
+        <div class="scene">
+          <div class="figure">
+            <div class="ico"><i class="fa-solid fa-person-walking"></i></div>
+            <div class="label">방문객</div>
+            <div class="sub">HTTP 요청</div>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="figure filter">
+            <div class="ico"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="label">Filter</div>
+            <div class="sub">정문 경비원</div>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="figure">
+            <div class="ico"><i class="fa-solid fa-building"></i></div>
+            <div class="label">아파트 단지</div>
+            <div class="sub">스프링 영역</div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <i class="fa-solid fa-circle-info ic"></i>
+          <div>
+            필터는 <span class="accent">서블릿 스펙</span>의 일부다. → 스프링이
+            아니라 <strong>Tomcat 차원</strong>에서 동작한다.
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 6 : Filter가 하는 일 ───── -->
+      <section class="slide">
+        <h2>필터는 무엇을 검사할까?</h2>
+
+        <div class="grid-3" style="margin-top: 28px">
+          <div class="card">
+            <span class="ico"><i class="fa-solid fa-language"></i></span>
+            <h3>인코딩 설정</h3>
+            <p>"마스크 안 쓰셨으면 못 들어가요." — 모든 요청에 UTF-8을 강제.</p>
+          </div>
+          <div class="card">
+            <span class="ico"><i class="fa-solid fa-shield-virus"></i></span>
+            <h3>XSS / CORS</h3>
+            <p>"수상한 물건은 빼고 들어가세요." — 공통 보안 필터링.</p>
+          </div>
+          <div class="card">
+            <span class="ico"><i class="fa-solid fa-clipboard-list"></i></span>
+            <h3>요청 로깅</h3>
+            <p>"방문 기록은 남깁니다." — 단지 전체의 접근 로그.</p>
+          </div>
+        </div>
+
+        <div class="callout cool" style="margin-top: 32px">
+          <i class="fa-solid fa-bullseye ic"></i>
+          <div>
+            <strong>스프링을 거치기 전 단계</strong>이기 때문에,<br />
+            순수한 <span class="accent2">HTTP 요청/응답 자체</span>를 가공하는
+            데 특화되어 있다.<br />
+            <em>(개별 입주민의 사정은 잘 모른다)</em>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 7 : Interceptor 섹션 표지 ───── -->
+      <section class="slide section-slide">
+        <div class="section-num">— 03 —</div>
+        <div class="big-ico">
+          <i class="fa-solid fa-user-tie" style="color: var(--accent-3)"></i>
+        </div>
+        <h1 class="section" style="color: var(--accent-3)">Interceptor</h1>
+      </section>
+
+      <!-- ───── 슬라이드 8 : Interceptor 개념과 위치 ───── -->
+      <section class="slide">
+        <h2>입주민(컨트롤러) 문 앞의 비서</h2>
+        <p class="sub">
+          디스패처 서블릿(스프링 로비)과 컨트롤러(입주민)
+          <strong>사이</strong>에서 동작한다.
+        </p>
+
+        <div class="scene">
+          <div class="figure disp">
+            <div class="ico"><i class="fa-solid fa-door-open"></i></div>
+            <div class="label">DispatcherServlet</div>
+            <div class="sub">스프링 로비</div>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="figure intc">
+            <div class="ico"><i class="fa-solid fa-user-tie"></i></div>
+            <div class="label">Interceptor</div>
+            <div class="sub">문 앞 비서</div>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="figure">
+            <div class="ico"><i class="fa-solid fa-house-user"></i></div>
+            <div class="label">Controller</div>
+            <div class="sub">702호 입주민</div>
+          </div>
+        </div>
+
+        <div class="callout purple">
+          <i class="fa-solid fa-quote-left ic"></i>
+          <div>
+            <strong>초인종 누르기 직전</strong> 문 앞을 지키고 있는 사설
+            경호원."
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 9 : Interceptor가 하는 일 ───── -->
+      <section class="slide">
+        <h2>인터셉터는 무엇을 검사할까?</h2>
+
+        <div class="grid-3" style="margin-top: 28px">
+          <div class="card intc">
+            <span class="ico"><i class="fa-solid fa-key"></i></span>
+            <h3>로그인 세션 체크</h3>
+            <p>"입주민 연락처나 초대장 있으신가요?" — 세션을 들여다본다.</p>
+          </div>
+          <div class="card intc">
+            <span class="ico"><i class="fa-solid fa-user-shield"></i></span>
+            <h3>권한(Role) 검사</h3>
+            <p>"이분 블랙리스트인데 돌려보낼게요." — 컨트롤러별 정교한 제어.</p>
+          </div>
+          <div class="card intc">
+            <span class="ico"
+              ><i class="fa-solid fa-magnifying-glass-chart"></i
+            ></span>
+            <h3>컨트롤러별 감사</h3>
+            <p>어떤 핸들러에 진입했는지, 실행에 얼마나 걸렸는지 측정.</p>
+          </div>
+        </div>
+
+        <div class="callout purple" style="margin-top: 32px">
+          <i class="fa-solid fa-bullseye ic"></i>
+          <div>
+            <strong>스프링의 영역 안</strong>에서 돌기 때문에,
+            <span class="accent3">Bean 주입(@Autowired)</span> 등 스프링 기능을
+            자유롭게 활용할 수 있다.<br />
+            <em>(입주민의 사정을 잘 아는 비서.)</em>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 10 : 비교 섹션 표지 ───── -->
+      <section class="slide section-slide">
+        <div class="section-num">— 04 —</div>
+        <div class="big-ico">
+          <i
+            class="fa-solid fa-scale-balanced"
+            style="color: var(--accent-2)"
+          ></i>
+        </div>
+        <h1
+          class="section"
+          style="
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          "
+        >
+          Filter vs Interceptor
+        </h1>
+        <p class="sub" style="margin-top: 18px">왜 두 명이나 필요한 걸까?</p>
+      </section>
+
+      <!-- ───── 슬라이드 11 : 본질적 질문 ───── -->
+      <section class="slide">
+        <h2>"필터만으로 다 할 수 있는 거 아닌가요?"</h2>
+        <p class="sub">
+          맞다. 서블릿만으로도 처리는 가능하다. 그런데 왜 인터셉터를 또
+          두었을까?
+        </p>
+
+        <div class="grid-2" style="margin-top: 32px">
+          <div class="card" style="border-top: 4px solid var(--accent)">
+            <span class="ico"><i class="fa-solid fa-shield-halved"></i></span>
+            <h3>Filter — 거친 그물</h3>
+            <p>
+              단지 전체를 지킨다.
+              <span class="accent">HttpServletRequest/Response</span>만 안다.
+            </p>
+            <p>
+              스프링 Bean에 손이 닿지 않는다. <code>@Service</code> 주입?
+              불가능.
+            </p>
+            <p>
+              예외가 나면 —
+              <span class="accent">톰캣의 지저분한 흰 화면</span>이 뜬다.
+            </p>
+          </div>
+          <div class="card intc" style="border-top: 4px solid var(--accent-3)">
+            <span class="ico"><i class="fa-solid fa-user-tie"></i></span>
+            <h3>Interceptor — 정교한 손길</h3>
+            <p>
+              입주민(컨트롤러) 코앞에서 일한다.
+              <span class="accent3">HandlerMethod</span>를 안다.
+            </p>
+            <p>스프링 안에서 산다. <code>@Autowired UserService</code> 가능.</p>
+            <p>
+              예외도 <code>@ControllerAdvice</code>로 우아하게 받아낼 수 있다.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout cool">
+          <i class="fa-solid fa-bullseye ic"></i>
+          <div>
+            <strong>거친 그물(Filter)</strong>로 단지 전체를 막고,
+            <strong>정교한 손길(Interceptor)</strong>로 호수마다 다르게
+            검사한다.<br />
+            <em
+              >"같은 일을 두 명이 하는 게 아니라, 다른 깊이로 다른 일을
+              한다."</em
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 12 : 예외 처리의 차이 ───── -->
+      <section class="slide">
+        <h2>에러가 터졌을 때 — 누가 받아주는가?</h2>
+
+        <div class="grid-2" style="margin-top: 24px">
+          <div class="card" style="border-top: 4px solid var(--accent)">
+            <span class="ico"
+              ><i class="fa-solid fa-triangle-exclamation"></i
+            ></span>
+            <h3 style="color: var(--accent)">Filter에서 터지면?</h3>
+            <p>
+              스프링의 <code>@ControllerAdvice</code>가
+              <strong>못 잡는다</strong>.
+            </p>
+            <p>아직 스프링 영역에 들어오지 않았기 때문.</p>
+            <p style="color: var(--accent); font-weight: 700">
+              <i class="fa-solid fa-arrow-right"></i>
+              톰캣 기본 에러 페이지가 그대로 노출
+            </p>
+          </div>
+          <div class="card intc" style="border-top: 4px solid var(--accent-3)">
+            <span class="ico"
+              ><i class="fa-solid fa-wand-magic-sparkles"></i
+            ></span>
+            <h3 style="color: var(--accent-3)">Interceptor에서 터지면?</h3>
+            <p>이미 스프링 안. <code>@ControllerAdvice</code>의 손이 닿는다.</p>
+            <p>예쁜 에러 화면이나 JSON 응답으로 제어 가능.</p>
+            <p style="color: var(--accent-3); font-weight: 700">
+              <i class="fa-solid fa-arrow-right"></i>
+              사용자에게 깔끔한 응답
+            </p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 28px">
+          <i class="fa-solid fa-lightbulb ic"></i>
+          <div>
+            그래서 <strong>비즈니스 로직과 가까운 검사일수록 인터셉터</strong>로
+            옮긴다.<br />
+            스프링이 마련해 둔 예외 처리 인프라를 그대로 쓸 수 있기 때문.
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 13 : Summary 섹션 표지 ───── -->
+      <section class="slide section-slide">
+        <div class="section-num">— 05 —</div>
+        <div class="big-ico">
+          <i class="fa-solid fa-thumbtack" style="color: var(--accent)"></i>
+        </div>
+        <h1 class="section">Summary</h1>
+      </section>
+
+      <!-- ───── 슬라이드 14 : 요청 흐름 ───── -->
+      <section class="slide">
+        <h2>요청은 어떤 흐름으로 처리되는가?</h2>
+
+        <div class="flow" style="margin-top: 40px">
+          <div class="step">
+            <div class="ico"><i class="fa-solid fa-person-walking"></i></div>
+            <div class="label">사용자 요청</div>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="step filter">
+            <div class="ico"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="label">Filter</div>
+            <p class="sub">정문 경비원</p>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="step disp">
+            <div class="ico"><i class="fa-solid fa-door-open"></i></div>
+            <div class="label">Dispatcher</div>
+            <p class="sub">로비 안내</p>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="step intc">
+            <div class="ico"><i class="fa-solid fa-user-tie"></i></div>
+            <div class="label">Interceptor</div>
+            <p class="sub">문 앞 비서</p>
+          </div>
+          <span class="arrow"
+            ><i class="fa-solid fa-arrow-right-long"></i
+          ></span>
+          <div class="step">
+            <div class="ico"><i class="fa-solid fa-house-user"></i></div>
+            <div class="label">Controller</div>
+            <p class="sub">입주민</p>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 40px">
+          <i class="fa-solid fa-bullseye ic"></i>
+          <div>
+            <strong>거대한 작업은 Filter</strong> ·
+            <strong>정교한 작업은 Interceptor</strong>.<br />
+            어디서 일하느냐가 그 사람이 무엇을 할 수 있는지 결정한다.
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── 슬라이드 15 : 비교표 ───── -->
+      <section class="slide">
+        <h2>언제 어느 쪽을 쓸까?</h2>
+
+        <table class="compare">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="filter-h">
+                <i class="fa-solid fa-shield-halved"></i>Filter
+              </th>
+              <th class="intc-h">
+                <i class="fa-solid fa-user-tie"></i>Interceptor
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>위치</td>
+              <td>서블릿 컨테이너 (Tomcat) — 정문</td>
+              <td>Dispatcher와 Controller 사이 — 문 앞</td>
+            </tr>
+            <tr>
+              <td>속한 세계</td>
+              <td>서블릿 스펙 (스프링 밖)</td>
+              <td>Spring MVC (스프링 안)</td>
+            </tr>
+            <tr>
+              <td>다루는 객체</td>
+              <td>HttpServletRequest / Response</td>
+              <td>+ HandlerMethod, ModelAndView</td>
+            </tr>
+            <tr>
+              <td>Bean 주입</td>
+              <td>제한적 (FilterRegistrationBean 필요)</td>
+              <td>자유로움 (@Autowired 가능)</td>
+            </tr>
+            <tr>
+              <td>예외 처리</td>
+              <td>스프링의 @ControllerAdvice 닿지 않음</td>
+              <td>@ControllerAdvice로 우아하게 처리</td>
+            </tr>
+            <tr>
+              <td>주 용도</td>
+              <td>인코딩, 웹 보안(XSS/CORS), 로깅</td>
+              <td>로그인 인증, 권한 제어, 감사</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ───── 슬라이드 16 : Thank you ───── -->
+      <section class="slide thanks-slide">
+        <div class="icon-row">
+          <i class="fa-solid fa-shield-halved" style="color: var(--accent)"></i>
+          <i class="fa-solid fa-handshake" style="color: var(--accent-2)"></i>
+          <i class="fa-solid fa-user-tie" style="color: var(--accent-3)"></i>
+        </div>
+        <h1 class="title">Thank you</h1>
+      </section>
+    </div>
+
+    <!-- 진행 / 네비 -->
+    <div class="hint">← / → : 슬라이드 이동 &nbsp;·&nbsp; F : 전체화면</div>
+    <div class="nav">
+      <button id="prev" aria-label="이전">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <span id="counter">1 / 15</span>
+      <button id="next" aria-label="다음">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <script>
+      // ── 슬라이드 컨트롤 ──
+      const slides = document.querySelectorAll(".slide");
+      const total = slides.length;
+      let idx = 0;
+
+      const progressEl = document.getElementById("progress");
+      const counterEl = document.getElementById("counter");
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+
+      function show(i) {
+        if (i < 0) i = 0;
+        if (i > total - 1) i = total - 1;
+        slides[idx].classList.remove("active");
+        idx = i;
+        slides[idx].classList.add("active");
+        counterEl.textContent = idx + 1 + " / " + total;
+        progressEl.style.width = ((idx + 1) / total) * 100 + "%";
+      }
+
+      function next() {
+        show(idx + 1);
+      }
+      function prev() {
+        show(idx - 1);
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
+          e.preventDefault();
+          next();
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          prev();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          show(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          show(total - 1);
+        } else if (e.key === "f" || e.key === "F") {
+          if (!document.fullscreenElement)
+            document.documentElement.requestFullscreen();
+          else document.exitFullscreen();
+        }
+      });
+
+      prevBtn.addEventListener("click", prev);
+      nextBtn.addEventListener("click", next);
+
+      // 클릭으로 다음 슬라이드 (단, 버튼/링크 클릭은 제외)
+      document.getElementById("deck").addEventListener("click", (e) => {
+        if (e.target.closest("button, a, .nav, .hint")) return;
+        next();
+      });
+
+      // 초기화
+      show(0);
+    </script>
+  </body>
+</html>

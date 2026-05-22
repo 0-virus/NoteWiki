@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spring MVC 한눈에 — DispatcherServlet · 3-tier · DTO/DAO/DO/Entity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fdf8f0;
+        --bg-alt: #fff6e8;
+        --ink: #2e2a26;
+        --ink-soft: #6b625b;
+        --ink-faint: #968b80;
+
+        --filter: #e7773a;        /* 오렌지 — Filter (서블릿 영역) */
+        --dispatch: #4e8a8a;      /* 청록 — DispatcherServlet (스프링 진입) */
+        --interceptor: #7a5ec4;   /* 보라 — Interceptor */
+        --controller: #d35d8a;    /* 핑크 — Controller (Web Layer) */
+        --service: #c08a2a;       /* 머스타드 — Service (Business Layer) */
+        --repo: #4d8a4f;          /* 그린 — Repository (Data Layer) */
+        --view: #a86f3b;          /* 브라운 — View / 응답 */
+        --db: #5d6f8a;            /* 슬레이트 — DB */
+
+        --dto: #c46a4f;
+        --dao: #4d8a4f;
+        --entity: #6f57b8;
+        --do: #2a6f7a;
+
+        --line: #e6dccd;
+        --line-soft: #efe6d5;
+        --card: #ffffff;
+        --code-bg: #f4ecdb;
+        --shadow: 0 12px 36px rgba(160, 120, 60, 0.12);
+        --shadow-sm: 0 4px 12px rgba(160, 120, 60, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+        line-height: 1.7;
+      }
+
+      .page {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 64px 48px 120px;
+      }
+
+      header.hero {
+        text-align: center;
+        padding: 24px 0 56px;
+        border-bottom: 1px dashed var(--line);
+        margin-bottom: 56px;
+      }
+      header.hero h1 {
+        font-family: "Gowun Dodum", "Noto Sans KR", sans-serif;
+        font-size: 38px;
+        margin: 0 0 12px;
+        letter-spacing: -0.5px;
+      }
+      header.hero .sub {
+        color: var(--ink-soft);
+        font-size: 16px;
+      }
+      header.hero .meta {
+        margin-top: 18px;
+        color: var(--ink-faint);
+        font-size: 13px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      section {
+        margin-bottom: 84px;
+      }
+
+      .sec-head {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--ink);
+      }
+      .sec-head .num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--ink-soft);
+        background: var(--bg-alt);
+        padding: 4px 10px;
+        border-radius: 6px;
+        letter-spacing: 0.5px;
+      }
+      .sec-head h2 {
+        font-size: 26px;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+      }
+      .sec-head .tag {
+        margin-left: auto;
+        color: var(--ink-faint);
+        font-size: 13px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      h3 {
+        margin: 32px 0 14px;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      p { margin: 10px 0; }
+      .note {
+        background: var(--bg-alt);
+        border-left: 4px solid var(--dispatch);
+        padding: 12px 18px;
+        border-radius: 0 8px 8px 0;
+        margin: 14px 0;
+        font-size: 14.5px;
+        color: var(--ink-soft);
+      }
+      .note strong { color: var(--ink); }
+
+      code {
+        font-family: "JetBrains Mono", monospace;
+        background: var(--code-bg);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 13.5px;
+      }
+
+      /* ── 박스/도식 공통 ─────────────────── */
+      .diagram {
+        background: var(--card);
+        border-radius: 14px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+      }
+      .diagram + .diagram { margin-top: 24px; }
+
+      .lane {
+        display: flex;
+        align-items: stretch;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .box {
+        background: var(--card);
+        border: 2px solid var(--line);
+        border-radius: 10px;
+        padding: 14px 16px;
+        min-width: 130px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14.5px;
+        color: var(--ink);
+        box-shadow: var(--shadow-sm);
+        position: relative;
+      }
+      .box .role {
+        display: block;
+        font-size: 11.5px;
+        color: var(--ink-faint);
+        font-weight: 500;
+        margin-top: 4px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .box.filter      { border-color: var(--filter);      color: var(--filter); }
+      .box.dispatch    { border-color: var(--dispatch);    color: var(--dispatch); }
+      .box.interceptor { border-color: var(--interceptor); color: var(--interceptor); }
+      .box.controller  { border-color: var(--controller);  color: var(--controller); }
+      .box.service     { border-color: var(--service);     color: var(--service); }
+      .box.repo        { border-color: var(--repo);        color: var(--repo); }
+      .box.view        { border-color: var(--view);        color: var(--view); }
+      .box.db          { border-color: var(--db);          color: var(--db); }
+
+      .arrow {
+        align-self: center;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--ink-faint);
+        font-size: 18px;
+      }
+
+      /* ── 풀 파이프라인 시각화 ────────────── */
+      .pipeline {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .pipe-row {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 24px;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px dashed var(--line);
+      }
+      .pipe-row:last-child { border-bottom: none; }
+      .pipe-zone {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--ink-soft);
+        text-align: right;
+        padding-right: 16px;
+        border-right: 3px solid var(--line);
+      }
+      .pipe-zone.servlet  { border-color: var(--filter); color: var(--filter); }
+      .pipe-zone.dispatch { border-color: var(--dispatch); color: var(--dispatch); }
+      .pipe-zone.web      { border-color: var(--controller); color: var(--controller); }
+      .pipe-zone.biz      { border-color: var(--service); color: var(--service); }
+      .pipe-zone.data     { border-color: var(--repo); color: var(--repo); }
+      .pipe-zone.db       { border-color: var(--db); color: var(--db); }
+      .pipe-zone.view     { border-color: var(--view); color: var(--view); }
+
+      .pipe-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .pipe-desc {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-left: 6px;
+      }
+
+      /* ── 비교 카드 ─────────────────── */
+      .cards-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 12px;
+        padding: 20px 18px;
+        border: 2px solid var(--line);
+        box-shadow: var(--shadow-sm);
+      }
+      .card.dto    { border-top: 6px solid var(--dto); }
+      .card.dao    { border-top: 6px solid var(--dao); }
+      .card.entity { border-top: 6px solid var(--entity); }
+      .card.do     { border-top: 6px solid var(--do); }
+
+      .card h4 {
+        margin: 0 0 4px;
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .card .full {
+        display: block;
+        font-size: 11.5px;
+        color: var(--ink-faint);
+        font-family: "JetBrains Mono", monospace;
+        margin-bottom: 12px;
+      }
+      .card .role-line {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin: 0 0 10px;
+        font-weight: 600;
+      }
+      .card ul {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 13px;
+        color: var(--ink-soft);
+      }
+      .card ul li { margin: 4px 0; }
+      .card .one {
+        margin-top: 12px;
+        font-size: 12.5px;
+        background: var(--bg-alt);
+        padding: 8px 10px;
+        border-radius: 6px;
+        color: var(--ink);
+      }
+
+      /* ── 시퀀스 ─────────────────── */
+      .seq {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 12px;
+        font-size: 14px;
+      }
+      .seq .num {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        color: var(--dispatch);
+        text-align: right;
+        padding-right: 10px;
+        border-right: 2px solid var(--line);
+      }
+      .seq .body {
+        padding-bottom: 14px;
+      }
+      .seq .body strong { color: var(--ink); }
+      .seq .body code { font-size: 12.5px; }
+
+      /* ── 표 ─────────────────── */
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 16px 0;
+        font-size: 14px;
+      }
+      th, td {
+        text-align: left;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        background: var(--bg-alt);
+        font-weight: 700;
+        color: var(--ink);
+        border-bottom: 2px solid var(--ink-soft);
+      }
+      tr:last-child td { border-bottom: none; }
+
+      .legend {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin: 8px 0 20px;
+        font-size: 12.5px;
+        color: var(--ink-soft);
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .swatch {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+      }
+
+      .ascii {
+        background: var(--code-bg);
+        border-radius: 10px;
+        padding: 20px 24px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--ink);
+        white-space: pre;
+        overflow-x: auto;
+      }
+
+      footer {
+        margin-top: 72px;
+        padding-top: 24px;
+        border-top: 1px dashed var(--line);
+        text-align: center;
+        font-size: 13px;
+        color: var(--ink-faint);
+      }
+      footer a { color: var(--dispatch); text-decoration: none; }
+
+      @media (max-width: 900px) {
+        .cards-4 { grid-template-columns: repeat(2, 1fr); }
+        .pipe-row { grid-template-columns: 1fr; }
+        .pipe-zone {
+          text-align: left;
+          border-right: none;
+          border-left: 3px solid var(--line);
+          padding-left: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+
+      <header class="hero">
+        <h1>Spring MVC 한눈에</h1>
+        <div class="sub">
+          DispatcherServlet의 동작 · Spring MVC 구조 · DTO/DAO/DO/Entity 관계 — 다섯 장의 도식으로
+        </div>
+        <div class="meta">2026-05-21 · 박영균 NoteWiki / Output</div>
+      </header>
+
+      <!-- =========================================================
+           0. 미리보기 — 분리축 4개
+      ========================================================== -->
+      <section>
+        <div class="sec-head">
+          <span class="num">00</span>
+          <h2>먼저, 머릿속 정리 — Spring MVC는 “네 가지 분리축”의 교차점</h2>
+          <span class="tag">overview</span>
+        </div>
+
+        <p>
+          Spring MVC를 처음 보면 컴포넌트가 너무 많아서 길을 잃기 쉽다. 하지만 그 모든 부품은
+          결국 <strong>네 가지 분리축</strong> 위에 놓여 있다. 도식을 하나씩 보기 전에 이 축들부터 머리에 박아두자.
+        </p>
+
+        <table>
+          <thead>
+            <tr><th>분리축</th><th>무엇을 나누나</th><th>대표 부품</th><th>왜?</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>가로채기 위치</strong></td>
+              <td>스프링 밖 / 안</td>
+              <td>Filter / Interceptor</td>
+              <td>각자 다룰 수 있는 정보의 깊이가 다름</td>
+            </tr>
+            <tr>
+              <td><strong>표현 분리 (MVC)</strong></td>
+              <td>요청 처리 / 데이터 / 화면</td>
+              <td>Controller / Model / View</td>
+              <td>화면 변경과 로직 변경을 떨어뜨림</td>
+            </tr>
+            <tr>
+              <td><strong>시스템 계층 (3-tier)</strong></td>
+              <td>웹 / 비즈니스 / 데이터</td>
+              <td>@Controller / @Service / @Repository</td>
+              <td>각 계층이 알아야 할 게 좁아지면 변경이 안전해짐</td>
+            </tr>
+            <tr>
+              <td><strong>객체 책임</strong></td>
+              <td>운반 / 접근 / 도메인</td>
+              <td>DTO / DAO / Entity (DO)</td>
+              <td>도메인 변경이 클라이언트로 새지 않게 격리</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <strong>핵심 통찰</strong> — 이 네 축은 <em>같은 일을 네 번 하는 게 아니라, 다른 차원의 분리</em>다.
+          그래서 한 요청을 따라가면 네 축이 동시에 작동하는 게 보인다 (도식 1·3에서 확인).
+        </div>
+      </section>
+
+      <!-- =========================================================
+           1. 한 요청의 전체 파이프라인
+      ========================================================== -->
+      <section>
+        <div class="sec-head">
+          <span class="num">01</span>
+          <h2>도식 1. 한 요청의 풀 파이프라인</h2>
+          <span class="tag">end-to-end</span>
+        </div>
+
+        <p>
+          브라우저가 “<code>GET /posts/42</code>”를 보내고 JSON 응답을 받기까지 거치는 모든 정거장.
+          왼쪽은 <strong>어느 영역(zone)</strong>에서 일이 일어나는지, 오른쪽은 <strong>실제 부품</strong>이다.
+        </p>
+
+        <div class="legend">
+          <span><i class="swatch" style="background:var(--filter)"></i> 서블릿 영역 (스프링 밖)</span>
+          <span><i class="swatch" style="background:var(--dispatch)"></i> DispatcherServlet (스프링 진입)</span>
+          <span><i class="swatch" style="background:var(--controller)"></i> Web Layer</span>
+          <span><i class="swatch" style="background:var(--service)"></i> Business Layer</span>
+          <span><i class="swatch" style="background:var(--repo)"></i> Data Layer</span>
+          <span><i class="swatch" style="background:var(--db)"></i> DB</span>
+          <span><i class="swatch" style="background:var(--view)"></i> View / 응답</span>
+        </div>
+
+        <div class="diagram">
+          <div class="pipeline">
+
+            <div class="pipe-row">
+              <div class="pipe-zone servlet">SERVLET CONTAINER<br/>(Tomcat)</div>
+              <div class="pipe-content">
+                <div class="box filter">Filter Chain<span class="role">CharacterEncoding · CORS · XSS · MethodOverride</span></div>
+                <div class="arrow">→</div>
+                <span class="pipe-desc">HTTP 자체를 가공. 스프링 도착 전.</span>
+              </div>
+            </div>
+
+            <div class="pipe-row">
+              <div class="pipe-zone dispatch">SPRING 진입점</div>
+              <div class="pipe-content">
+                <div class="box dispatch">DispatcherServlet<span class="role">Front Controller</span></div>
+                <div class="arrow">→</div>
+                <div class="box dispatch">HandlerMapping<span class="role">URL → Handler 찾기</span></div>
+                <div class="arrow">→</div>
+                <div class="box dispatch">HandlerAdapter<span class="role">Handler 호출 위임</span></div>
+              </div>
+            </div>
+
+            <div class="pipe-row">
+              <div class="pipe-zone web">WEB LAYER<br/>(@Controller)</div>
+              <div class="pipe-content">
+                <div class="box interceptor">Interceptor<span class="role">preHandle (인증·권한)</span></div>
+                <div class="arrow">→</div>
+                <div class="box controller">@Controller<span class="role">@GetMapping(&quot;/posts/{id}&quot;)</span></div>
+                <div class="arrow">→</div>
+                <span class="pipe-desc">요청 파라미터를 DTO로 받음</span>
+              </div>
+            </div>
+
+            <div class="pipe-row">
+              <div class="pipe-zone biz">BUSINESS LAYER<br/>(@Service)</div>
+              <div class="pipe-content">
+                <div class="box service">@Service<span class="role">PostService.find(id)</span></div>
+                <div class="arrow">→</div>
+                <span class="pipe-desc">트랜잭션 경계, 비즈니스 규칙 실행 (Entity가 일하는 곳)</span>
+              </div>
+            </div>
+
+            <div class="pipe-row">
+              <div class="pipe-zone data">DATA LAYER<br/>(@Repository)</div>
+              <div class="pipe-content">
+                <div class="box repo">@Repository<span class="role">DAO · JdbcTemplate · JPA</span></div>
+                <div class="arrow">→</div>
+                <div class="box db">DB<span class="role">SELECT · INSERT · …</span></div>
+              </div>
+            </div>
+
+            <div class="pipe-row">
+              <div class="pipe-zone view">RESPONSE</div>
+              <div class="pipe-content">
+                <div class="box controller">Entity → DTO 변환<span class="role">Service 또는 Controller에서</span></div>
+                <div class="arrow">→</div>
+                <div class="box view">HttpMessageConverter<span class="role">Jackson → JSON</span></div>
+                <div class="arrow">또는</div>
+                <div class="box view">ViewResolver → JSP/Thymeleaf<span class="role">HTML 렌더</span></div>
+              </div>
+            </div>
+
+            <div class="pipe-row">
+              <div class="pipe-zone dispatch">역순 복귀</div>
+              <div class="pipe-content">
+                <div class="box interceptor">Interceptor<span class="role">postHandle → afterCompletion</span></div>
+                <div class="arrow">→</div>
+                <div class="box filter">Filter<span class="role">응답 후처리 (압축·로깅)</span></div>
+                <div class="arrow">→</div>
+                <span class="pipe-desc">브라우저로 응답</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>읽는 법</strong> — 위에서 아래로 따라 내려가면 “요청”이 거치는 길이고,
+          마지막 두 줄은 “응답”이 되돌아 나오는 역순. <em>Filter와 Interceptor는 한 번이 아니라 들어갈 때·나올 때 두 번 작동</em>한다.
+        </div>
+      </section>
+
+      <!-- =========================================================
+           2. DispatcherServlet 내부
+      ========================================================== -->
+      <section>
+        <div class="sec-head">
+          <span class="num">02</span>
+          <h2>도식 2. DispatcherServlet 내부 — Front Controller가 “위임”으로 일하는 법</h2>
+          <span class="tag">spring-mvc-core</span>
+        </div>
+
+        <p>
+          DispatcherServlet은 <strong>스프링 위에서 도는 단 하나의 Servlet</strong>이다. 모든 URL이 이 친구에게 먼저 들어온다.
+          그런데 정작 자기는 매핑 룰도, 호출 방식도, 뷰 렌더링도 직접 안 한다 — <strong>전부 위임</strong>한다.
+          이 “위임 구조”가 Spring MVC가 그토록 유연한 이유.
+        </p>
+
+        <h3>4단계 위임</h3>
+
+        <div class="diagram">
+<pre class="ascii">                           ┌──────────────────────────────────────┐
+   요청 도착 ─────────────▶ │  ① HandlerMapping                    │
+   /posts/42 GET            │     "URL과 메서드를 보고              │
+                            │      어느 Handler(컨트롤러 메서드)에   │
+                            │      넘길지 결정"                     │
+                            └──────────────┬───────────────────────┘
+                                           │ HandlerExecutionChain
+                                           ▼ (Handler + Interceptor 목록)
+                            ┌──────────────────────────────────────┐
+                            │  ② HandlerAdapter                    │
+                            │     "그 Handler를 어떻게 호출해야      │
+                            │      하는지를 안다"                    │
+                            │     (@Controller, HttpRequestHandler  │
+                            │      등 다양한 핸들러 타입 대응)        │
+                            └──────────────┬───────────────────────┘
+                                           │ Interceptor.preHandle
+                                           ▼
+                            ┌──────────────────────────────────────┐
+                            │     @Controller 메서드 실행           │
+                            │     반환: ModelAndView 또는           │
+                            │           @ResponseBody 객체          │
+                            └──────────────┬───────────────────────┘
+                                           │ Interceptor.postHandle
+                                           ▼
+                            ┌──────────────────────────────────────┐
+                            │  ③ ViewResolver                      │
+                            │     "뷰 이름('posts/detail')을        │
+                            │      실제 JSP/Thymeleaf 파일로 매핑"   │
+                            │     (@ResponseBody면 건너뜀)          │
+                            └──────────────┬───────────────────────┘
+                                           ▼
+                            ┌──────────────────────────────────────┐
+                            │  ④ HttpMessageConverter / View       │
+                            │     · @ResponseBody → Jackson이 JSON  │
+                            │     · 일반 View → 템플릿 렌더링         │
+                            └──────────────┬───────────────────────┘
+                                           │ Interceptor.afterCompletion
+                                           ▼
+                                       응답 송출</pre>
+        </div>
+
+        <h3>왜 “위임”인가</h3>
+        <p>
+          만약 DispatcherServlet이 매핑·호출·렌더링을 직접 다 한다면, “URL 패턴 바꾸자”나
+          “JSON으로 응답 형식 바꾸자” 한 마디에 DispatcherServlet 코드를 손대야 한다.
+          위임 구조 덕분에 우리는 <strong>해당 부품(예: HttpMessageConverter)만 교체</strong>하면 된다.
+          OCP(Open-Closed)를 인프라 수준에서 실현한 셈.
+        </p>
+
+        <h3>“스프링이 없으면 우리가 직접 짜야 할 것”과의 매핑</h3>
+        <table>
+          <thead>
+            <tr><th>순수 Servlet이라면</th><th>DispatcherServlet이 대신해주는 것</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>@WebServlet("/posts/*")</code>로 각 URL마다 Servlet 분리</td><td><strong>HandlerMapping</strong>이 한 번에 처리</td></tr>
+            <tr><td><code>doGet</code> / <code>doPost</code> 분기, 파라미터 파싱</td><td><strong>HandlerAdapter</strong>가 메서드·파라미터 바인딩</td></tr>
+            <tr><td><code>request.setAttribute</code> + <code>forward()</code></td><td><strong>ViewResolver</strong>가 뷰 이름만으로 렌더</td></tr>
+            <tr><td>JSON 응답이면 <code>PrintWriter</code>로 직접 <code>{...}</code> 작성</td><td><strong>Jackson</strong>이 객체 → JSON 자동 변환</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <strong>왜 DispatcherServlet은 “Front Controller”인가</strong> — 모든 요청이 “정문 한 곳”으로 들어오기 때문.
+          반대 디자인(URL마다 Servlet을 따로 두는 것)은 공통 처리(인증·로깅·뷰 결정)를 매번 복붙해야 한다.
+          정문 하나로 모으면 그 모든 공통 처리를 <strong>한 곳에서 표준화</strong>할 수 있다.
+        </div>
+      </section>
+
+      <!-- =========================================================
+           3. MVC × 3-tier 겹침
+      ========================================================== -->
+      <section>
+        <div class="sec-head">
+          <span class="num">03</span>
+          <h2>도식 3. Spring MVC 구조 — MVC와 3-tier가 동시에 작동한다</h2>
+          <span class="tag">two-axes</span>
+        </div>
+
+        <p>
+          가장 자주 헷갈리는 지점. <strong>MVC와 3-tier는 같은 것이 아니다.</strong>
+          MVC는 <em>표현(presentation) 분리</em>고, 3-tier는 <em>시스템 계층 분리</em>다.
+          축이 다르기 때문에 두 분리는 <strong>동시에 적용</strong>된다.
+        </p>
+
+        <div class="diagram">
+<pre class="ascii">                        ─── MVC 축 (표현 분리) ───
+                  Controller        Model            View
+                       ▼              ▼                ▼
+   ┌───────────────────────────────────────────────────────────┐
+   │  WEB LAYER                                                │  ┐
+   │  @Controller / DispatcherServlet / Filter / Interceptor   │  │
+   │  Thymeleaf · JSP · HttpMessageConverter                   │  │
+   ├───────────────────────────────────────────────────────────┤  │ 3-tier 축
+   │  BUSINESS LAYER                                           │  │ (시스템 계층)
+   │  @Service · @Transactional · Domain Model(Entity의 행위)  │  │
+   ├───────────────────────────────────────────────────────────┤  │
+   │  DATA LAYER                                               │  │
+   │  @Repository · DAO · JdbcTemplate · JPA · Entity 매핑     │  ┘
+   └───────────────────────────────────────────────────────────┘
+                                ▼
+                              DATABASE</pre>
+        </div>
+
+        <h3>축이 만나는 지점</h3>
+        <ul>
+          <li><strong>Controller</strong> — MVC의 C이자 3-tier의 Web Layer 진입점. 두 축이 겹쳐 보여서 헷갈린다.</li>
+          <li><strong>Model</strong> — MVC에서는 “Controller가 View로 넘기는 데이터”. 3-tier에서는 “Domain Model(Service 계층의 핵심)”. 같은 단어가 두 뜻으로 쓰임.</li>
+          <li><strong>View</strong> — MVC 전용 개념. 3-tier에는 따로 대응하는 게 없다 (Web Layer 안에 다 들어감).</li>
+        </ul>
+
+        <h3>한 표로</h3>
+        <table>
+          <thead>
+            <tr><th>축</th><th>분류 기준</th><th>분할</th><th>어디 산다</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MVC</td>
+              <td>표현 분리 (UI)</td>
+              <td>Controller · View · Model</td>
+              <td>Web Layer 안</td>
+            </tr>
+            <tr>
+              <td>3-tier</td>
+              <td>시스템 계층</td>
+              <td>Web · Business · Data</td>
+              <td>시스템 전체에 걸침</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <strong>외워두기</strong> — “MVC는 화면 쪽만 분리, 3-tier는 화면 안쪽까지 포함한 전체 분리.”
+          Spring에서 <code>@Controller</code> → <code>@Service</code> → <code>@Repository</code>로 이어지는 호출이 바로 3-tier.
+          그 안에서 Controller와 View가 협력하는 게 MVC.
+        </div>
+      </section>
+
+      <!-- =========================================================
+           4. DTO / DAO / DO / Entity
+      ========================================================== -->
+      <section>
+        <div class="sec-head">
+          <span class="num">04</span>
+          <h2>도식 4. 데이터 객체 4종 — DTO / DAO / DO / Entity</h2>
+          <span class="tag">data-objects</span>
+        </div>
+
+        <p>
+          이름이 비슷해서 가장 잘 섞이는 4개. 결론부터 한 줄로:
+        </p>
+
+        <div class="note">
+          <strong>요약</strong> —
+          <span style="color:var(--dao)">DAO는 “행동(접근)”</span>,
+          나머지 셋은 “객체”다. 그 중에서
+          <span style="color:var(--entity)">Entity</span>는 “식별자(id)를 가진 도메인 객체”,
+          <span style="color:var(--do)">DO</span>는 “도메인 모델에 속하는 객체 모두(Entity의 부모 카테고리)”,
+          <span style="color:var(--dto)">DTO</span>는 “계층/시스템 경계를 건너는 운반체”다.
+        </div>
+
+        <div class="cards-4">
+          <div class="card dto">
+            <h4>DTO</h4>
+            <span class="full">Data Transfer Object</span>
+            <p class="role-line">계층 사이를 오가는 운반체</p>
+            <ul>
+              <li>데이터만 있고 행위는 없음</li>
+              <li>요청/응답 시나리오마다 다른 모양</li>
+              <li>주로 <code>record</code>나 Lombok DTO</li>
+              <li>변환 위치: 보통 Service에서</li>
+            </ul>
+            <div class="one">필드 결정 기준 = <strong>유스케이스</strong> (엔티티 아님)</div>
+          </div>
+
+          <div class="card dao">
+            <h4>DAO</h4>
+            <span class="full">Data Access Object</span>
+            <p class="role-line">DB 접근을 전담하는 객체</p>
+            <ul>
+              <li>SQL/JDBC 호출을 한곳에 모음</li>
+              <li>Spring에서는 <code>@Repository</code></li>
+              <li>JPA Repository 인터페이스도 이 자리</li>
+              <li>Service는 “무엇을”만, DAO는 “어떻게”를 안다</li>
+            </ul>
+            <div class="one">4종 중 유일하게 <strong>“행동” 객체</strong>다</div>
+          </div>
+
+          <div class="card entity">
+            <h4>Entity</h4>
+            <span class="full">Domain Entity</span>
+            <p class="role-line">식별자(id)를 가진 도메인 본체</p>
+            <ul>
+              <li>상태 + 식별자 + <strong>행위</strong></li>
+              <li>JPA에서 <code>@Entity</code> 어노테이션</li>
+              <li>DB 테이블과 매핑되는 경우가 많음</li>
+              <li>비즈니스 규칙을 자기 안에 품음</li>
+            </ul>
+            <div class="one"><code>Order.cancel()</code>처럼 <strong>도메인 규칙</strong>을 실행</div>
+          </div>
+
+          <div class="card do">
+            <h4>DO</h4>
+            <span class="full">Domain Object</span>
+            <p class="role-line">도메인 모델에 속하는 모든 객체</p>
+            <ul>
+              <li>Entity의 상위 카테고리</li>
+              <li>VO(Value Object)도 DO의 일종</li>
+              <li>“DB와의 매핑” 의무 없음</li>
+              <li>한국 실무에선 “Entity와 사실상 같은 뜻”으로도 씀</li>
+            </ul>
+            <div class="one">⚠️ 팀마다 정의가 다름 — <strong>합의된 의미를 먼저 확인</strong></div>
+          </div>
+        </div>
+
+        <h3>객체 vs 행동 — 가장 큰 오해 풀기</h3>
+
+        <div class="diagram">
+<pre class="ascii">                      [ Controller / Service ]
+                            │
+                            │  postDao.findById(42)
+                            ▼
+                    ┌──────────────────┐
+                    │      DAO         │   ← 객체이긴 한데 본질은 "행동"(SQL 호출)
+                    │   @Repository    │
+                    └────────┬─────────┘
+                             │  SELECT * FROM posts WHERE id = 42
+                             ▼
+                          [ DB ]
+                             │
+                             ▼  ResultSet
+                    ┌──────────────────┐
+                    │     Entity       │   ← DB 한 행을 채운 도메인 본체
+                    │     (Post)       │
+                    └────────┬─────────┘
+                             │  Service에서 변환
+                             ▼
+                    ┌──────────────────┐
+                    │       DTO        │   ← Controller가 클라이언트에 줄 운반체
+                    │  PostResponseDto │
+                    └──────────────────┘</pre>
+        </div>
+
+        <h3>한 표로 비교</h3>
+        <table>
+          <thead>
+            <tr><th>구분</th><th>DTO</th><th>DAO</th><th>Entity</th><th>DO</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>본질</strong></td>
+              <td>객체(운반체)</td>
+              <td><strong>행동</strong>(접근자)</td>
+              <td>객체(도메인 본체)</td>
+              <td>객체(도메인 모델 일반)</td>
+            </tr>
+            <tr>
+              <td><strong>행위(메서드)</strong></td>
+              <td>없음</td>
+              <td>findAll/save/...</td>
+              <td>있음 (규칙 실행)</td>
+              <td>있을 수 있음</td>
+            </tr>
+            <tr>
+              <td><strong>식별자(id)</strong></td>
+              <td>있어도 됨, 의미 약함</td>
+              <td>해당 없음</td>
+              <td><strong>핵심</strong></td>
+              <td>경우에 따라 (VO는 없음)</td>
+            </tr>
+            <tr>
+              <td><strong>DB 매핑</strong></td>
+              <td>아님</td>
+              <td>매핑을 <em>수행</em>함</td>
+              <td>대개 매핑됨</td>
+              <td>의무 없음</td>
+            </tr>
+            <tr>
+              <td><strong>위치</strong></td>
+              <td>계층 경계</td>
+              <td>Data Layer</td>
+              <td>Business/Data Layer</td>
+              <td>Business Layer</td>
+            </tr>
+            <tr>
+              <td><strong>Spring</strong></td>
+              <td>일반 클래스/record</td>
+              <td><code>@Repository</code></td>
+              <td><code>@Entity</code></td>
+              <td>특정 어노테이션 없음</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>DO와 Entity — 관계가 모호한 이유</h3>
+        <p>
+          엄밀히 말하면 <strong>Entity ⊂ DO</strong>다. 즉 DO가 더 큰 범주고, Entity는 그 중 “식별자로 구별되는 것”.
+          DDD(Domain-Driven Design)에선 DO를 다시 <strong>Entity</strong>(식별 가능)와 <strong>Value Object</strong>(값으로만 구별,
+          예: <code>Money(1000, KRW)</code>)로 나눈다.
+        </p>
+        <p>
+          그런데 한국 실무에서는 “DO”라는 용어를 거의 안 쓰거나, Entity와 사실상 동의어로 쓰는 경우가 많다.
+          DDD 책이나 외국 코드베이스를 볼 때만 “DO ⊃ Entity”라는 위계가 의미를 가진다.
+        </p>
+
+        <div class="note">
+          <strong>영균 실무에서</strong> — 처음엔 “DTO ↔ Entity” 두 개로만 생각해도 충분. DO를 의식해야 할 때는 (a) DDD 책 읽을 때,
+          (b) Value Object(예: Money, Address)를 도입할 때, (c) 외국 코드베이스 읽을 때 정도.
+        </div>
+      </section>
+
+      <!-- =========================================================
+           5. 한 시나리오로 따라가기
+      ========================================================== -->
+      <section>
+        <div class="sec-head">
+          <span class="num">05</span>
+          <h2>도식 5. 한 시나리오로 따라가기 — “POST /posts” 요청의 라이프</h2>
+          <span class="tag">walkthrough</span>
+        </div>
+
+        <p>
+          영균이 만드는 미니 SNS의 글 작성 요청. 위 도식들이 어떻게 한 줄로 꿰어지는지.
+        </p>
+
+        <div class="diagram">
+          <div class="seq">
+            <div class="num">①</div>
+            <div class="body">
+              브라우저가 <code>POST /posts</code> + JSON <code>{title, body}</code> 송신 →
+              <strong>Tomcat</strong>이 TCP 받고 HTTP 파싱.
+            </div>
+
+            <div class="num">②</div>
+            <div class="body">
+              <strong>Filter Chain</strong> 통과 — <code>CharacterEncodingFilter</code>가 UTF-8 강제,
+              CORS 필터가 Origin 검사.
+            </div>
+
+            <div class="num">③</div>
+            <div class="body">
+              <strong>DispatcherServlet</strong> 진입.
+              <code>HandlerMapping</code>이 “POST /posts → <code>PostController.create()</code>” 결정.
+            </div>
+
+            <div class="num">④</div>
+            <div class="body">
+              <strong>AuthInterceptor.preHandle</strong> — 세션에 로그인 정보 없으면 401 반환하고 컷.
+              있으면 통과.
+            </div>
+
+            <div class="num">⑤</div>
+            <div class="body">
+              <strong>HandlerAdapter</strong>가 Jackson을 시켜 요청 본문 JSON →
+              <code>PostCreateRequestDto</code>로 역직렬화. 그걸 컨트롤러 메서드 파라미터에 주입.
+            </div>
+
+            <div class="num">⑥</div>
+            <div class="body">
+              <code>@Controller</code> 메서드 본체:
+              <code>postService.create(dto, loginUser)</code> 호출.
+              컨트롤러는 흐름 조립만 한다.
+            </div>
+
+            <div class="num">⑦</div>
+            <div class="body">
+              <code>@Service</code> <strong>PostService.create</strong>:
+              DTO를 <strong>Entity</strong>(<code>new Post(...)</code>)로 변환,
+              도메인 규칙(예: <code>post.validateTitleLength()</code>) 적용,
+              <code>postRepository.save(post)</code> 호출.
+              <code>@Transactional</code> 경계도 여기.
+            </div>
+
+            <div class="num">⑧</div>
+            <div class="body">
+              <code>@Repository</code> = <strong>DAO</strong>가 INSERT SQL 실행.
+              JPA면 <code>EntityManager.persist</code>, JdbcTemplate이면 <code>update(...)</code>.
+              <strong>DB</strong>에 한 행 박힘.
+            </div>
+
+            <div class="num">⑨</div>
+            <div class="body">
+              저장된 Entity를 받아 <strong>PostResponseDto</strong>로 다시 변환 (Service가 함).
+              민감 필드(예: 작성자의 비밀번호 해시)는 빠진다 — DTO의 차단 효과.
+            </div>
+
+            <div class="num">⑩</div>
+            <div class="body">
+              컨트롤러가 DTO 반환 → <code>@ResponseBody</code>이므로 <strong>ViewResolver는 건너뜀</strong> →
+              <strong>HttpMessageConverter</strong>(Jackson)가 DTO → JSON 직렬화.
+            </div>
+
+            <div class="num">⑪</div>
+            <div class="body">
+              <strong>Interceptor.postHandle / afterCompletion</strong> 실행 (감사 로그, 성능 측정).
+            </div>
+
+            <div class="num">⑫</div>
+            <div class="body">
+              응답이 <strong>Filter</strong> 역순 통과 (gzip 압축, 응답 로깅) →
+              브라우저가 JSON 수신.
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>오늘의 한 줄</strong> — 한 요청은 <em>Filter → Dispatcher → Interceptor → Controller → Service → Entity ↔ DAO → DB</em>를 거쳐
+          <em>역순으로 빠져나온다</em>. 그 길 위에서 <strong>DTO는 양 끝(요청·응답)에서만 등장</strong>하고, 중심엔 늘 Entity가 있다.
+        </div>
+      </section>
+
+      <!-- =========================================================
+           6. 자주 헷갈리는 짝
+      ========================================================== -->
+      <section>
+        <div class="sec-head">
+          <span class="num">06</span>
+          <h2>부록. 자주 헷갈리는 짝</h2>
+          <span class="tag">cheat-sheet</span>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>헷갈리는 짝</th><th>이렇게 구분</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MVC ↔ 3-tier</td>
+              <td>MVC는 화면(presentation) 분리, 3-tier는 시스템 계층 분리. <strong>축이 다름</strong>.</td>
+            </tr>
+            <tr>
+              <td>Filter ↔ Interceptor</td>
+              <td>Filter는 스프링 밖(HTTP만 봄), Interceptor는 스프링 안(Bean·HandlerMethod 봄).</td>
+            </tr>
+            <tr>
+              <td>Servlet ↔ DispatcherServlet</td>
+              <td>DispatcherServlet도 <em>하나의 Servlet</em>이다. 다만 모든 URL을 한 곳으로 받는 Front Controller.</td>
+            </tr>
+            <tr>
+              <td>Service ↔ Controller</td>
+              <td>Controller는 “HTTP 입출력 조립”, Service는 “비즈니스 로직 실행 + 트랜잭션 경계”.</td>
+            </tr>
+            <tr>
+              <td>DTO ↔ Entity</td>
+              <td>DTO는 경계의 계약(유스케이스 기반), Entity는 도메인의 본체(행위 포함).</td>
+            </tr>
+            <tr>
+              <td>DAO ↔ Repository</td>
+              <td>같은 자리. Spring에선 <code>@Repository</code>가 DAO의 자리. JPA Repository 인터페이스도 여기.</td>
+            </tr>
+            <tr>
+              <td>DO ↔ Entity</td>
+              <td>엄밀히는 DO ⊃ Entity (DO 안에 Entity와 Value Object가 있음). 실무에선 거의 동의어로 쓰임.</td>
+            </tr>
+            <tr>
+              <td>HandlerMapping ↔ HandlerAdapter</td>
+              <td>Mapping은 “누가 처리할지 찾기”, Adapter는 “찾은 그놈을 실제로 호출하기”.</td>
+            </tr>
+            <tr>
+              <td>ViewResolver ↔ HttpMessageConverter</td>
+              <td>전자는 뷰 이름 → 템플릿 파일, 후자는 객체 ↔ JSON/XML 변환. <code>@ResponseBody</code>면 후자만.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer>
+        근거 위키 페이지:
+        servlet · servlet-container · mvc-pattern · three-tier-architecture · dao-pattern ·
+        dto-vs-entity · domain · filter · interceptor · filter-vs-interceptor · servlet-to-spring-mvc ·
+        spring-framework · spring-bean · dependency-injection
+        <br/>
+        2026-05-21 · NoteWiki/Output
+      </footer>
+
+    </main>
+  </body>
+</html>
