@@ -173,6 +173,7 @@ Java DTO       ──Serialize(직렬화)─────▶  "JSON 문자열"
 - [[dao-pattern]] — 4종 중 유일한 "행동" 객체
 - [[three-tier-architecture]] — DTO가 계층 사이를 오가는 무대
 - [[java-record]] — DTO를 가장 짧게 쓰는 도구
+- [[api-response-wrapper]] — DTO 위에 메타 정보 한 겹을 더 씌우는 응답 패턴
 - [[content-negotiation]] — DTO와 JSON/XML 직렬화의 연결
 - 흐름: [[spring-mvc-request-flow]] — DTO·Entity가 한 요청에서 등장하는 자리
 - 출처: [[spring-framework-1-note]]

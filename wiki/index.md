@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-05-26 (query — 서블릿 스펙 환류: [[servlet-spec]] 신설, [[filter]]·[[interceptor]]·[[filter-vs-interceptor]]·[[servlet]]·[[servlet-container]] 백링크 보강)_
+_마지막 갱신: 2026-05-26 (ingest — MyBatis 실습 정리: [[mybatis]]·[[api-response-wrapper]]·[[http-status-codes]] 신설, [[mybatis-practice-debugging]] 소스 추가)_
 
 ---
 
@@ -37,6 +37,7 @@ _마지막 갱신: 2026-05-26 (query — 서블릿 스펙 환류: [[servlet-spec
 ### 데이터베이스
 - [[orm]] — 객체-관계 매핑, 장점과 한계
 - [[prisma]] — JS/TS 전용 ORM, 스키마와 클라이언트
+- [[mybatis]] — Java SQL Mapper, ORM이 아닌 중간 추상화 (namespace ↔ 인터페이스 매핑)
 - [[n-plus-1-problem]] — ORM에서 흔한 쿼리 비효율과 해결
 
 ### Java / 언어 기초
@@ -95,9 +96,11 @@ _마지막 갱신: 2026-05-26 (query — 서블릿 스펙 환류: [[servlet-spec
 - [[three-tier-architecture]] — Web/Service/Repository 계층, MVC와 다른 축
 - [[dto-vs-entity]] — 운반체와 도메인 본체의 분리
 - [[domain]] — "이 소프트웨어가 다루는 현실 영역" + 네트워크 도메인 분기
+- [[api-response-wrapper]] — `{success, message, data}` 공통 응답 래퍼, DTO 위 메타 한 겹
 
 ### 웹 / HTTP·REST
 - [[restful-api]] — URI=명사, 동사=HTTP 메서드의 API 설계
+- [[http-status-codes]] — 2xx/4xx/5xx 적극 활용·Spring `ResponseStatusException` 던지기
 - [[content-negotiation]] — Accept·Content-Type, JSON/XML 자동 선택
 - [[http-method-override]] — `X-HTTP-Method-Override`, Filter로만 가능한 이유
 - [[etag]] — 리소스 버전 도장, `If-None-Match`·304로 캐싱·동시성 제어
@@ -136,12 +139,13 @@ _마지막 갱신: 2026-05-26 (query — 서블릿 스펙 환류: [[servlet-spec
 - [[proxy-forward-reverse-video]] — `raw/youtube/Proxy(프록시)란 Forward vs Reverse Proxy…` (코딩문)
 - [[load-balancing-video]] — `raw/youtube/Load Balancing 로드 밸런싱이 뭔가요…` (코딩문)
 - [[spring-framework-1-note]] — `raw/notes/Spring Framework.md` (부트캠프 강의자료 §1~§3)
+- [[mybatis-practice-debugging]] — `raw/notes/study-notes.md` (MyBatis 실습 Claude 대화 정리, 8건 디버깅 일지)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 72
+- 개념 페이지: 75
 - 흐름 페이지: 9
-- 소스 페이지: 19
-- 통합한 원본 수: 19
+- 소스 페이지: 20
+- 통합한 원본 수: 20

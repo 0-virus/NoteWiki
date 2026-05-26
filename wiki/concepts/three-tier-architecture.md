@@ -46,6 +46,8 @@ sources: ["raw/notes/Spring Framework.md"]
 - **DB에 접근하는 영역**, 곧 [[dao-pattern]]의 영역.
 - SQL/JPQL이 들어가는 유일한 곳.
 - Web도 Service도 SQL을 알지 못한다.
+- 구현 도구: [[jdbc]]를 직접 / [[mybatis]] SQL Mapper / [[orm]](JPA·Prisma 등) —
+  추상화 단계가 다를 뿐 책임은 같다.
 
 ## 양 옆 — DTO와 Domain Model
 

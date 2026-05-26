@@ -85,9 +85,13 @@ Spring의 **`@Repository`**가 바로 이 DAO다. 더 나아가 **Spring Data JP
 지금 DAO를 손으로 짜며 겪는 반복(연결·ResultSet 순회·해제)이 **Spring이 무엇을 없애주는가**의
 체험이다. → [[servlet-to-spring-mvc]]
 
+[[mybatis]]는 그 자동화의 **SQL Mapper 버전** — 인터페이스 + XML(또는 `@Select`)
+선언만으로 구현체를 동적 프록시로 만들어준다. 부트캠프 MyBatis 단원이 이 단계.
+
 ## 관련 페이지
 
 - [[jdbc]] — DAO 내부가 실제로 쓰는 DB 접근 API
+- [[mybatis]] — DAO 인터페이스에 구현을 자동 끼워주는 SQL Mapper
 - [[mvc-pattern]] — DAO는 Controller 아래 데이터 접근 계층
 - [[orm]] — DAO의 반복 코드를 더 크게 추상화한 접근
 - 출처: [[servlet-jdbc-debugging]]

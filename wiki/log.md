@@ -261,3 +261,27 @@ AI 채팅(ChatGPT·Gemini 등)의 클리핑 품질을 높이기 위해 selector 
   - **[[dispatcher-servlet]] 자체도 `HttpServlet`을 상속한 한 개의 서블릿** — Spring MVC 전체가 결국 서블릿 스펙 위에 올린 한 겹의 추상화임이 드러나는 지점.
   - [[filter]]가 Spring 없이도 Tomcat만으로 동작하는 반면 [[interceptor]]는 [[dispatcher-servlet]] 안에서만 사는 것이, "스펙 기술 vs 스프링 기술"의 위치 차이로 자연스럽게 설명됨.
 - `index.md` 갱신: "Java / 웹 (Servlet·Spring)" 카테고리 맨 앞에 [[servlet-spec]] 추가, 개념 71→72.
+
+## [2026-05-26] ingest | MyBatis 실습 정리 (Claude Code 대화)
+
+`raw/notes/study-notes.md` 인제스트 — 부트캠프 MyBatis 단원 실습(`usertest` 프로젝트) 중 Claude Code와의 대화에서 정리한 8가지 막힘 지점.
+
+- 인터뷰: ①정착 형태 = "개념 + 디버깅 일지 둘 다" ②신설 개념 = mybatis(메타) + api-response-wrapper + http-status-codes (pathvariable-vs-requestparam은 의도적으로 제외 — 소스 페이지 #8 체크리스트로만 남김) ③맥락 = 부트캠프 MyBatis 단원 실습 중.
+- 생성: 소스 페이지 1, 개념 페이지 3 (총 4 페이지)
+  - 소스: [[mybatis-practice-debugging]] — [[servlet-jdbc-debugging]] 형식의 디버깅 일지 8건. "JDBC에서 사라진 자리에 MyBatis가 새로 가져온 함정"의 기록.
+  - 개념: [[mybatis]] — SQL Mapper 메타. **ORM이 아닌 이유**(카테고리 차이) 강조. namespace↔Java 인터페이스 매핑, `<sql>`/`<include>` 재사용, `#{}` vs `${}` 보안, 주요 설정(mapper-locations·map-underscore-to-camel-case·type-aliases-package), `@Mapper` 어노테이션 방식.
+  - 개념: [[api-response-wrapper]] — `{success, message, data}` 공통 응답 래퍼. [[dto-vs-entity]] 위 메타 한 겹. 실습 단계 과잉/실무 도입의 트레이드오프. **헤더(HTTP status) vs 본문(wrapper) 분업** 강조 — 래퍼 도입했다고 모두 200으로 통일하는 함정 경고.
+  - 개념: [[http-status-codes]] — "클라이언트가 다르게 반응해야 하면 구분"의 판단 기준. ResponseStatusException·`@ResponseStatus`·`@ControllerAdvice` 3가지 던지는 법. **Filter 예외는 `@ControllerAdvice`에 안 잡힘** 함정을 [[filter-vs-interceptor]]와 교차 연결.
+- 백링크 보강(6건):
+  - [[orm]] — "ORM vs SQL Mapper 카테고리 다름" 표 추가, MyBatis와의 명시적 구분
+  - [[jdbc]] — 영균 맥락에 "JDBC → MyBatis → ORM" 다리 추가
+  - [[dao-pattern]] — MyBatis Mapper가 DAO 인터페이스에 동적 프록시 구현체 끼우는 방식 명시
+  - [[three-tier-architecture]] — Repository Layer 구현 도구로 jdbc/mybatis/orm 3단계 명시
+  - [[restful-api]] — [[http-status-codes]] 본문 깊이 위임 + 관련 페이지에 [[api-response-wrapper]] 추가
+  - [[dto-vs-entity]] — 관련 페이지에 [[api-response-wrapper]] 추가 (위 메타 한 겹)
+- 핵심 인사이트:
+  - **MyBatis ≠ ORM** — SQL Mapper다. SQL 통제권은 개발자에게 남는다. JPA와 우열이 아닌 선택.
+  - JDBC의 반복 코드(연결·해제·ResultSet)는 사라졌지만 **새로운 함정**(XML namespace·`@PathVariable` 매칭 시점·`RuntimeException`은 500)이 그 자리를 채운다. 추상화는 항상 트레이드오프.
+  - 응답의 의미는 **헤더(status code)**, 응답의 데이터는 **본문(DTO/Wrapper)**. 두 축은 분업이지 대체가 아니다.
+- 의도된 미생성: `pathvariable-vs-requestparam` — 영균 선택으로 보류. 소스 페이지 체크리스트 #8에 패턴만 기록.
+- `index.md` 갱신: 데이터베이스/Spring 웹·아키텍처/웹 HTTP·REST 3개 카테고리에 각각 신규 페이지 1건씩 추가. 개념 72→75, 소스 19→20, 통합 원본 19→20.

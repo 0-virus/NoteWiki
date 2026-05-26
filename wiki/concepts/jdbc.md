@@ -94,10 +94,15 @@ PreparedStatement → ResultSet 흐름이다. JDBC를 직접 만져보면 ORM이
 선명해진다. Spring으로 가면 `DataSource`·`JdbcTemplate`이 이 반복 코드(연결·해제)를
 대신 처리해준다 — "왜 그 도구가 필요한가"의 답이 여기 있다.
 
+ORM이 한 번에 너무 많이 감춰서 부담스러우면 **중간 추상화 [[mybatis]]**(SQL Mapper)가
+있다. SQL은 그대로 두고 매핑·자원 관리만 자동화하는 형태. 부트캠프 MyBatis 단원 실습이
+바로 이 다리.
+
 ## 관련 페이지
 
 - [[dao-pattern]] — JDBC 코드를 한 객체로 모으는 패턴
-- [[orm]] — JDBC를 추상화한 상위 계층
+- [[orm]] — JDBC를 추상화한 상위 계층 (자동 SQL)
+- [[mybatis]] — JDBC와 ORM 사이의 중간 추상화 (SQL Mapper)
 - [[prisma]] — ORM 구현체, JDBC와 같은 일을 추상화해 처리
 - [[mvc-pattern]] — Controller가 DAO를 거쳐 JDBC로 DB에 접근
 - 출처: [[servlet-jdbc-debugging]]

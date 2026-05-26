@@ -53,6 +53,8 @@ sources: ["raw/notes/Spring Framework.md"]
 | `406 Not Acceptable` | 클라이언트가 원한 형식을 못 줌 → [[content-negotiation]] |
 | `500 Internal Server Error` | 서버 오류             |
 
+→ Spring에서 적극적으로 던지는 법, 401/403 구분 등 자세한 내용은 [[http-status-codes]].
+
 ## 강의 실습 — 미니 SNS API 명세
 
 | 기능              | 메서드 | URI                  |
@@ -109,6 +111,8 @@ public class PostController {
 
 ## 관련 페이지
 
+- [[http-status-codes]] — 응답 상태 코드 적극 활용·Spring에서 던지는 법
+- [[api-response-wrapper]] — REST 응답 본문을 공통 구조로 감싸는 패턴
 - [[content-negotiation]] — 응답 형식(JSON/XML)을 클라이언트가 고르는 메커니즘
 - [[http-method-override]] — 제한 환경에서 메서드를 우회하는 방법
 - [[etag]] — REST 응답에 캐싱·동시성 제어를 더하는 헤더
