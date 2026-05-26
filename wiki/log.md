@@ -285,3 +285,21 @@ AI 채팅(ChatGPT·Gemini 등)의 클리핑 품질을 높이기 위해 selector 
   - 응답의 의미는 **헤더(status code)**, 응답의 데이터는 **본문(DTO/Wrapper)**. 두 축은 분업이지 대체가 아니다.
 - 의도된 미생성: `pathvariable-vs-requestparam` — 영균 선택으로 보류. 소스 페이지 체크리스트 #8에 패턴만 기록.
 - `index.md` 갱신: 데이터베이스/Spring 웹·아키텍처/웹 HTTP·REST 3개 카테고리에 각각 신규 페이지 1건씩 추가. 개념 72→75, 소스 19→20, 통합 원본 19→20.
+
+## [2026-05-26] query | RAG의 작동 원리와 활용 — NoteWiki 패턴과의 비교
+
+영균의 질문 "RAG가 뭔지 대충은 알겠는데 정확한 작동 원리와 실제 활용을 알고 싶다"에 답하며, 가치 있는 답변(특히 NoteWiki가 따르는 [[llm-wiki-pattern]]과의 비교)을 위키로 환류.
+
+- 신규 개념 페이지 4건:
+  - [[rag]] — 3단계(Indexing → Retrieval → Generation), 실무 패턴(Hybrid Search·Re-ranking·Citation), 스택(LangChain·Pinecone·pgvector 등)
+  - [[embedding]] — 분포 가설 기반 벡터화, 코사인 유사도, "같은 모델로 쿼리하라" 함정
+  - [[vector-database]] — HNSW·IVF 인덱스, ANN, 메타데이터 필터링, 제품별 선택 기준
+  - [[llm-wiki-pattern]] — Karpathy 제안, 3대 작업(Ingest·Query·Lint), RAG 한계의 대안으로 등장
+- 신규 흐름 페이지 1건:
+  - [[rag-vs-llm-wiki]] — 두 패턴의 트레이드오프, 자료 규모·연결성·누적성 축으로 선택 기준 정리, 하이브리드 가능성
+- 핵심 takeaway:
+  - RAG는 **chunk 검색**, LLM Wiki는 **컴파일된 위키** — 우열이 아니라 자료 성격에 따른 선택.
+  - NoteWiki의 비전("AI 색인 도구")은 **chunk가 아니라 연결**이 가치 → Wiki 패턴이 옳은 선택.
+  - 자료가 커지면 하이브리드 가능: 위키 + raw/에 대한 RAG 보완.
+  - 이 저장소의 CLAUDE.md가 명시한 "RAG처럼 매번 원본을 재검색하는 대신…"의 배경 이론을 명시적 페이지로 기록.
+- `index.md` 갱신: 새 카테고리 "AI / LLM / 지식 검색" 신설, 흐름에 비교 페이지 추가. 개념 75→79, 흐름 9→10.

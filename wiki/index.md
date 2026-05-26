@@ -3,11 +3,17 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-05-26 (ingest — MyBatis 실습 정리: [[mybatis]]·[[api-response-wrapper]]·[[http-status-codes]] 신설, [[mybatis-practice-debugging]] 소스 추가)_
+_마지막 갱신: 2026-05-26 (query — RAG 작동 원리 정리: [[rag]]·[[embedding]]·[[vector-database]]·[[llm-wiki-pattern]] 신설, [[rag-vs-llm-wiki]] 흐름 추가)_
 
 ---
 
 ## 개념 (Concepts) — `concepts/`
+
+### AI / LLM / 지식 검색
+- [[rag]] — Retrieval-Augmented Generation, 답변 전에 외부 문서 검색해 컨텍스트 주입
+- [[embedding]] — 텍스트 의미를 벡터로, 의미 유사도 검색의 핵심 부품
+- [[vector-database]] — 임베딩 대량 저장·근사 최근접 검색용 DB (Pinecone·Chroma·pgvector)
+- [[llm-wiki-pattern]] — RAG의 대안, AI가 컴파일·유지하는 위키 (이 저장소가 따르는 패턴)
 
 ### 도구 / 지식관리
 - [[markdown]] — 위키의 토대가 되는 경량 마크업 언어
@@ -117,6 +123,7 @@ _마지막 갱신: 2026-05-26 (ingest — MyBatis 실습 정리: [[mybatis]]·[[
 - [[manual-di-to-spring-ioc]] — 직접 `new` → DI → 인터페이스 → IoC 컨테이너 4단계 진화
 - [[filter-vs-interceptor]] — 두 가로채기 기술의 위치·책임·선택 기준 비교
 - [[spring-mvc-request-flow]] — 한 요청의 풀 파이프라인 (Filter → DispatcherServlet → Interceptor → Controller → Service → DAO → DB)
+- [[rag-vs-llm-wiki]] — AI에게 외부 지식을 주는 두 패턴의 트레이드오프 비교
 
 ## 소스 (Sources) — `sources/`
 
@@ -145,7 +152,7 @@ _마지막 갱신: 2026-05-26 (ingest — MyBatis 실습 정리: [[mybatis]]·[[
 
 ### 통계
 
-- 개념 페이지: 75
-- 흐름 페이지: 9
+- 개념 페이지: 79
+- 흐름 페이지: 10
 - 소스 페이지: 20
 - 통합한 원본 수: 20
