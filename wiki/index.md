@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-05-21 (query — Spring MVC 도식 HTML 환류: [[dispatcher-servlet]] 신설, [[spring-mvc-request-flow]] 신설, [[domain]]·[[dto-vs-entity]] 보강)_
+_마지막 갱신: 2026-05-26 (query — 서블릿 스펙 환류: [[servlet-spec]] 신설, [[filter]]·[[interceptor]]·[[filter-vs-interceptor]]·[[servlet]]·[[servlet-container]] 백링크 보강)_
 
 ---
 
@@ -64,6 +64,7 @@ _마지막 갱신: 2026-05-21 (query — Spring MVC 도식 HTML 환류: [[dispat
 - [[nginx]] — 리버스 프록시·LB 대표 구현, 실습 가능한 설정 예시 수록
 
 ### Java / 웹 (Servlet·Spring)
+- [[servlet-spec]] — "Java로 웹 처리하려면 이렇게 하라"는 Jakarta EE 표준 명세 (구현체 = Tomcat 등)
 - [[servlet]] — 웹 요청을 처리하는 주체가 되는 Java 클래스
 - [[jsp]] — HTML에 Java를 삽입한 문서, "JSP는 결국 Servlet"
 - [[jstl-el]] — JSP의 `${...}`·`<c:forEach>`, 스크립틀릿을 대체하는 표현 도구
@@ -71,7 +72,7 @@ _마지막 갱신: 2026-05-21 (query — Spring MVC 도식 HTML 환류: [[dispat
 - [[servlet-lifecycle]] — init/service/destroy와 싱글톤 관리
 - [[mvc-pattern]] — Servlet(Controller) + JSP(View) 역할 분리
 - [[dispatcher-servlet]] — Spring MVC의 Front Controller, 4부품(HandlerMapping/Adapter/ViewResolver/Converter)에 위임
-- [[filter]] — 서블릿 스펙의 가로채기, 정문 경비원 (인코딩·XSS·CORS)
+- [[filter]] — [[servlet-spec|서블릿 스펙]]의 가로채기, 정문 경비원 (인코딩·XSS·CORS)
 - [[interceptor]] — 스프링 MVC의 가로채기, 컨트롤러 문 앞 비서 (인증·권한)
 - [[dao-pattern]] — 데이터 접근을 전담 객체로 분리하는 패턴
 - [[jdbc]] — Java의 표준 DB 접근 API, Driver/Connection/ResultSet
@@ -140,7 +141,7 @@ _마지막 갱신: 2026-05-21 (query — Spring MVC 도식 HTML 환류: [[dispat
 
 ### 통계
 
-- 개념 페이지: 71
+- 개념 페이지: 72
 - 흐름 페이지: 9
 - 소스 페이지: 19
 - 통합한 원본 수: 19

@@ -248,3 +248,16 @@ AI 채팅(ChatGPT·Gemini 등)의 클리핑 품질을 높이기 위해 selector 
   - **[[dto-vs-entity]] 보강** — "DTO · DAO · Entity · DO — 4종 한 표로" 섹션 추가. 핵심 통찰: **DAO만 "행동", 나머지 셋은 "객체"**. 한 요청에서 네 객체가 만나는 자리 ASCII 도식.
 - 백링크 갱신: [[filter]] (TODO 해소), [[interceptor]], [[mvc-pattern]], [[servlet-to-spring-mvc]]에 [[dispatcher-servlet]] / [[spring-mvc-request-flow]] 링크 추가.
 - `index.md`: 개념 70→71 ([[dispatcher-servlet]] 추가), 흐름 8→9 ([[spring-mvc-request-flow]] 추가).
+
+## [2026-05-26] query | 서블릿 스펙이라는 게 무슨 뜻이야?
+
+영균 질문: 위키 곳곳([[filter]] 등)에 "서블릿 스펙"이라는 표현이 정의 없이 등장하던 자리를 채움. lint 기준 "언급은 되지만 페이지 없는 중요 개념"에 해당.
+
+- 환류 (1건 신설 + 5개 페이지 백링크 보강):
+  - **새 페이지 [[servlet-spec]]** — Jakarta EE의 표준 명세서. 콘센트 규격서 비유로 "인터페이스만 정의, 구현은 컨테이너가" 설명. 정의하는 주요 인터페이스 표, "서블릿 스펙 기술 vs 스프링 기술" 대조표, `javax → jakarta` 패키지 이동(Spring Boot 3.x/Tomcat 10+ 분기) 함정 메모.
+  - 백링크 보강(5건): [[filter]] 3곳·[[interceptor]] 1곳·[[filter-vs-interceptor]] 3곳에 박혀 있던 "서블릿 스펙" 문자열을 모두 [[servlet-spec]]으로 연결. [[servlet]]·[[servlet-container]] "관련 페이지"에도 추가.
+- 핵심 인사이트:
+  - 스펙 = "인터페이스 + 동작 규약"만 정의. Tomcat·Jetty·Undertow는 같은 스펙의 다른 구현체.
+  - **[[dispatcher-servlet]] 자체도 `HttpServlet`을 상속한 한 개의 서블릿** — Spring MVC 전체가 결국 서블릿 스펙 위에 올린 한 겹의 추상화임이 드러나는 지점.
+  - [[filter]]가 Spring 없이도 Tomcat만으로 동작하는 반면 [[interceptor]]는 [[dispatcher-servlet]] 안에서만 사는 것이, "스펙 기술 vs 스프링 기술"의 위치 차이로 자연스럽게 설명됨.
+- `index.md` 갱신: "Java / 웹 (Servlet·Spring)" 카테고리 맨 앞에 [[servlet-spec]] 추가, 개념 71→72.

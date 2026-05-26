@@ -9,7 +9,7 @@ sources: ["raw/notes/Spring Framework.md"]
 
 ## 한 줄 정의
 
-**HTTP 요청과 응답을 가로채서 변형하거나 거르는 [[servlet]] 스펙의 기술.**
+**HTTP 요청과 응답을 가로채서 변형하거나 거르는 [[servlet-spec|서블릿 스펙]]의 기술.**
 [[servlet-container]](Tomcat) 영역에서, 스프링에 도착하기 *전*에 동작한다.
 
 ## 비유 — 아파트 단지 정문 경비원
@@ -52,7 +52,7 @@ sources: ["raw/notes/Spring Framework.md"]
 
 모든 페이지에서 공통으로 필요한 작업(인코딩, 보안, 로깅)을 컨트롤러마다 복붙하면
 코드가 엉망이 된다. 한 곳에서 **요청을 가로채서 처리**할 방법이 필요했고,
-그것이 [[servlet]] 스펙에 처음 들어간 기술이 Filter다.
+그것이 [[servlet-spec|서블릿 스펙]]에 처음 들어간 기술이 Filter다.
 
 ## 주로 하는 일
 
@@ -88,7 +88,7 @@ public class MyFilter implements Filter {
 
 ## Interceptor와의 결정적 차이
 
-- **Bean 주입**: Filter는 서블릿 스펙 객체라 [[spring-bean]] 주입이 자유롭지 않다.
+- **Bean 주입**: Filter는 [[servlet-spec|서블릿 스펙]] 객체라 [[spring-bean]] 주입이 자유롭지 않다.
   `FilterRegistrationBean`을 거치는 우회 등록이 필요.
 - **예외 처리**: Filter에서 발생한 예외는 스프링의 `@ControllerAdvice`가 **잡지 못한다**.
   → 톰캣의 기본 에러 페이지가 그대로 노출될 수 있다.
@@ -111,7 +111,7 @@ public class MyFilter implements Filter {
 - [[interceptor]] — 같은 "가로채기"지만 스프링 영역에서 작동
 - [[filter-vs-interceptor]] — 두 가로채기 기술의 비교와 선택 기준
 - [[servlet-container]] — Filter가 사는 무대
-- [[servlet]] — Filter와 같은 서블릿 스펙 가족
+- [[servlet]] — Filter와 같은 [[servlet-spec|서블릿 스펙]] 가족
 - [[http-method-override]] — Filter여야만 가능한 대표 사례
 - [[dispatcher-servlet]] — Filter 다음 단계 (스프링 진입점)
 - 흐름: [[spring-mvc-request-flow]] — Filter가 끼는 전체 파이프라인

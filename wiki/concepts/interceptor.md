@@ -50,7 +50,7 @@ sources: ["raw/notes/Spring Framework.md"]
 가능은 하다. 하지만 다음의 차이 때문에 스프링은 **별도의 가로채기 계층**을 따로 두었다.
 
 1. **Bean을 자유롭게 주입받고 싶다.**
-   필터는 서블릿 스펙 객체라 `@Autowired UserService`가 자연스럽지 않다.
+   필터는 [[servlet-spec|서블릿 스펙]] 객체라 `@Autowired UserService`가 자연스럽지 않다.
    인터셉터는 스프링 Bean이라 그냥 주입받으면 된다.
 
 2. **HandlerMethod를 알고 싶다.**

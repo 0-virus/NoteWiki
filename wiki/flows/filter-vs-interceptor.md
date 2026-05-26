@@ -14,7 +14,7 @@ sources: ["raw/notes/Spring Framework.md"]
 | | 🛡️ [[filter]] | 🕴️ [[interceptor]] |
 | --- | --- | --- |
 | 비유 | **단지 정문 경비원** | **702호 문 앞 비서** |
-| 속한 세계 | [[servlet]] 스펙 (스프링 밖) | Spring MVC (스프링 안) |
+| 속한 세계 | [[servlet-spec|서블릿 스펙]] (스프링 밖) | Spring MVC (스프링 안) |
 | 위치 | [[servlet-container]] ↔ DispatcherServlet 사이 | DispatcherServlet ↔ Controller 사이 |
 
 ## 요청의 이동 경로
@@ -23,7 +23,7 @@ sources: ["raw/notes/Spring Framework.md"]
 [사용자 요청]
    │
    ▼
-[ 🛡️ Filter ]               ← 서블릿 스펙
+[ 🛡️ Filter ]               ← [[servlet-spec|서블릿 스펙]]
    │
    ▼
 [ DispatcherServlet ]      ← 스프링 진입점
@@ -42,7 +42,7 @@ sources: ["raw/notes/Spring Framework.md"]
 
 | 축 | Filter | Interceptor |
 | --- | --- | --- |
-| **속한 곳** | 서블릿 스펙. 스프링이 없어도 존재 | 스프링 MVC 한정 |
+| **속한 곳** | [[servlet-spec|서블릿 스펙]]. 스프링이 없어도 존재 | 스프링 MVC 한정 |
 | **다루는 객체** | `HttpServletRequest`/`Response` | + `HandlerMethod`, `ModelAndView` |
 | **Bean 주입** | 어색함 (`FilterRegistrationBean` 우회) | 자유로움 (`@Autowired`, 생성자 주입) |
 | **HandlerMethod 인지** | ❌ 모른다 (디스패처가 정하기 전) | ✅ 안다 (메서드 어노테이션까지 검사 가능) |
