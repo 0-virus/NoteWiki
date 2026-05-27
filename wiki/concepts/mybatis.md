@@ -62,7 +62,7 @@ public interface UserRepository {
 ## 주요 설정 (application.properties)
 
 ```properties
-# DB 접속 정보 (Spring DataSource)
+# DB 접속 정보 (Spring DataSource — 내부적으로 [[hikaricp]]가 자동 등록됨)
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/jwbook
 spring.datasource.username=root
@@ -153,6 +153,7 @@ public interface UserRepository {
 ## 관련 페이지
 
 - [[jdbc]] — MyBatis가 내부에서 호출하는 저수준 API
+- [[connection-pool]] · [[hikaricp]] — `spring.datasource.*` 설정 뒤에서 MyBatis가 받아 쓰는 Connection 풀
 - [[dao-pattern]] — MyBatis Mapper가 자동화한 패턴
 - [[orm]] — MyBatis와 다른 카테고리, 비교 대상
 - [[three-tier-architecture]] — Repository Layer를 채우는 도구

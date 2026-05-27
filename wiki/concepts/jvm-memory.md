@@ -66,4 +66,5 @@ Stack               Heap                  Method Area
 - [[static-keyword]] — Method Area에 사는 클래스 멤버
 - [[mutable-immutable]] — Heap 객체의 상태 변경과 GC
 - [[string-pool]] — Heap 안의 특수 영역
+- [[java-buffer]] — 마찬가지로 Heap에 위치하는 임시 저장 공간; 버퍼 이해를 위한 메모리 온토관이 바탕
 - 출처: [[jvm-memory-note]], [[static-note]]

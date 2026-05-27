@@ -94,6 +94,12 @@ PreparedStatement → ResultSet 흐름이다. JDBC를 직접 만져보면 ORM이
 선명해진다. Spring으로 가면 `DataSource`·`JdbcTemplate`이 이 반복 코드(연결·해제)를
 대신 처리해준다 — "왜 그 도구가 필요한가"의 답이 여기 있다.
 
+그리고 `DataSource`의 구체 클래스로 보통 들어가는 것이 [[hikaricp]] — JDBC의 가장 비싼
+비용(Connection 생성)을 [[connection-pool]]로 재사용해 회피한다. 영균이 위에서 외운
+"역순으로 close"가 풀 환경에선 **물리적 종료가 아니라 풀 반납**으로 의미가 바뀐다.
+다만 **`close()` 호출 책임은 그대로** — 안 부르면 풀이 고갈된다 ([[connection-pool]]
+"누수의 두 얼굴" 참조).
+
 ORM이 한 번에 너무 많이 감춰서 부담스러우면 **중간 추상화 [[mybatis]]**(SQL Mapper)가
 있다. SQL은 그대로 두고 매핑·자원 관리만 자동화하는 형태. 부트캠프 MyBatis 단원 실습이
 바로 이 다리.
@@ -101,6 +107,8 @@ ORM이 한 번에 너무 많이 감춰서 부담스러우면 **중간 추상화 
 ## 관련 페이지
 
 - [[dao-pattern]] — JDBC 코드를 한 객체로 모으는 패턴
+- [[connection-pool]] — JDBC Connection 생성 비용을 재사용으로 회피
+- [[hikaricp]] — Spring Boot 기본 풀 구현체
 - [[orm]] — JDBC를 추상화한 상위 계층 (자동 SQL)
 - [[mybatis]] — JDBC와 ORM 사이의 중간 추상화 (SQL Mapper)
 - [[prisma]] — ORM 구현체, JDBC와 같은 일을 추상화해 처리

@@ -303,3 +303,49 @@ AI 채팅(ChatGPT·Gemini 등)의 클리핑 품질을 높이기 위해 selector 
   - 자료가 커지면 하이브리드 가능: 위키 + raw/에 대한 RAG 보완.
   - 이 저장소의 CLAUDE.md가 명시한 "RAG처럼 매번 원본을 재검색하는 대신…"의 배경 이론을 명시적 페이지로 기록.
 - `index.md` 갱신: 새 카테고리 "AI / LLM / 지식 검색" 신설, 흐름에 비교 페이지 추가. 개념 75→79, 흐름 9→10.
+
+## [2026-05-27] query | HikariCP가 뭐고 영균 학습 트리와 어떻게 연결되나
+
+## [2026-05-27] query | 네트워크 Proxy vs AOP Proxy — 이름은 같은데 같은 것인가?
+
+[[proxy]] 페이지(Forward/Reverse)와 [[aop]](객체 수준 Proxy)의 관계 정리.
+쿨: 두 객다 "중간에 낌 대리자" 아이디어는 공유, 적용 층만 다름 (네트워크 vs JVM).
+[[proxy]].md에 구분 테이블 환류.
+
+## [2026-05-27] lint | 위키 전체 건강 점검 + 수정
+
+점검 범위: concepts 81 → 83, flows 10, sources 20 (신규 2페이지 추가)
+
+점검 결과:
+- ✅ 깨진 링크: 0
+- ✅ 고아 페이지: 0
+- ⚠️ 약연결(2개 링크): java-buffer, short-circuit → 상호참조 보강 완료
+- 🔴 독립 페이지 없는 중요 개념 → aop/transaction 신설, jpa는 미완료(다음 가지)
+- ⚠️ javax→jakarta stale: servlet.md, servlet-container.md 업데이트 완료
+
+수정 내역:
+- 신설: [[aop]], [[transaction]]
+- 링크 보강: java-buffer(servlet·jdbc·string-pool), short-circuit(functional-interface·lambda), functional-interface(short-circuit), jvm-memory(java-buffer)
+- spring-framework.md AOP 예정 플래그 → [[aop]] 링크
+- servlet.md, servlet-container.md jakarta 주의 삽입
+- index.md 통계 81 → 83
+
+영균 질문: "hikai cp가 뭐야? 내가 배우는 부분과 어떻게 연결되어 있는지 모르겠네." → 후속 두 차례로 핵심 통찰이 도출되어 위키 환류.
+
+- 대화 흐름 (3턴):
+  1. 1차 답변: HikariCP = JDBC Connection Pool 구현체, Spring Boot 기본 DataSource. 영균 학습 트리에서 JDBC → MyBatis → Spring Boot 자동 설정 사슬의 한 매듭.
+  2. 영균 후속 ①: "커넥션 누수란 뭐고, 풀을 써도 close 안 하면 똑같이 누수 아닌가?" → **"close 호출 책임은 그대로다, 다만 의미가 종료→반납으로 바뀔 뿐"** 정정. 영균의 직관 자체는 옳았음.
+  3. 영균 후속 ②: "JDBC 관리가 어려우니 CP가 대신해준다는 거야?" → **"CP의 본질은 재사용이지 관리 대행이 아니다"** 정정. close 호출은 try-with-resources/JdbcTemplate/`@Transactional`이 한다 (별개 계층).
+- 환류 (2건 신설 + 3개 페이지 백링크 보강):
+  - **새 페이지 [[connection-pool]]** — 일반 개념. Connection 생성 비용(TCP+TLS+인증+세션 초기화)으로 풀의 필요성 설명, 핵심 설정 5종(maxPoolSize·minIdle·connectionTimeout·idleTimeout·maxLifetime), **"누수의 두 얼굴" 비교표** (JDBC: max_connections 151 vs Pool: maximumPoolSize 10 — 풀이 오히려 더 빨리 터짐), **CP의 책임 vs CP가 안 하는 일** 표 (재사용/한도/검증/누수감지 ⊂ CP, close 호출 ⊄ CP).
+  - **새 페이지 [[hikaricp]]** — 구현체 디테일. 이름 유래(光), 다른 풀 대비 빠른 이유(FastList·ConcurrentBag·bytecode 최적화), Spring Boot 자동 등록 흐름 4단계, `application.properties`의 `spring.datasource.hikari.*` 튜닝 옵션, `leakDetectionThreshold` 디버깅 기능 강조.
+  - 백링크 보강(3건):
+    - [[jdbc]] — "Spring으로 가면 DataSource·JdbcTemplate이…" 문단에 [[hikaricp]]·[[connection-pool]] 연결 + "역순으로 close가 풀 환경에선 반납으로 의미가 바뀌지만 호출 책임은 그대로" 한 문단 추가.
+    - [[spring-boot]] — 자동 설정 섹션에 "starter-jdbc/mybatis-starter가 HikariCP를 transitive로 끌어옴 → HikariDataSource Bean 자동 등록" 박스 추가. 영균이 본 `HikariPool-1 - Starting...` 로그 의미 짚음.
+    - [[mybatis]] — `spring.datasource.*` 설정 주석에 "내부적으로 HikariCP가 자동 등록됨" 명시. 관련 페이지에 [[connection-pool]]·[[hikaricp]] 추가.
+- 핵심 인사이트:
+  - **두 책임의 분리** — CP의 책임(재사용) vs 자원 관리 추상화의 책임(close 호출). 영균이 [[mybatis]] 실습에서 close 코드를 안 본 것은 풀 덕이 아니라 MyBatis SqlSession + `@Transactional` 덕.
+  - **누수의 두 얼굴** — JDBC 직접 환경의 누수(DB 한도 151)와 풀 환경의 누수(풀 한도 10)는 같은 close 미호출이 다른 자원에서 터지는 것. 풀을 써도 누수는 안 사라진다.
+  - 영균은 [[mybatis-practice-debugging]] 시점부터 이미 HikariCP를 **사용자**로 써왔다. 이 페이지들은 그것을 **인식**으로 끌어올리는 단계.
+- `index.md` 갱신: "데이터베이스" 카테고리에 [[connection-pool]]·[[hikaricp]] 추가, 개념 79→81, 마지막 갱신 메타 갱신.
+

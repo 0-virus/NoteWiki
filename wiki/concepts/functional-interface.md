@@ -56,5 +56,6 @@ IAdd<String>  strAdd = (a, b) -> a + b;       // String add(String, String)
 - [[lambda]] — 함수형 인터페이스의 유일한 메서드를 짧게 구현하는 문법
 - [[generics]] — 함수형 인터페이스의 타입을 파라미터화
 - [[anonymous-class]] — 람다 이전, 함수형 인터페이스를 구현하던 방식
+- [[short-circuit]] — `Predicate.and()` / `Predicate.or()`는 쁜단 평가를 순차적으로 적용. `Predicate<T> and(Predicate<? super T> other)` 구현에 쁜단 평가 원리가 내장됨
 - [[anonymous-class-to-lambda]] — 전체 흐름
 - 출처: [[functional-interface-table]], [[generics-lambda-note]]

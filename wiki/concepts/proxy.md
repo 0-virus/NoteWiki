@@ -60,6 +60,24 @@ sources: ["raw/youtube/Proxy(프록시)란 Forward vs Reverse Proxy 차이점은
 
 이게 [[scaling-a-web-app]] 흐름의 첫 단계다.
 
+## "프록시"라는 이름이 복수인 이유
+
+이 페이지는 **네트워크 프록시**를 다룬다. 하지만 위키에는 또 다른 "Proxy"가 등장한다.
+
+| 종류 | 어디서 동작하나 | 가로만는 것 | 대표 사례 |
+|---|---|---|---|
+| **Forward/Reverse Proxy** | 네트워크 숙 | HTTP 패킷 | Nginx, Squid |
+| **AOP Proxy** | JVM 안, 객체 사이 | Java 메서드 호출 | Spring `@Transactional` |
+
+세 가지 모두 이 아이디어는 같다:
+```
+호입자 ——▶ [Proxy - 중간에 낌 대리자] ——▶ 진짜 대상
+                (여기서 뭐가 처리)
+```
+이름이 같은 이유: 두 것 모두 "진짜 대상 앞에 서서 대신 받아주는 중간자"라는 골격이 같아서다. 차이는 **적용되는 층**만 다르다.
+
+→ [[aop]] 페이지에서 Spring AOP Proxy 동작 원리를 확인할 수 있다.
+
 ## 관련 페이지
 
 - [[forward-proxy]] · [[reverse-proxy]]

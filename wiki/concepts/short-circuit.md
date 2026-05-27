@@ -52,4 +52,7 @@ i != 0 && console.log(5 / i);   // ✅ 동작 (아무것도 출력 안 함)
 
 ## 관련 페이지
 
+- [[functional-interface]] — `Predicate.and()` / `Predicate.or()`는 쁜순회로 단라 평가를 구현. `Predicate<T> and(Predicate<? super T> other)`는 `this.test()`가 false면 other를 호출 안 함
+- [[lambda]] — Predicate 람다를 수식으로 쓸 때 실질적으로 숥토회로로 동작
+- [[javascript-async]] — JS에서 `&&`를 조건식려놅기(가등실행)로 웰용하는 패턴 (이 페이지 Java vs JS 유사 하지만 다른 점)
 - [[short-circuit-note]] — 출처

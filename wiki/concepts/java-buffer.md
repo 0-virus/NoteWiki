@@ -72,5 +72,8 @@ int num = Integer.parseInt(line);     // 파싱은 직접
 
 ## 관련 페이지
 
-- [[jvm-memory]] — 버퍼도 결국 메모리 공간
+- [[jvm-memory]] — 버퍼도 결국 메모리 공간 (Heap에 위치)
+- [[string-pool]] — 같은 원리: "미리 모아두면 재사용 비용이 줄어든다"
+- [[servlet]] — `res.getWriter()`는 내부에 출력 버퍼를 가진 PrintWriter. 버퍼를 flush하지 않으면 응답이 나가지 않는다
+- [[jdbc]] — BLOB/CLOB 처리 시 InputStream/OutputStream으로 스트리밍, 버퍼 개념이 그대로 적용됨
 - 출처: [[java-buffer-note]]
