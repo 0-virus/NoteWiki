@@ -1,5 +1,9 @@
-# obsidian local cache
+# Obsidian local cache
 .obsidian/workspace.json
 
-# claude code: machine-local settings (permissions etc.)
+# Claude code: machine-local settings (permissions etc.)
 .claude/settings.local.json
+
+# Output files (Except CLAUDE.md)
+Output/*
+!Output/CLAUDE.md
