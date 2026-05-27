@@ -80,7 +80,7 @@ pstmt.setDate(4, new java.sql.Date(birth.getTime()));
 
 ## Spring으로 이어지는 지점 — 영균 맥락
 
-Spring의 **`@Repository`**가 바로 이 DAO다. 더 나아가 **Spring Data JPA**는 DAO를
+Spring의 **`@Repository`**가 바로 이 DAO다. 더 나아가 **[[spring-data-jpa]]**는 DAO를
 인터페이스 선언만으로 메서드를 자동 구현해준다 (`findAll()`을 직접 짤 필요가 없다).
 지금 DAO를 손으로 짜며 겪는 반복(연결·ResultSet 순회·해제)이 **Spring이 무엇을 없애주는가**의
 체험이다. → [[servlet-to-spring-mvc]]
@@ -92,6 +92,7 @@ Spring의 **`@Repository`**가 바로 이 DAO다. 더 나아가 **Spring Data JP
 
 - [[jdbc]] — DAO 내부가 실제로 쓰는 DB 접근 API
 - [[mybatis]] — DAO 인터페이스에 구현을 자동 끼워주는 SQL Mapper
+- [[spring-data-jpa]] — DAO를 인터페이스 선언만으로 자동 구현하는 종착점
 - [[mvc-pattern]] — DAO는 Controller 아래 데이터 접근 계층
 - [[orm]] — DAO의 반복 코드를 더 크게 추상화한 접근
 - 출처: [[servlet-jdbc-debugging]]

@@ -306,6 +306,11 @@ AI 채팅(ChatGPT·Gemini 등)의 클리핑 품질을 높이기 위해 selector 
 
 ## [2026-05-27] query | HikariCP가 뭐고 영균 학습 트리와 어떻게 연결되나
 
+## [2026-05-27] ingest | pi 하네스 이해와 설정 대화
+
+`raw/dialogues/2026-05-27 pi 하네스 이해와 설정 — 슬래시 커맨드·스킬·익스텐션 구조.md` 인제스트.
+신설: [[pi]](개념), [[pi-dialogue]](소스). 주요 개념: pi 리소스 3계층(프롬프트 템플릿 vs 스킬 vs 익스텐션), `.claude/commands/` 연동 설정.
+
 ## [2026-05-27] query | 네트워크 Proxy vs AOP Proxy — 이름은 같은데 같은 것인가?
 
 [[proxy]] 페이지(Forward/Reverse)와 [[aop]](객체 수준 Proxy)의 관계 정리.
@@ -349,3 +354,55 @@ AI 채팅(ChatGPT·Gemini 등)의 클리핑 품질을 높이기 위해 selector 
   - 영균은 [[mybatis-practice-debugging]] 시점부터 이미 HikariCP를 **사용자**로 써왔다. 이 페이지들은 그것을 **인식**으로 끌어올리는 단계.
 - `index.md` 갱신: "데이터베이스" 카테고리에 [[connection-pool]]·[[hikaricp]] 추가, 개념 79→81, 마지막 갱신 메타 갱신.
 
+
+## [2026-05-27] ingest | JPA 강의 노트 (MyBatis to JPA)
+
+원본: `raw/lectures/JPA.md` (부트캠프 NHN Forward 계열 "MyBatis to JPA" 강의). 인터뷰 모드.
+
+- 맥락 인터뷰:
+  - 저장 동기 → **프로젝트 적용 준비** (곧 Spring 프로젝트에 JPA 실제 사용)
+  - 현재 위치 → **MyBatis 다음 단계** (MyBatis 실습 끝내고 JPA로 전환 중)
+  - 원하는 결과물 → **MyBatis→JPA 비교 흐름 + 개념 트리 확장**
+- 신설 (개념 7 + 흐름 1 + 소스 1):
+  - **[[jpa]]** — 자바 ORM 표준 명세. 채택 4동기(생산성·유지보수·벤더독립·객체중심) + 핵심 "왜"=패러다임 불일치(상속·참조·그래프탐색) + 단점/보완(JPQL 한계·MyBatis 혼용·CQRS).
+  - **[[hibernate]]** — JPA의 de facto 구현체. 명세 vs 구현 분리의 가치(벤더 독립, JDBC와 동일 구조). Spring Boot 기본 구현체.
+  - **[[spring-data-jpa]]** — JpaRepository 상속 인터페이스만으로 자동 구현. Spring Data 우산, 계층 구조(Crud→PagingAndSorting→Jpa), 메서드 이름 쿼리, Pageable.
+  - **[[entity-manager]]** — EntityManager/Factory의 비용 차이로 분리 이유 설명, persist/find/merge/remove, **영속성 컨텍스트·변경 감지**(⚠️ 원본엔 용어 없어 표준 동작으로 보강 플래그), Spring 빈 설정(MyBatis SqlSessionFactory와 1:1 대응).
+  - **[[jpa-entity-mapping]]** — `@Entity`·`@Table`·`@Id`·`@Column`·`@Temporal`·`@Transient`, 키 생성 전략 4종(IDENTITY/SEQUENCE/TABLE/AUTO)과 벤더 독립, 복합 키(`@EmbeddedId`/`@Embeddable`)와 equals/hashCode·Serializable 필요성.
+  - **[[jpa-association]]** — FK↔참조 방향성 불일치, 다중성 4종, **연관 관계 주인(=FK 있는 쪽)·mappedBy**, 페치 전략(LAZY/EAGER → N+1 진원지), 영속성 전이(Cascade).
+  - **[[jpql]]** — 엔티티 대상 객체 지향 쿼리(FROM 엔티티클래스), 복잡 쿼리 4카드(메서드명→JPQL→Criteria→QueryDSL→Native), JPA 한계 보완과 MyBatis 공존.
+  - **[[mybatis-to-jpa]]** (흐름) — 추상화 사다리(손JDBC→MyBatis→JPA→Spring Data JPA), **1:1 대응표**(SQL작성·매핑·관계·작업단위·빈·트랜잭션·UPDATE방식), 전환 6절차, "전부 갈아엎기 아님"(CQRS 공존), 새로 짊어지는 부담(영속성컨텍스트·주인·N+1).
+  - **[[jpa-lecture]]** (소스) — 맥락·핵심 주장·개념·엔티티 정리.
+- 갱신 (6): [[orm]](자바 ORM=JPA/Hibernate 섹션), [[mybatis]](다음 단계 JPA·공존), [[n-plus-1-problem]](JPA LAZY 페치 진원지·fetch join), [[transaction]](JpaTransactionManager·변경 감지 커밋 시점), [[dao-pattern]](spring-data-jpa 링크화), [[spring-framework]](학습 트리에 영속성 사다리 추가).
+- 핵심 교차 연결: MyBatis↔JPA를 "SQL 통제권 이동"으로 일관되게 연결. [[jdbc]]→[[mybatis]]→[[jpa]]→[[spring-data-jpa]] 추상화 사다리가 [[dao-pattern]]·[[spring-framework]]·[[mybatis-to-jpa]]에서 반복 등장. N+1·트랜잭션 변경 감지가 "통제권을 넘긴 대가"로 묶임.
+- index.md: 개념 84→91, 흐름 10→11, 소스 21→22, 통합 원본 21→22.
+
+## [2026-05-27] query | 영속성 컨텍스트란? (JPA 변경 감지의 정체)
+
+영균 질문: "영속성 컨텍스트가 뭔지 알아야 이해가 될 것 같은데." → 직전 JPA ingest에서 [[entity-manager]]에 ⚠️ 플래그로 남겨둔 보강 항목이 정확히 이 개념이라, 답변 후 위키에 환류.
+
+- 답변 핵심: 영속성 컨텍스트 = 엔티티를 보관·관리하는 "작업대"(1차 캐시). 트랜잭션 하나 = 작업대 하나. `persist`/`find`한 엔티티는 DB로 바로 안 가고 작업대에 올라갔다가 커밋 때 반영.
+  - MyBatis(`update` SQL 직접 호출) vs JPA(객체 필드만 바꿔도 반영)의 차이가 곧 이 개념.
+  - 5대 기능: 1차 캐시 / 동일성 보장 / **변경 감지(dirty checking, 스냅샷 비교)** / 쓰기 지연 / 지연 로딩.
+  - 생명주기 4단계: 비영속(transient)→영속(managed)→준영속(detached)→삭제(removed). merge는 준영속을 작업대에 재등록할 때.
+  - flush ≠ 커밋: flush는 SQL 전송, 커밋 직전 자동 발생. "커밋 시점 변경 감지"의 정확한 순서 = 커밋→flush→dirty checking→UPDATE.
+- 환류 (1건 신설 + 4개 페이지 보강):
+  - **새 페이지 [[persistence-context]]** — 작업대 비유, MyBatis 대비표, 5대 기능표, 변경 감지 상세(스냅샷·merge 불필요), 지연 로딩→N+1 연결, 생명주기 4단계, flush vs 커밋, 영균 맥락(LazyInitializationException 등).
+  - 보강(4건):
+    - [[entity-manager]] — ⚠️ 보강 플래그 **해소**. "왜" 섹션을 [[persistence-context]] 링크로 압축, "EntityManager가 가벼운 이유 = 이 작업대를 들고 있어서" 연결.
+    - [[jpa]] — 구성 요소에 [[persistence-context]] 추가, 단점표 "영속성 컨텍스트" 링크화.
+    - [[transaction]] — "변경 감지 커밋 시점" 설명을 커밋→flush 순서로 정밀화, [[persistence-context]] 링크.
+- index.md: 개념 91→92, "데이터베이스" 카테고리에 [[persistence-context]] 추가, 마지막 갱신 메타 갱신.
+
+## [2026-05-27] query | LAZY 연관 객체(프록시)와 merge 로직
+
+영균 질문: "lazy 연관 객체는 뭐야? 그리고 merge가 어떤 로직인지도." → 직전 query에서 예고한 "준영속·merge" 줄기의 후속. 답변 후 기존 페이지에 가지로 환류(새 페이지 대신 보강).
+
+- 답변 핵심:
+  - **LAZY 연관 객체 = 프록시(가짜 대역)**. `getOrder()`는 id만 든 빈 껍데기를 반환하고, 진짜 필드 접근 순간 SELECT로 초기화. 왜=안 쓸 연관을 미리 JOIN하면 낭비. 함정 ①`LazyInitializationException`(트랜잭션 종료 후 작업대 닫힌 뒤 프록시 접근 시 예외) ②[[n-plus-1-problem]].
+  - **merge 4단계**: ①인자 ID 추출 ②영속 엔티티 조회(없으면 생성) ③필드 전부 복사 ④영속 엔티티 반환. 함정 ①인자는 여전히 준영속 → 반환값을 써야 함 ②전체 덮어쓰기(null도 복사) → 부분 수정 위험. 결론: 일상 수정은 find+변경 감지가 안전, merge는 준영속 재등록 전용.
+- 환류 (기존 2개 페이지 보강):
+  - [[jpa-association]] — 페치 전략 섹션에 "**LAZY 연관 객체의 정체 = 프록시**" 추가(초기화 메커니즘·왜·⚠️LazyInitializationException). 관련 페이지에 [[persistence-context]] 추가.
+  - [[persistence-context]] — 생명주기 섹션 뒤에 "**merge의 로직**" 섹션 추가(4단계·함정 2개·변경 감지 권장).
+- 핵심 인사이트: 프록시 초기화 가능 구간 = [[transaction]] 경계 = 작업대([[persistence-context]]) 수명. LazyInitializationException·merge 반환값 함정 모두 "작업대 밖이냐 안이냐(영속/준영속)"로 환원된다.
+- index.md: 신설 없음(stats 불변), 마지막 갱신 메타만 갱신.

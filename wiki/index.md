@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-05-27 (lint — [[aop]]·[[transaction]] 신설, 누락 상호참조 보강, javax→jakarta stale 업데이트)_
+_마지막 갱신: 2026-05-27 (query 환류 — LAZY 프록시·merge 로직, [[jpa-association]]·[[persistence-context]] 보강)_
 
 ---
 
@@ -18,6 +18,7 @@ _마지막 갱신: 2026-05-27 (lint — [[aop]]·[[transaction]] 신설, 누락 
 ### 도구 / 지식관리
 - [[markdown]] — 위키의 토대가 되는 경량 마크업 언어
 - [[obsidian]] — 로컬 기반 마크다운 노트 앱, Vault
+- [[pi]] — Claude Code 위에 씌워진 코딩 에이전트 하네스, 리소스 3계층(프롬프트 템플릿·스킬·익스텐션)
 - [[wikilink]] — `[[연결]]`로 노트를 잇는 핵심 기능
 - [[graph-view]] — 노트 연결망을 시각화
 - [[obsidian-tags]] — 태그·중첩 태그로 가로지르는 검색
@@ -47,6 +48,14 @@ _마지막 갱신: 2026-05-27 (lint — [[aop]]·[[transaction]] 신설, 누락 
 - [[n-plus-1-problem]] — ORM에서 흔한 쿼리 비효율과 해결
 - [[connection-pool]] — DB Connection을 미리 만들어 두고 빌려주고 반납받는 자원 캐시
 - [[hikaricp]] — Spring Boot 기본 Connection Pool 구현체, "빛"이라는 이름답게 빠름
+- [[jpa]] — 자바 진영 ORM 표준 명세, 패러다임 불일치를 푸는 객체 중심 영속성
+- [[hibernate]] — JPA의 사실상 표준 구현체 (명세 vs 구현)
+- [[spring-data-jpa]] — JpaRepository 인터페이스 선언만으로 CRUD·페이징 자동 구현
+- [[entity-manager]] — 엔티티 생명주기 관리자 + EntityManagerFactory, 영속성 컨텍스트
+- [[persistence-context]] — 엔티티를 보관하는 "작업대", 변경 감지·1차 캐시·생명주기·flush
+- [[jpa-entity-mapping]] — `@Entity`·`@Id`·`@Column`·키 생성 전략·복합 키 매핑
+- [[jpa-association]] — `@OneToMany`/`@ManyToOne`, 연관 관계 주인·페치·영속성 전이
+- [[jpql]] — 엔티티 대상 객체 지향 쿼리, Criteria·QueryDSL·Native SQL 보완
 
 ### Java / 언어 기초
 - [[jvm-memory]] — Method Area / Heap / Stack 3대 메모리 영역
@@ -128,6 +137,7 @@ _마지막 갱신: 2026-05-27 (lint — [[aop]]·[[transaction]] 신설, 누락 
 - [[filter-vs-interceptor]] — 두 가로채기 기술의 위치·책임·선택 기준 비교
 - [[spring-mvc-request-flow]] — 한 요청의 풀 파이프라인 (Filter → DispatcherServlet → Interceptor → Controller → Service → DAO → DB)
 - [[rag-vs-llm-wiki]] — AI에게 외부 지식을 주는 두 패턴의 트레이드오프 비교
+- [[mybatis-to-jpa]] — SQL Mapper에서 ORM으로의 전환·공존 흐름 (1:1 대응표 + 절차)
 
 ## 소스 (Sources) — `sources/`
 
@@ -151,12 +161,14 @@ _마지막 갱신: 2026-05-27 (lint — [[aop]]·[[transaction]] 신설, 누락 
 - [[load-balancing-video]] — `raw/youtube/Load Balancing 로드 밸런싱이 뭔가요…` (코딩문)
 - [[spring-framework-1-note]] — `raw/notes/Spring Framework.md` (부트캠프 강의자료 §1~§3)
 - [[mybatis-practice-debugging]] — `raw/notes/study-notes.md` (MyBatis 실습 Claude 대화 정리, 8건 디버깅 일지)
+- [[pi-dialogue]] — `raw/dialogues/2026-05-27 pi 하네스 이해와 설정 — 슬래시 커맨드·스킬·익스텐션 구조.md`
+- [[jpa-lecture]] — `raw/lectures/JPA.md` (부트캠프 "MyBatis to JPA" 강의 노트)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 83
-- 흐름 페이지: 10
-- 소스 페이지: 20
-- 통합한 원본 수: 20
+- 개념 페이지: 92
+- 흐름 페이지: 11
+- 소스 페이지: 22
+- 통합한 원본 수: 22

@@ -2,7 +2,7 @@
 type: concept
 tags: [spring, database, transaction, jdbc]
 updated: 2026-05-27
-sources: ["raw/notes/Spring Framework.md", "raw/notes/study-notes.md"]
+sources: ["raw/notes/Spring Framework.md", "raw/notes/study-notes.md", "raw/lectures/JPA.md"]
 ---
 
 # 트랜잭션 (Transaction)
@@ -89,6 +89,29 @@ public class OrderService {
 
 [[mybatis]]에서 `SqlSession`이 트랜잭션 단위다. Spring과 함께 쓰면 `@Transactional`이 SqlSession을 관리해준다 — 직접 `session.commit()`을 쓸 필요가 없다.
 
+## JPA에서의 트랜잭션 — TransactionManager가 바뀐다
+
+`@Transactional`을 쓰는 코드는 그대로지만, **뒤에서 트랜잭션을 관리하는 빈이 기술마다 다르다.**
+
+| 영속성 기술 | TransactionManager 구현 |
+| --- | --- |
+| [[jdbc]] · [[mybatis]] | `DataSourceTransactionManager` |
+| [[jpa]] | `JpaTransactionManager` (EntityManager를 관리) |
+
+```java
+@Bean
+PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+    JpaTransactionManager tm = new JpaTransactionManager();
+    tm.setEntityManagerFactory(emf);
+    return tm;
+}
+```
+
+> JPA에서 트랜잭션이 특히 중요한 이유: [[persistence-context|영속성 컨텍스트]]의 **변경
+> 감지가 커밋 시점에 동작**한다. 조회한 엔티티의 필드를 바꾸면 `@Transactional` 메서드가
+> 끝날 때(커밋 → flush) JPA가 UPDATE를 내보낸다 — 트랜잭션 경계가 곧 작업대의 수명이자
+> 영속성 반영 시점이다. → [[persistence-context]] · [[mybatis-to-jpa]]
+
 ## 관련 페이지
 
 - [[aop]] — `@Transactional`의 구현 방식, AOP Proxy
@@ -96,6 +119,7 @@ public class OrderService {
 - [[jdbc]] — Connection 수준 트랜잭션의 기반
 - [[connection-pool]] · [[hikaricp]] — Connection = 트랜잭션 단위
 - [[mybatis]] — Spring 통합 시 트랜잭션 위임
+- [[jpa]] · [[entity-manager]] — `JpaTransactionManager`, 커밋 시점의 변경 감지
 - [[dao-pattern]] — 트랜잭션 경계는 보통 Service 레이어에서 (@Transactional이 @Service에 붙는 이유)
 - [[three-tier-architecture]] — Service 레이어가 트랜잭션을 책임지는 구조
 - [[spring-bean]] — Proxy 교체로 @Transactional이 가능한 이유

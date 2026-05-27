@@ -148,7 +148,9 @@ public interface UserRepository {
 - [[jdbc]]를 손으로 짜본 다음 단계 — JDBC의 반복 코드(연결·해제·매핑)가 어디로 사라졌는지를
   이 페이지로 추적할 수 있다.
 - JPA로 한 번 더 올라가기 전의 중간 추상화 — **SQL 통제권은 그대로 두고 매핑만 자동화**한
-  형태가 SQL Mapper. 다음 가지가 JPA([[orm]] 진영).
+  형태가 SQL Mapper. 다음 가지가 [[jpa]]([[orm]] 진영). 전환의 1:1 대응은 [[mybatis-to-jpa]]에 정리.
+  → SQL 작성까지 프레임워크에 넘기면 JPA, 인터페이스 선언만 남기면 [[spring-data-jpa]].
+  단 MyBatis는 버려지지 않는다 — JPA의 [[jpql]] 한계를 메우는 복잡 쿼리 안전판으로 공존(CQRS).
 
 ## 관련 페이지
 
@@ -159,4 +161,6 @@ public interface UserRepository {
 - [[three-tier-architecture]] — Repository Layer를 채우는 도구
 - [[spring-bean]] — `@Mapper`로 등록된 인터페이스가 Bean이 되는 방식
 - [[n-plus-1-problem]] — MyBatis에서도 동일하게 발생 (SQL이 보여서 잡기는 쉬움)
+- [[jpa]] — 다음 단계(ORM). SQL 작성까지 자동화
+- [[mybatis-to-jpa]] — 두 기술의 전환·공존 흐름
 - 출처: [[mybatis-practice-debugging]]
