@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [jpa, hibernate, persistence, entity-manager, spring]
-updated: 2026-05-27
-sources: ["raw/lectures/JPA.md"]
+updated: 2026-05-28
+sources: ["raw/lectures/JPA.md", "raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md"]
 ---
 
 # EntityManager / EntityManagerFactory
@@ -83,6 +83,42 @@ LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSourc
 > [[spring-data-jpa]]를 쓰면 이 빈 설정 대부분을 Spring Boot 자동 설정이 대신 해준다.
 > 강의의 수동 설정은 "안에서 무슨 일이 일어나는지"를 보여주기 위한 것.
 
+## "컨테이너가 EntityManager를 관리한다" — 2단계 도식
+
+바닐라 JPA에서는 `emf.createEntityManager()`를 **직접** 호출해 EM을 만들고 닫았다. Spring에서는
+그 생성·시작·종료를 인프라가 대신 한다. 시점을 둘로 나눠 봐야 이해된다.
+
+**(A) 앱 시작 시 — 딱 1번**
+```
+application.yml  (datasource, jpa 설정)
+       │  Spring Boot 자동 설정
+       ▼
+EntityManagerFactory (EMF)     ← 싱글톤 빈, 앱 살아있는 내내 1개
+   (= 바닐라의 Persistence.createEntityManagerFactory 결과물)
+```
+
+**(B) `@Transactional` 메서드 실행 시 — 호출마다**
+```
+  Controller → [프록시] ─ "트랜잭션 시작" 요청
+                   ▼
+   TransactionManager (JpaTransactionManager)
+     ① EMF.createEntityManager()  → 진짜 EM 생성
+     ② em.getTransaction().begin()
+     ③ 이 EM을 "현재 스레드"에 묶어둠 ──▶ TransactionSynchronizationManager
+                   ▼                        (ThreadLocal 저장소)
+   ===== Service 메서드 본문 실행 =====
+                   ▼
+   메서드 종료 → ④ commit / rollback → ⑤ em.close() + 스레드 바인딩 해제
+```
+
+즉 [[transaction]]에서 손으로 짜던 `begin/commit/rollback/close` 생명주기를, [[aop|프록시]] +
+`JpaTransactionManager`가 **호출마다 자동으로** 돌린다. 이게 "컨테이너가 관리한다"의 실체다.
+
+> 핵심: 주입받아 쓰는 EntityManager는 실은 **공유 프록시**다. 필드는 하나지만, 동작할 땐
+> "지금 이 스레드에 묶인 진짜 EM"을 찾아 연결한다. 그래서 여러 요청(스레드)이 동시에 들어와도
+> 각자 자기 트랜잭션의 작업대([[persistence-context]])를 쓰게 돼 안 섞인다. — [[spring-data-jpa]]
+> 리포지토리도 내부에서 이 스레드 바인딩된 EM에 위임한다.
+
 ## 관련 페이지
 
 - [[persistence-context]] — EntityManager가 들고 있는 작업대, 변경 감지의 정체
@@ -92,4 +128,6 @@ LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSourc
 - [[transaction]] — `JpaTransactionManager`, 변경 감지가 커밋 시점에 동작하는 이유
 - [[connection-pool]] — Factory가 받아 쓰는 DataSource
 - [[mybatis]] — `SqlSession`(작업 단위)·`SqlSessionFactory`(공장)와 1:1 대응
-- 출처: [[jpa-lecture]]
+- [[transaction-propagation]] — 스레드에 묶인 트랜잭션을 합칠지 새로 열지
+- [[spring-annotations]] — `@Entity` 등 JPA 매핑 어노테이션 인덱스
+- 출처: [[jpa-lecture]] · [[spring-transaction-proxy-dialogue]]

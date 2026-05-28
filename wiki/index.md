@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-05-27 (query 환류 — LAZY 프록시·merge 로직, [[jpa-association]]·[[persistence-context]] 보강)_
+_마지막 갱신: 2026-05-28 (ingest — Spring @Transactional·프록시 대화, [[spring-annotations]]·[[transaction-propagation]] 신설 + JPA 개념 도식 보강)_
 
 ---
 
@@ -100,8 +100,10 @@ _마지막 갱신: 2026-05-27 (query 환류 — LAZY 프록시·merge 로직, [[
 
 ### Spring / 코어
 - [[spring-framework]] — Spring 전체 메타 페이지, 학습 트리 진입점
+- [[spring-annotations]] — 자주 쓰는 Spring 어노테이션을 한곳에서 찾는 참조 인덱스 허브
 - [[aop]] — 횟단 관심사(로깅·트랜잭션·보안)를 핵심 로직에서 분리하는 패러다임, Proxy 기반
 - [[transaction]] — DB 작업의 원자적 단위, ACID와 Spring `@Transactional` 동작 원리
+- [[transaction-propagation]] — `REQUIRED` vs `REQUIRES_NEW`, rollback-only와 `UnexpectedRollbackException`
 - [[spring-boot]] — 자동 설정·내장 WAS·jar 배포로 Spring을 쉽게 쓰는 도구
 - [[dependency-injection]] — 의존 객체를 외부에서 주입받는 패턴
 - [[inversion-of-control]] — 제어의 역전, 객체 생성·결합을 컨테이너로 넘김
@@ -163,12 +165,13 @@ _마지막 갱신: 2026-05-27 (query 환류 — LAZY 프록시·merge 로직, [[
 - [[mybatis-practice-debugging]] — `raw/notes/study-notes.md` (MyBatis 실습 Claude 대화 정리, 8건 디버깅 일지)
 - [[pi-dialogue]] — `raw/dialogues/2026-05-27 pi 하네스 이해와 설정 — 슬래시 커맨드·스킬·익스텐션 구조.md`
 - [[jpa-lecture]] — `raw/lectures/JPA.md` (부트캠프 "MyBatis to JPA" 강의 노트)
+- [[spring-transaction-proxy-dialogue]] — `raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md` (강의 복습 중 프로젝트 재점검)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 92
+- 개념 페이지: 94
 - 흐름 페이지: 11
-- 소스 페이지: 22
-- 통합한 원본 수: 22
+- 소스 페이지: 23
+- 통합한 원본 수: 23

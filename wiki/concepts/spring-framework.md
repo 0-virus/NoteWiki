@@ -72,5 +72,6 @@ Spring Framework (여기)
 - 설계: [[pojo]] · [[solid-principles]]
 - 흐름: [[servlet-to-spring-mvc]] · [[manual-di-to-spring-ioc]] · [[mybatis-to-jpa]]
 - 영속성: [[jdbc]] · [[mybatis]] · [[jpa]] · [[spring-data-jpa]]
-- 필수 심화: [[aop]] · [[transaction]]
+- 필수 심화: [[aop]] · [[transaction]] · [[transaction-propagation]]
+- 참조 색인: [[spring-annotations]] — 자주 쓰는 어노테이션을 한곳에서 찾는 허브
 - 출처: [[spring-framework-1-note]]

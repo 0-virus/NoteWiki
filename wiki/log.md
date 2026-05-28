@@ -406,3 +406,35 @@ AI 채팅(ChatGPT·Gemini 등)의 클리핑 품질을 높이기 위해 selector 
   - [[persistence-context]] — 생명주기 섹션 뒤에 "**merge의 로직**" 섹션 추가(4단계·함정 2개·변경 감지 권장).
 - 핵심 인사이트: 프록시 초기화 가능 구간 = [[transaction]] 경계 = 작업대([[persistence-context]]) 수명. LazyInitializationException·merge 반환값 함정 모두 "작업대 밖이냐 안이냐(영속/준영속)"로 환원된다.
 - index.md: 신설 없음(stats 불변), 마지막 갱신 메타만 갱신.
+
+## [2026-05-28] ingest | Spring @Transactional·프록시 대화 (도메인 구조 → 트랜잭션 → 컨테이너)
+
+`raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md` 인제스트.
+Daker-server 프로젝트를 강의 복습 중 재점검하며 나온 8턴 대화. 대화 저장 모드(dialogue).
+
+- 영균의 인제스트 지시(2건): ① **자주 쓰는 Spring 어노테이션을 따로 모아 인덱스·연결 구조**로
+  만들 것 ② **JPA 개념 페이지를 대화의 도식으로 더 직관적으로 보강**할 것.
+- 생성 (개념 2 + 소스 1):
+  - **[[spring-annotations]]** (개념/인덱스) — 영균 요청 ①. 7개 그룹(빈 등록·DI·웹 매핑·응답/예외·
+    트랜잭션/AOP·JPA 매핑·설정)으로 어노테이션을 표로 정리, 각 행이 "깊이('왜')" 페이지로 링크.
+    "어노테이션은 표시일 뿐, 읽는 쪽(컨테이너/Hibernate)이 일한다"는 큰 그림 도식 포함.
+  - **[[transaction-propagation]]** (개념) — `REQUIRED`는 새 트랜잭션을 안 만들고 1개로 합침 →
+    안쪽 예외가 바깥까지 롤백. **rollback-only + `UnexpectedRollbackException`** 함정 도식,
+    `REQUIRES_NEW` 분리, 전파 옵션 6종 표. 대화의 핵심 신규 지식.
+  - **[[spring-transaction-proxy-dialogue]]** (소스) — 8턴 대화 요약, 핵심 주장 9건.
+- 보강 (영균 요청 ② — 대화 도식 이식, 3개 개념):
+  - [[transaction]] — "바닐라 JPA와의 대응"(EntityManager/EntityTransaction try-catch ↔
+    `@Transactional` 매핑) 섹션, programmatic vs declarative 용어, **readOnly의 "왜"**(변경 감지
+    스냅샷 생략, 기존 "최적화 힌트"를 정밀화), **기본 롤백 규칙 = unchecked만** 함정, 자기호출 경고,
+    전파 절에서 [[transaction-propagation]] 위임.
+  - [[entity-manager]] — **"컨테이너가 EntityManager를 관리한다" 2단계 도식**(앱 시작 시 EMF 1개 →
+    호출마다 EM 생성·begin·스레드 바인딩·commit·close), 공유 EM 프록시(ThreadLocal)로 동시 요청 격리.
+  - [[aop]] — **"컨테이너 vs 프록시" 구분 절**(만든 쪽 vs 만들어진 것, 주입 시점 vs 호출 시점 2단계
+    도식, 비서 비유), **자기호출(self-invocation) 함정** 명시. 영균이 직접 헷갈려한 지점이라 정면 대응.
+- 백링크: [[spring-framework]] 허브에 [[spring-annotations]](참조 색인)·[[transaction-propagation]] 추가.
+- 핵심 인사이트:
+  - `@Transactional` = 바닐라 try-catch의 **선언적 버전**. 단 기본 롤백은 unchecked만(바닐라 `catch(Exception)`과 다름).
+  - **프록시 ≠ 컨테이너** — 컨테이너(앱당 1개)가 프록시(빈마다 1개)를 만들어 주입. 호출 시점엔 컨테이너 빠짐.
+  - `REQUIRED`는 트랜잭션을 합치므로 안쪽 실패를 try-catch로 못 살린다(rollback-only).
+  - 영균의 바닐라 JPA 경험을 지렛대로 삼아 "프록시가 대신 짜주는 코드"로 프레이밍한 것이 통한 ingest.
+- index.md: 개념 92→94, 소스 22→23, 통합 원본 22→23, "Spring / 코어" 카테고리에 2개 추가.

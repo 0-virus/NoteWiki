@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [spring, aop, aspect, proxy]
-updated: 2026-05-27
-sources: ["raw/notes/Spring Framework.md"]
+updated: 2026-05-28
+sources: ["raw/notes/Spring Framework.md", "raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md"]
 ---
 
 # AOP (Aspect-Oriented Programming)
@@ -59,6 +59,48 @@ Spring AOP는 **런타임에 Proxy 객체**를 만들어 끼워 넣는다.
 > [[transaction|@Transactional]]이 작동하는 방식이 정확히 이 Proxy AOP다.
 > `@Transactional`이 붙은 메서드를 호출하면, Proxy가 트랜잭션을 열고 → 메서드 위임 → 커밋/롤백한다.
 
+## 컨테이너 vs 프록시 — 누가 언제 일하나
+
+헷갈리기 쉬운 지점: **프록시와 컨테이너는 같은 게 아니다.** "만든 쪽"과 "만들어진 것"의 관계다.
+
+| | 컨테이너 (ApplicationContext) | 프록시 |
+|---|---|---|
+| 정체 | 빈 전체를 관리하는 본부 | 빈 하나를 감싼 래퍼 객체 |
+| 개수 | 앱당 1개 | (AOP·트랜잭션 붙은) 빈마다 1개 |
+| 역할 | 빈 생성·보관·주입(DI)·생명주기 | 메서드 호출을 가로채 부가기능 추가 |
+| 관계 | **프록시를 만드는 쪽** | **컨테이너가 만든 결과물** |
+
+핵심은 **컨테이너가 일하는 시점**과 **프록시가 일하는 시점**이 다르다는 것이다.
+
+**① 앱 시작 시 (딱 1번) — 컨테이너가 일함**
+```
+컨테이너: UserService 빈 만들려는데 @Transactional(또는 @Aspect 대상)이네?
+          → 진짜 UserService를 프록시로 감싸서 등록
+          → 주입할 땐 진짜 대신 "프록시"를 꽂아줌  (받는 쪽은 모름)
+```
+
+**② 런타임, 실제 호출 시 (매번) — 컨테이너는 빠지고 프록시만 일함**
+```
+controller.userService.save()      ← 이미 주입받은 게 프록시라, 이건 곧 프록시 호출
+        │  (컨테이너는 이 순간 개입하지 않음!)
+        ▼
+   [프록시]  ─① 부가기능 앞단 (트랜잭션 begin 등)
+        │
+        ▼ ② 진짜 UserService.save() 위임
+        │
+        ▼ ③ 부가기능 뒷단 (commit / 예외면 rollback)
+```
+
+> 비유: 본부(컨테이너)가 채용·배치할 때 직원 자리에 **비서(프록시)**를 앉혀놨다. 그 뒤
+> 일을 시킬 땐 본부를 거치지 않고 비서한테 바로 말하고, 비서가 앞뒤 처리를 한 뒤 진짜 직원에게 넘긴다.
+
+### ⚠️ 자기호출(self-invocation) 함정
+
+프록시는 **바깥에서 들어오는 호출만** 가로챈다. 그래서 같은 클래스 안에서 `this.다른메서드()`로
+부르면 비서(프록시)를 안 거치고 진짜 객체끼리 직접 호출이라, 그 메서드의 `@Transactional`·
+`@Around` 등이 **안 먹는다**. 해결: 메서드를 다른 빈으로 분리하거나, 자기 자신을 프록시로
+주입받아 호출한다.
+
 ## 코드 예시
 
 ```java
@@ -100,3 +142,6 @@ public class LoggingAspect {
 - [[filter]] · [[interceptor]] — "끼어들기" 3형제의 위치 비교
 - [[filter-vs-interceptor]] — 비교 흐름 페이지
 - [[solid-principles]] — AOP가 자동화하는 SRP·DRY 원칙
+- [[transaction-propagation]] — 프록시 경계에서 rollback-only가 찍히는 메커니즘
+- [[spring-annotations]] — `@Aspect`·`@Transactional` 등 프록시로 동작하는 어노테이션 인덱스
+- 출처: [[spring-transaction-proxy-dialogue]]
