@@ -44,7 +44,7 @@ List<ItemEntity> result = entityManager
 
 - **Criteria API**: JPQL을 문자열이 아닌 자바 코드로 조립 → 컴파일 타임 타입 체크가 되지만
   코드가 길고 읽기 어렵다.
-- **QueryDSL**: 그 단점을 해결한 서드파티. 실무에서 동적 쿼리의 사실상 표준.
+- **QueryDSL**: 그 단점을 해결한 서드파티. 실무에서 동적 쿼리의 사실상 표준. → [[querydsl]]
 
 ## JPA의 한계와 그 보완 — 영균 맥락
 
@@ -63,4 +63,5 @@ List<ItemEntity> result = entityManager
 - [[hibernate]] — JPQL을 실제 SQL로 번역하는 구현체
 - [[mybatis]] — 복잡 쿼리에서 JPA와 공존/혼용
 - [[mybatis-to-jpa]] — 점진적 전환에서 JPQL 한계가 갖는 의미
+- [[querydsl]] — JPQL의 한계(문자열·동적 쿼리)를 타입 세이프하게 해결한 서드파티
 - 출처: [[jpa-lecture]]
