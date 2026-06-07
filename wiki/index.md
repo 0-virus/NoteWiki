@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-06-02 (ingest — Querydsl Reference Guide, [[querydsl]] 신설)_
+_마지막 갱신: 2026-06-07 (ingest — 인증 방식 필기, [[cookie]]·[[session-auth]]·[[jwt]]·[[refresh-token]]·[[serialization]]·[[cookie-session-jwt]] 신설)_
 
 ---
 
@@ -71,6 +71,13 @@ _마지막 갱신: 2026-06-02 (ingest — Querydsl Reference Guide, [[querydsl]]
 - [[lambda]] — 함수형 인터페이스 구현을 짧게 쓰는 문법
 - [[anonymous-class]] — 즉석 구현체, 람다의 전신
 - [[java-record]] — JDK 16+ 불변 데이터 클래스를 한 줄로 정의
+
+### 보안 / 인증
+- [[cookie]] — HTTP 쿠키, 무상태 HTTP의 첫 번째 해법, HttpOnly/Secure 옵션
+- [[session-auth]] — 세션 기반 Stateful 인증, IP 바인딩과 확장성 한계
+- [[jwt]] — JSON Web Token, 서명 기반 Stateless 인증, 구조와 신뢰성 근거
+- [[refresh-token]] — Access Token 재발급 + Rotation으로 탈취 감지
+- [[serialization]] — 객체 → 전송 가능한 문자열, 직렬화/역직렬화 개념
 
 ### 시스템 디자인 / 인프라
 - [[proxy]] — 네트워크 통신의 중간자, Forward와 Reverse는 위치만 다른 한 쌍
@@ -141,6 +148,7 @@ _마지막 갱신: 2026-06-02 (ingest — Querydsl Reference Guide, [[querydsl]]
 - [[spring-mvc-request-flow]] — 한 요청의 풀 파이프라인 (Filter → DispatcherServlet → Interceptor → Controller → Service → DAO → DB)
 - [[rag-vs-llm-wiki]] — AI에게 외부 지식을 주는 두 패턴의 트레이드오프 비교
 - [[mybatis-to-jpa]] — SQL Mapper에서 ORM으로의 전환·공존 흐름 (1:1 대응표 + 절차)
+- [[cookie-session-jwt]] — 쿠키 → 세션 → JWT 인증 발전 흐름, Spring 구현 위치까지
 
 ## 소스 (Sources) — `sources/`
 
@@ -168,12 +176,13 @@ _마지막 갱신: 2026-06-02 (ingest — Querydsl Reference Guide, [[querydsl]]
 - [[jpa-lecture]] — `raw/lectures/JPA.md` (부트캠프 "MyBatis to JPA" 강의 노트)
 - [[spring-transaction-proxy-dialogue]] — `raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md` (강의 복습 중 프로젝트 재점검)
 - [[querydsl-reference-guide]] — `raw/articles/Querydsl Reference Guide.md` (공식 레퍼런스 v5.0.0, QType·JPAQueryFactory·BooleanBuilder·Projections)
+- [[authentication-note]] — `raw/notes/인증.md` (사이드 프로젝트 JWT 구현 전 Cookie/Session/JWT 원리 정리)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 95
-- 흐름 페이지: 11
-- 소스 페이지: 24
-- 통합한 원본 수: 24
+- 개념 페이지: 100
+- 흐름 페이지: 12
+- 소스 페이지: 25
+- 통합한 원본 수: 25
