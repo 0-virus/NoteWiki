@@ -44,6 +44,32 @@ public class ItemEntity {
 | `@GeneratedValue` | PK 값을 어떻게 만들지(전략) |
 | `@Column(name=…)` | 필드 ↔ 칼럼 매핑. 생략 시 필드명 |
 
+## 필드 타입 선택 — 기본형 vs 래퍼 클래스
+
+JPA 엔티티 필드에는 **기본형(`int`, `long`, `boolean`) 대신 래퍼 클래스(`Integer`, `Long`, `Boolean`)를 써야 한다.**
+
+```java
+// 잘못된 예
+@Column(nullable = true)
+private int price;    // null 불가 → nullable 설정이 의미 없음
+
+// 올바른 예
+@Column(nullable = true)
+private Integer price;  // null 가능
+```
+
+**왜**: 기본형은 Java 언어 레벨에서 null이 불가능하다. JPA가 DB에서 null을 읽어오면 기본형 필드에 담지 못해 `NullPointerException`이 발생한다. 래퍼 클래스는 null을 담을 수 있으므로 DB의 nullable 컬럼과 정확히 대응된다.
+
+| 기본형 | 래퍼 클래스 | null 가능 여부 |
+|---|---|---|
+| `int` | `Integer` | ✅ |
+| `long` | `Long` | ✅ |
+| `boolean` | `Boolean` | ✅ |
+| `double` | `Double` | ✅ |
+
+> PK 필드(`@Id`)도 `Long`으로 선언한다. `long`이면 JPA가 새 엔티티인지 판단할 때(`isNew()`)
+> null 체크가 불가능해 문제가 생긴다.
+
 ## 필드 타입 매핑
 
 ```java
@@ -106,7 +132,8 @@ public class OrderItemEntity {
 
 - [[jpa]] — 이 매핑 규칙을 정의한 표준
 - [[jpa-association]] — 테이블 간 관계(FK) 매핑은 별도 페이지로
+- [[jpa-auditing]] — @MappedSuperclass 기반 BaseEntity, createdAt/updatedAt 자동화
 - [[entity-manager]] — 매핑된 Entity를 실제로 다루는 관리자
 - [[equals-hashcode]] — 복합 키 클래스가 `equals`/`hashCode`를 오버라이드해야 하는 이유
 - [[dto-vs-entity]] — `@Entity`(도메인 본체) vs DTO(운반체)의 분리
-- 출처: [[jpa-lecture]]
+- 출처: [[jpa-lecture]] · [[zeroverse-spring-practice]]

@@ -4,6 +4,34 @@
 > 형식: `## [YYYY-MM-DD] <ingest|query|lint> | <제목>`
 > 최근 활동 확인: `grep "^## \[" log.md | tail -5`
 
+## [2026-06-09] ingest | ZeroVerse Spring 실습 노트 (JPA Auditing · Spring Security · Bean Validation)
+
+- 원본: `raw/notes/zeroverse_note_2026-06-09.md`
+- 프로젝트: ZeroVerse 개인 블로그 플랫폼 (`C:\Users\PC\Desktop\zeroverse-server`)
+- 저장 이유: AI를 조언 용도로 활용하며 학습, 다른 프로젝트에서 재참조할 패턴 기록
+- 현재 진행 상태: 회원가입/로그인 요청-응답 완성, JWT 토큰 미연동
+
+### 신설 개념 페이지 (3개)
+- [[jpa-auditing]] — @EnableJpaAuditing, @MappedSuperclass, BaseEntity 패턴, @CreatedDate/@LastModifiedDate
+- [[spring-security]] — SecurityFilterChain, HttpSecurity, CSRF 비활성화 이유, STATELESS, BCryptPasswordEncoder
+- [[bean-validation]] — @Valid 트리거 원리, @NotBlank vs @NotNull 차이, 자주 쓰는 검증 어노테이션
+
+### 신설 흐름 페이지 (1개)
+- [[spring-security-register-flow]] — SecurityConfig → Controller(@Valid) → Service(BCrypt) → Repository 회원가입 전 파이프라인, ZeroVerse 코드 위치 포함
+
+### 신설 소스 페이지 (1개)
+- [[zeroverse-spring-practice]] — ZeroVerse 프로젝트 컨텍스트 및 기술 스택
+
+### 갱신 페이지 (2개)
+- [[jpa-entity-mapping]] — 래퍼 클래스 vs 기본형 섹션 추가 (`Integer`/`Long` 써야 하는 null 이유)
+- [[spring-annotations]] — §7 보안·검증 섹션(@EnableWebSecurity/@Valid/@NotBlank 등), §8 JPA Auditing 섹션 신설
+
+### 교차 연결
+- [[spring-security]] ↔ [[jwt]] ↔ [[refresh-token]] ↔ [[filter]] — Spring Security Filter Chain에서 JWT 연동 위치
+- [[jpa-auditing]] ↔ [[jpa-entity-mapping]] — BaseEntity 패턴과 기본 매핑 연결
+- [[bean-validation]] ↔ [[dto-vs-entity]] ↔ [[three-tier-architecture]] — DTO 검증 계층 연결
+- [[spring-security-register-flow]] — 위 모든 개념을 하나의 실습 흐름으로 통합
+
 ---
 
 ## [2026-05-18] init | 위키 초기화

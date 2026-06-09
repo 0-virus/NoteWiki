@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-06-07 (ingest — 인증 방식 필기, [[cookie]]·[[session-auth]]·[[jwt]]·[[refresh-token]]·[[serialization]]·[[cookie-session-jwt]] 신설)_
+_마지막 갱신: 2026-06-09 (ingest — ZeroVerse Spring 실습, [[jpa-auditing]]·[[spring-security]]·[[bean-validation]]·[[spring-security-register-flow]] 신설)_
 
 ---
 
@@ -53,8 +53,9 @@ _마지막 갱신: 2026-06-07 (ingest — 인증 방식 필기, [[cookie]]·[[se
 - [[spring-data-jpa]] — JpaRepository 인터페이스 선언만으로 CRUD·페이징 자동 구현
 - [[entity-manager]] — 엔티티 생명주기 관리자 + EntityManagerFactory, 영속성 컨텍스트
 - [[persistence-context]] — 엔티티를 보관하는 "작업대", 변경 감지·1차 캐시·생명주기·flush
-- [[jpa-entity-mapping]] — `@Entity`·`@Id`·`@Column`·키 생성 전략·복합 키 매핑
+- [[jpa-entity-mapping]] — `@Entity`·`@Id`·`@Column`·키 생성 전략·복합 키 매핑·래퍼 클래스
 - [[jpa-association]] — `@OneToMany`/`@ManyToOne`, 연관 관계 주인·페치·영속성 전이
+- [[jpa-auditing]] — @EnableJpaAuditing, @MappedSuperclass, BaseEntity 패턴, 자동 타임스탬프
 - [[jpql]] — 엔티티 대상 객체 지향 쿼리, Criteria·QueryDSL·Native SQL 보완
 - [[querydsl]] — 타입 세이프 쿼리 빌더, QType + JPAQueryFactory + BooleanBuilder로 동적 쿼리
 
@@ -78,6 +79,8 @@ _마지막 갱신: 2026-06-07 (ingest — 인증 방식 필기, [[cookie]]·[[se
 - [[jwt]] — JSON Web Token, 서명 기반 Stateless 인증, 구조와 신뢰성 근거
 - [[refresh-token]] — Access Token 재발급 + Rotation으로 탈취 감지
 - [[serialization]] — 객체 → 전송 가능한 문자열, 직렬화/역직렬화 개념
+- [[spring-security]] — SecurityFilterChain, HttpSecurity, CSRF·STATELESS 설정, BCryptPasswordEncoder
+- [[bean-validation]] — @Valid, @NotBlank vs @NotNull, Jakarta Bean Validation 어노테이션 정리
 
 ### 시스템 디자인 / 인프라
 - [[proxy]] — 네트워크 통신의 중간자, Forward와 Reverse는 위치만 다른 한 쌍
@@ -149,6 +152,7 @@ _마지막 갱신: 2026-06-07 (ingest — 인증 방식 필기, [[cookie]]·[[se
 - [[rag-vs-llm-wiki]] — AI에게 외부 지식을 주는 두 패턴의 트레이드오프 비교
 - [[mybatis-to-jpa]] — SQL Mapper에서 ORM으로의 전환·공존 흐름 (1:1 대응표 + 절차)
 - [[cookie-session-jwt]] — 쿠키 → 세션 → JWT 인증 발전 흐름, Spring 구현 위치까지
+- [[spring-security-register-flow]] — SecurityConfig → Controller(@Valid) → Service(BCrypt) → Repository 회원가입 전체 파이프라인
 
 ## 소스 (Sources) — `sources/`
 
@@ -177,12 +181,13 @@ _마지막 갱신: 2026-06-07 (ingest — 인증 방식 필기, [[cookie]]·[[se
 - [[spring-transaction-proxy-dialogue]] — `raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md` (강의 복습 중 프로젝트 재점검)
 - [[querydsl-reference-guide]] — `raw/articles/Querydsl Reference Guide.md` (공식 레퍼런스 v5.0.0, QType·JPAQueryFactory·BooleanBuilder·Projections)
 - [[authentication-note]] — `raw/notes/인증.md` (사이드 프로젝트 JWT 구현 전 Cookie/Session/JWT 원리 정리)
+- [[zeroverse-spring-practice]] — `raw/notes/zeroverse_note_2026-06-09.md` (ZeroVerse 블로그 Spring 실습, JPA 엔티티·Security·Validation)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 100
-- 흐름 페이지: 12
-- 소스 페이지: 25
-- 통합한 원본 수: 25
+- 개념 페이지: 103
+- 흐름 페이지: 13
+- 소스 페이지: 26
+- 통합한 원본 수: 26
