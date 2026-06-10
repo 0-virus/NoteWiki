@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_마지막 갱신: 2026-06-09 (ingest — ZeroVerse Spring 실습, [[jpa-auditing]]·[[spring-security]]·[[bean-validation]]·[[spring-security-register-flow]] 신설)_
+_Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice: added [[jwt-claims]], [[security-context]], [[once-per-request-filter]], [[spring-security-jwt-auth-flow]])_
 
 ---
 
@@ -78,8 +78,11 @@ _마지막 갱신: 2026-06-09 (ingest — ZeroVerse Spring 실습, [[jpa-auditin
 - [[session-auth]] — 세션 기반 Stateful 인증, IP 바인딩과 확장성 한계
 - [[jwt]] — JSON Web Token, 서명 기반 Stateless 인증, 구조와 신뢰성 근거
 - [[refresh-token]] — Access Token 재발급 + Rotation으로 탈취 감지
+- [[jwt-claims]] - JWT Payload key-value set such as sub/email/role/iat/exp
+- [[security-context]] - Spring Security context that holds Authentication for the current request
 - [[serialization]] — 객체 → 전송 가능한 문자열, 직렬화/역직렬화 개념
 - [[spring-security]] — SecurityFilterChain, HttpSecurity, CSRF·STATELESS 설정, BCryptPasswordEncoder
+- [[once-per-request-filter]] - Spring Web filter base class that runs once per request; useful for JWT filters
 - [[bean-validation]] — @Valid, @NotBlank vs @NotNull, Jakarta Bean Validation 어노테이션 정리
 
 ### 시스템 디자인 / 인프라
@@ -111,6 +114,7 @@ _마지막 갱신: 2026-06-09 (ingest — ZeroVerse Spring 실습, [[jpa-auditin
 
 ### Spring / 코어
 - [[spring-framework]] — Spring 전체 메타 페이지, 학습 트리 진입점
+- [[lombok]] — @RequiredArgsConstructor vs @AllArgsConstructor, DI용 생성자 자동 생성
 - [[spring-annotations]] — 자주 쓰는 Spring 어노테이션을 한곳에서 찾는 참조 인덱스 허브
 - [[aop]] — 횟단 관심사(로깅·트랜잭션·보안)를 핵심 로직에서 분리하는 패러다임, Proxy 기반
 - [[transaction]] — DB 작업의 원자적 단위, ACID와 Spring `@Transactional` 동작 원리
@@ -153,6 +157,7 @@ _마지막 갱신: 2026-06-09 (ingest — ZeroVerse Spring 실습, [[jpa-auditin
 - [[mybatis-to-jpa]] — SQL Mapper에서 ORM으로의 전환·공존 흐름 (1:1 대응표 + 절차)
 - [[cookie-session-jwt]] — 쿠키 → 세션 → JWT 인증 발전 흐름, Spring 구현 위치까지
 - [[spring-security-register-flow]] — SecurityConfig → Controller(@Valid) → Service(BCrypt) → Repository 회원가입 전체 파이프라인
+- [[spring-security-jwt-auth-flow]] - login verification, Access Token issue, JWT filter, SecurityContext, AuthorizationFilter flow
 
 ## 소스 (Sources) — `sources/`
 
@@ -182,12 +187,14 @@ _마지막 갱신: 2026-06-09 (ingest — ZeroVerse Spring 실습, [[jpa-auditin
 - [[querydsl-reference-guide]] — `raw/articles/Querydsl Reference Guide.md` (공식 레퍼런스 v5.0.0, QType·JPAQueryFactory·BooleanBuilder·Projections)
 - [[authentication-note]] — `raw/notes/인증.md` (사이드 프로젝트 JWT 구현 전 Cookie/Session/JWT 원리 정리)
 - [[zeroverse-spring-practice]] — `raw/notes/zeroverse_note_2026-06-09.md` (ZeroVerse 블로그 Spring 실습, JPA 엔티티·Security·Validation)
+- [[spring-component-di-security-dialogue]] — `raw/dialogues/2026-06-10 Spring @Component · Bean · DI · Security Filter Chain 개념 문답.md`
+- [[zeroverse-spring-security-jwt-dialogue]] - raw/dialogues/2026-06-10-zeroverse-spring-security-jwt-auth-practice.md
 
 ---
 
 ### 통계
 
-- 개념 페이지: 103
-- 흐름 페이지: 13
-- 소스 페이지: 26
-- 통합한 원본 수: 26
+- 개념 페이지: 107
+- 흐름 페이지: 14
+- 소스 페이지: 28
+- 통합한 원본 수: 28

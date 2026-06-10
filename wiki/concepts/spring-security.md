@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [spring, security, authentication, authorization, filter, jwt, bcrypt]
-updated: 2026-06-09
-sources: ["raw/notes/zeroverse_note_2026-06-09.md"]
+updated: 2026-06-10
+sources: ["raw/notes/zeroverse_note_2026-06-09.md", "raw/dialogues/2026-06-10-zeroverse-spring-security-jwt-auth-practice.md"]
 ---
 
 # Spring Security
@@ -109,9 +109,9 @@ public class AuthService {
 - `encode()` 시 솔트가 해시에 포함되어, `matches()`로 원본과 비교 가능
 - 비밀번호를 평문으로 DB에 절대 저장하지 않는 이유: 유출 시 즉시 노출
 
-## JWT 필터 추가 (다음 단계 — 미완료)
+## JWT 필터 추가
 
-현재 ZeroVerse는 회원가입/로그인까지 완성. JWT 토큰 연동 시 아래 설정 추가:
+ZeroVerse에서는 아래 설정으로 JWT 인증 필터를 삽입한다:
 
 ```java
 // SecurityFilterChain에 JWT 필터 삽입
@@ -121,7 +121,9 @@ http.addFilterBefore(
 );
 ```
 
-[[jwt]]가 완성되면 이 필터가 토큰 검증 → `SecurityContext`에 인증 정보를 주입한다.
+`addFilterBefore(내 필터, 기준 필터.class)` = 기준 필터 앞에 삽입. Spring Security는 기본 16개 내장 필터를 등록하는데, `UsernamePasswordAuthenticationFilter`가 항상 존재하므로 기준 필터로 사용한다.
+
+이 필터가 토큰 검증 → `SecurityContext`에 인증 정보를 주입하는 역할을 한다. 자세한 흐름은 [[spring-security-jwt-auth-flow]] 참고.
 
 ## ZeroVerse 파일 위치
 
@@ -139,3 +141,17 @@ http.addFilterBefore(
 - [[cookie-session-jwt]] — 인증 방식 발전 흐름
 - [[spring-security-register-flow]] — SecurityConfig를 포함한 회원가입 전체 흐름
 - 출처: [[zeroverse-spring-practice]]
+
+## JWT 요청 인증에서 SecurityContext의 역할
+
+JWT 방식에서 로그인 성공은 Access Token 발급으로 끝나지 않는다. 이후 요청마다 `Authorization: Bearer <token>`을 보내면 커스텀 JWT 필터가 토큰을 검증하고 [[security-context]]에 `Authentication`을 저장해야 한다.
+
+```text
+JwtAuthenticationFilter
+-> JWT 검증
+-> Claims에서 userId, role 추출
+-> SecurityContextHolder.getContext().setAuthentication(...)
+-> AuthorizationFilter가 authenticated 여부 판단
+```
+
+따라서 `JwtAuthenticationFilter`는 로그인 필터가 아니라 **토큰으로 현재 요청의 인증 정보를 복원하는 필터**다. 자세한 흐름은 [[spring-security-jwt-auth-flow]] 참고.

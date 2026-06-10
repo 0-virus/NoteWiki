@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [authentication, jwt, token, stateless, security, spring]
-updated: 2026-06-07
-sources: ["raw/notes/인증.md"]
+updated: 2026-06-10
+sources: ["raw/notes/인증.md", "raw/dialogues/2026-06-10-zeroverse-spring-security-jwt-auth-practice.md"]
 ---
 
 # JWT (JSON Web Token)
@@ -116,3 +116,15 @@ Controller
 [[filter]] — Spring에서 JWT 검증 위치
 [[interceptor]] — Spring에서 권한 검사 위치
 [[cookie-session-jwt]] — 인증 방식 발전 흐름
+
+## Spring Security 실습에서 Claims를 읽는 위치
+
+ZeroVerse JWT 실습에서는 `JwtTokenProvider`가 Access Token을 만들고 검증하며, Payload를 [[jwt-claims]]로 읽는다.
+
+```java
+getClaims(token).getSubject();          // userId
+getClaims(token).get("email", String.class);
+getClaims(token).get("role", String.class);
+```
+
+Claims에서 꺼낸 `userId`, `role`은 [[security-context]]에 저장할 `Authentication` 객체를 만드는 데 쓰인다. 전체 요청 인증 흐름은 [[spring-security-jwt-auth-flow]]에 정리한다.

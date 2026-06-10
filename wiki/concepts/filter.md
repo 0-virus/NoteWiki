@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [java, servlet, spring, filter, web]
-updated: 2026-05-21
-sources: ["raw/notes/Spring Framework.md"]
+updated: 2026-06-10
+sources: ["raw/notes/Spring Framework.md", "raw/dialogues/2026-06-10-zeroverse-spring-security-jwt-auth-practice.md"]
 ---
 
 # Filter (서블릿 필터)
@@ -116,3 +116,16 @@ public class MyFilter implements Filter {
 - [[dispatcher-servlet]] — Filter 다음 단계 (스프링 진입점)
 - 흐름: [[spring-mvc-request-flow]] — Filter가 끼는 전체 파이프라인
 - 출처: [[spring-framework-1-note]]
+
+## OncePerRequestFilter와 doFilterInternal
+
+Spring Security JWT 실습에서 만든 `JwtAuthenticationFilter`는 [[once-per-request-filter]]를 상속한다. 이때 `doFilterInternal()`은 "현재 필터가 이번 요청에서 할 일"을 작성하는 메서드이고, `filterChain.doFilter(request, response)`는 다음 필터 또는 Controller로 요청을 넘기는 호출이다.
+
+```text
+doFilterInternal()
+-> 토큰 추출/검증/인증 저장
+-> filterChain.doFilter()
+-> 다음 필터 또는 Controller
+```
+
+Spring Security의 내장 필터들도 모두 필터 체인에서 실행되지만, 각 필터가 반드시 `doFilterInternal()`만 쓰는 것은 아니다.
