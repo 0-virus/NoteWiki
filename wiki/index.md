@@ -42,6 +42,10 @@ _Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice:
 - [[npm-dependency-files]] — package.json / package-lock.json / .package-lock.json
 
 ### 데이터베이스
+- [[database-index]] — 인덱스의 개념, B-tree/B+tree 구조, 클러스터드 인덱스, DDL 문법, 인덱스 힌트
+- [[covering-index]] — 쿼리에 필요한 컬럼이 모두 인덱스 안에 있어 테이블 접근 생략하는 최적화
+- [[explain]] — MySQL EXPLAIN으로 쿼리 실행 계획 확인 (type·key·Extra 컬럼 해석)
+- [[ddl-lock]] — ALTER TABLE의 메타데이터 락 구조, 서비스 멈춤 원인, pt-osc·Instant DDL 해결책
 - [[orm]] — 객체-관계 매핑, 장점과 한계
 - [[prisma]] — JS/TS 전용 ORM, 스키마와 클라이언트
 - [[mybatis]] — Java SQL Mapper, ORM이 아닌 중간 추상화 (namespace ↔ 인터페이스 매핑)
@@ -189,12 +193,15 @@ _Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice:
 - [[zeroverse-spring-practice]] — `raw/notes/zeroverse_note_2026-06-09.md` (ZeroVerse 블로그 Spring 실습, JPA 엔티티·Security·Validation)
 - [[spring-component-di-security-dialogue]] — `raw/dialogues/2026-06-10 Spring @Component · Bean · DI · Security Filter Chain 개념 문답.md`
 - [[zeroverse-spring-security-jwt-dialogue]] - raw/dialogues/2026-06-10-zeroverse-spring-security-jwt-auth-practice.md
+- [[index-what-is-it]] — `raw/youtube/index가 뭔지 설명해보세요...` (코딩애플, B-tree·B+tree·클러스터드 인덱스)
+- [[index-trap]] — `raw/youtube/(280) 인덱스 걸었는데 왜 3초나 걸리죠!...` (인덱스 함정 3가지·EXPLAIN·커버링)
+- [[ddl-trap]] — `raw/youtube/(280) 컬럼 하나 추가했는데 서비스가 10분간 멈췄습니다...` (MDL·ALTER TABLE WAITING·pt-osc)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 107
+- 개념 페이지: 111
 - 흐름 페이지: 14
-- 소스 페이지: 28
-- 통합한 원본 수: 28
+- 소스 페이지: 31
+- 통합한 원본 수: 31
