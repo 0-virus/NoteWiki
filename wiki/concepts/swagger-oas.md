@@ -100,10 +100,65 @@ public class PostController {
 
 `@Tag`·`@Operation`만 있어도 Swagger UI가 깔끔하게 보여준다. 더 정확한 명세를 위해 `@Schema`(DTO 필드)·`@ApiResponse`(응답 코드)를 추가.
 
+## Spring Security와 함께 쓸 때
+
+### Swagger 경로 허용
+
+Spring Security를 쓰면 Swagger 관련 경로도 보안 필터를 통과하므로, `SecurityConfig`에 명시적으로 허용해야 한다.
+
+```java
+.authorizeHttpRequests(auth -> auth
+    .requestMatchers(
+        "/swagger-ui/**",
+        "/v3/api-docs/**",
+        "/swagger-ui.html"
+    ).permitAll()
+    .anyRequest().authenticated()
+)
+```
+
+### JWT Bearer Auth 버튼 추가
+
+Swagger UI에 "Authorize" 버튼을 띄워 JWT를 직접 입력하고 인증된 요청을 테스트하려면 `OpenAPI` 빈에 `SecurityScheme`을 등록한다.
+
+```java
+@Bean
+public OpenAPI openAPI() {
+    return new OpenAPI()
+        .addSecurityItem(new SecurityRequirement().addList("BearerAuth"))
+        .components(new Components()
+            .addSecuritySchemes("BearerAuth", new SecurityScheme()
+                .name("BearerAuth")
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT")
+            )
+        );
+}
+```
+
+- Swagger UI의 "Authorize" 버튼에는 **Access Token만** 입력한다 (Refresh Token은 해당 없음)
+- bearer auth로 설정하면 보통 토큰 문자열만 넣으면 되고, UI가 직접 요구하면 `Bearer {token}` 형식으로 입력
+
+### JWT 필터에서 Swagger 제외 (선택)
+
+`OncePerRequestFilter`의 `shouldNotFilter()`로 Swagger 경로를 JWT 필터 자체에서 제외할 수도 있다.
+
+```java
+@Override
+protected boolean shouldNotFilter(HttpServletRequest request) {
+    String path = request.getRequestURI();
+    return path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs");
+}
+```
+
+→ `permitAll()`과 `shouldNotFilter()`는 역할이 다름: `permitAll()`은 인가(권한 검사) 우회, `shouldNotFilter()`는 해당 필터 실행 자체를 건너뜀.
+
 ## 함정
 
 - **패키지 스캔 범위가 좁으면 엔드포인트가 안 보임** — `@SpringBootApplication`이 있는 패키지보다 위에 컨트롤러를 두면 자동 스캔이 안 잡힌다.
 - **운영 환경 노출 위험** — Swagger UI는 모든 API를 노출하므로, 운영 환경에선 인증을 걸거나 프로파일로 끈다 (`springdoc.swagger-ui.enabled=false`).
+- **빈 화면** — JWT 필터에서 `filterChain.doFilter` 누락 시 Swagger 정적 리소스가 응답되지 않아 빈 화면 표시. → [[once-per-request-filter]]
 
 ## 영균 학습 트리에서
 

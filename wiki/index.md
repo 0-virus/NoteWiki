@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice: added [[jwt-claims]], [[security-context]], [[once-per-request-filter]], [[spring-security-jwt-auth-flow]])_
+_Last updated: 2026-06-21 (ingest - Virtuber Spring 프로젝트: N+1 실사례·Refresh Token 구현·@Query fetch join·AuthenticationEntryPoint 추가)_
 
 ---
 
@@ -196,12 +196,13 @@ _Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice:
 - [[index-what-is-it]] — `raw/youtube/index가 뭔지 설명해보세요...` (코딩애플, B-tree·B+tree·클러스터드 인덱스)
 - [[index-trap]] — `raw/youtube/(280) 인덱스 걸었는데 왜 3초나 걸리죠!...` (인덱스 함정 3가지·EXPLAIN·커버링)
 - [[ddl-trap]] — `raw/youtube/(280) 컬럼 하나 추가했는데 서비스가 10분간 멈췄습니다...` (MDL·ALTER TABLE WAITING·pt-osc)
+- [[virtuber-spring-work-2026-06-21]] — `raw/dialogues/2026-06-21 Spring 프로젝트 작업 내용과 알게 된 사실.md` (Virtuber JWT 인증·Refresh Token·계좌 조회·N+1 fetch join)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 111
+- 개념 페이지: 111 (내용 갱신: n-plus-1-problem, refresh-token, jpql, spring-data-jpa, once-per-request-filter, swagger-oas, spring-security)
 - 흐름 페이지: 14
-- 소스 페이지: 31
-- 통합한 원본 수: 31
+- 소스 페이지: 32
+- 통합한 원본 수: 32

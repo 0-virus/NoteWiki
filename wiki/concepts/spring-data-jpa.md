@@ -106,12 +106,48 @@ Page<ItemEntity> page = itemRepository.findAll(pageable);
   통제권을 더 넘기는 대신 코드가 더 준다 — [[mybatis-to-jpa]]에서 비교.
 - 프로젝트 적용 시 영균이 실제로 손대는 건 대부분 이 인터페이스 한 겹이다.
 
+## @Query — 직접 JPQL 작성
+
+메서드 이름이 너무 길어지거나, **fetch join** 같이 파생 메서드로 표현 못 하는 쿼리는 `@Query`를 쓴다.
+
+```java
+// fetch join: LAZY 연관을 즉시 로딩 → N+1 방지
+@Query("select h from Holding h join fetch h.stock where h.account.id = :accountId")
+List<Holding> findAllByAccountIdWithStock(@Param("accountId") Long accountId);
+```
+
+**`@Query`가 있으면 메서드명은 무시** — 이름은 가독성용일 뿐, 쿼리는 `@Query` 내용이 결정한다. → [[jpql]]
+
+### 언더바(`_`) 중첩 속성 구분
+
+파생 메서드에서 `Account.id`처럼 중첩 속성을 명확히 구분할 때 `_`를 사용한다.
+
+```java
+// Holding.account.id = :accountId
+List<Holding> findAllByAccount_Id(Long accountId);
+```
+
+`_` 없이 `findAllByAccountId`도 동작할 수 있지만, 엔티티에 `accountId` 직접 필드가 있으면 모호해진다. `_`가 더 명확.
+
+### 메서드명이 틀리면 시작 시 오류
+
+`@Query` 없이 파생 메서드 이름이 엔티티 필드 구조와 맞지 않으면, 런타임이 아닌 **애플리케이션 시작 시점**에 `No property ... found` 오류가 발생한다. 조기 실패(fail-fast)이므로 배포 전에 잡힌다.
+
+### 선택 기준 요약
+
+| 상황 | 방법 |
+|---|---|
+| 단순 조건 (`findBy`, `existsBy`, …) | 파생 메서드 이름 |
+| fetch join, 복잡한 조건 | `@Query` + JPQL |
+| 동적 쿼리 (조건이 런타임에 결정) | [[querydsl]] |
+
 ## 관련 페이지
 
 - [[jpa]] — Spring Data JPA가 올라타는 표준
 - [[hibernate]] — 그 아래에서 실제 SQL을 만드는 구현체
 - [[dao-pattern]] — Repository가 자동화한 패턴
 - [[mybatis]] — 자동화 한 단계 전(SQL Mapper)
-- [[jpql]] — 메서드 이름으로 부족할 때의 다음 카드
+- [[jpql]] — 메서드 이름으로 부족할 때의 다음 카드 / `@Query` 문법
+- [[n-plus-1-problem]] — fetch join으로 해결하는 N+1
 - [[entity-manager]] — Repository 내부가 위임하는 실제 영속성 관리자
-- 출처: [[jpa-lecture]]
+- 출처: [[jpa-lecture]] · [[virtuber-spring-work-2026-06-21]]

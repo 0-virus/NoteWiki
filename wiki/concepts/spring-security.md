@@ -131,16 +131,47 @@ http.addFilterBefore(
 - `AuthService`: `C:\Users\PC\Desktop\zeroverse-server\src\main\java\com\zeroverse\domain\auth\service\AuthService.java`
 - `AuthController`: `C:\Users\PC\Desktop\zeroverse-server\src\main\java\com\zeroverse\domain\auth\controller\AuthController.java`
 
+## 인증·인가 실패 응답 처리
+
+컨트롤러 예외는 `GlobalExceptionHandler`로 잡히지만, **인증·인가 실패는 Security Filter Chain에서 발생** → `@ControllerAdvice`가 닿지 않는다. 처리 인터페이스가 별도로 존재한다.
+
+| 실패 종류 | 위치 | 처리 인터페이스 |
+|---|---|---|
+| 미인증 (401) — 토큰 없음/만료 | `ExceptionTranslationFilter` | `AuthenticationEntryPoint` |
+| 권한 부족 (403) | `ExceptionTranslationFilter` | `AccessDeniedHandler` |
+| 잘못된 JWT | `JwtAuthenticationFilter` 내부 | `catch` 블록에서 직접 JSON 응답 작성 |
+
+```java
+// SecurityConfig에 등록
+http
+    .exceptionHandling(ex -> ex
+        .authenticationEntryPoint((request, response, authException) -> {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write("{\"message\":\"인증이 필요합니다.\"}");
+        })
+        .accessDeniedHandler((request, response, accessDeniedException) -> {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write("{\"message\":\"권한이 없습니다.\"}");
+        })
+    );
+```
+
+> MVP에서는 일단 응답 바디 없이 두고, 나중에 `AuthenticationEntryPoint`·`AccessDeniedHandler`를 별도 클래스로 분리해 등록한다.
+
 ## 관련 페이지
 
 - [[jwt]] — JWT 구조·서명 검증 원리, Spring 구현 위치
-- [[refresh-token]] — Access Token 재발급 + Rotation 메커니즘
+- [[refresh-token]] — Access Token 재발급 + Rotation 메커니즘, DB 저장 구현
 - [[filter]] — Spring Security가 위치하는 Filter 체인
+- [[once-per-request-filter]] — JWT 필터 구현 기반, doFilter 누락 함정
 - [[bean-validation]] — @Valid, @NotBlank/@NotNull (DTO 입력 검증)
 - [[session-auth]] — JWT가 대체하는 Stateful 세션 방식
 - [[cookie-session-jwt]] — 인증 방식 발전 흐름
+- [[swagger-oas]] — Swagger + Security 경로 허용 설정
 - [[spring-security-register-flow]] — SecurityConfig를 포함한 회원가입 전체 흐름
-- 출처: [[zeroverse-spring-practice]]
+- 출처: [[zeroverse-spring-practice]] · [[virtuber-spring-work-2026-06-21]]
 
 ## JWT 요청 인증에서 SecurityContext의 역할
 
