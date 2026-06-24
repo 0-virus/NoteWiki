@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice: added [[jwt-claims]], [[security-context]], [[once-per-request-filter]], [[spring-security-jwt-auth-flow]])_
+_Last updated: 2026-06-22 (merged: Docker 입문 노트 + Virtuber Spring 프로젝트 인제스트)_
 
 ---
 
@@ -98,6 +98,12 @@ _Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice:
 - [[horizontal-vs-vertical-scaling]] — 한 대를 키우기 vs 여러 대로 늘리기
 - [[high-availability]] — SPOF를 없애는 다중화, Active-Active / Active-Passive
 - [[nginx]] — 리버스 프록시·LB 대표 구현, 실습 가능한 설정 예시 수록
+
+### 컨테이너 / 배포 (Docker)
+- [[docker]] — Docker 전체 메타 페이지: 정의·내부 구성(dockerd·containerd·runc)·클라이언트-호스트-레지스트리 구조
+- [[container-virtualization]] — 호스트/하이퍼바이저/컨테이너 가상화 3종 비교, 네임스페이스
+- [[docker-image]] — 이미지 = 실행 가능한 스냅샷 패키지, 레이어 구조, pull/ls 명령어
+- [[docker-container]] — 이미지의 실행 인스턴스, 생명주기, run/ls 명령어
 
 ### Java / 웹 (Servlet·Spring)
 - [[servlet-spec]] — "Java로 웹 처리하려면 이렇게 하라"는 Jakarta EE 표준 명세 (구현체 = Tomcat 등)
@@ -196,12 +202,14 @@ _Last updated: 2026-06-10 (ingest - ZeroVerse Spring Security JWT auth practice:
 - [[index-what-is-it]] — `raw/youtube/index가 뭔지 설명해보세요...` (코딩애플, B-tree·B+tree·클러스터드 인덱스)
 - [[index-trap]] — `raw/youtube/(280) 인덱스 걸었는데 왜 3초나 걸리죠!...` (인덱스 함정 3가지·EXPLAIN·커버링)
 - [[ddl-trap]] — `raw/youtube/(280) 컬럼 하나 추가했는데 서비스가 10분간 멈췄습니다...` (MDL·ALTER TABLE WAITING·pt-osc)
+- [[virtuber-spring-work-2026-06-21]] — `raw/dialogues/2026-06-21 Spring 프로젝트 작업 내용과 알게 된 사실.md` (Virtuber JWT 인증·Refresh Token·계좌 조회·N+1 fetch join)
+- [[docker-note]] — `raw/notes/docker.md` (Docker 입문 독학 노트 — 컨테이너 가상화·구성 요소·이미지·컨테이너)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 111
+- 개념 페이지: 115
 - 흐름 페이지: 14
-- 소스 페이지: 31
-- 통합한 원본 수: 31
+- 소스 페이지: 32
+- 통합한 원본 수: 32

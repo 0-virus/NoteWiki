@@ -56,12 +56,29 @@ List<ItemEntity> result = entityManager
 > 그래서 [[mybatis-to-jpa]]는 "전부 갈아엎기"가 아니다. 단순 CRUD는 JPA로 옮기고, 복잡한
 > 조회 쿼리는 MyBatis/Native로 남기는 **점진적 공존**이 현실적이다.
 
+## @Query — Repository에서 JPQL 직접 쓰기
+
+[[spring-data-jpa]]의 파생 메서드 이름으로 표현 안 되는 조건(fetch join 포함)은 `@Query` 어노테이션으로 JPQL을 직접 작성한다.
+
+```java
+// fetch join: Holding 조회 시 Stock을 한 번에 같이 가져옴
+@Query("select h from Holding h join fetch h.stock where h.account.id = :accountId")
+List<Holding> findAllByAccountIdWithStock(@Param("accountId") Long accountId);
+```
+
+- `join fetch h.stock`: LAZY인 `stock` 연관을 즉시 로딩. N+1 방지 → [[n-plus-1-problem]]
+- `where h.account.id = :accountId`: 엔티티 필드 경로로 작성 (테이블 컬럼 아님)
+- `@Param("accountId")`: 메서드 파라미터와 JPQL `:accountId`를 연결
+
+**`@Query`가 있으면 메서드명은 무시된다** — 이름은 사람이 읽기 좋게 붙인 설명용. 실제 쿼리는 `@Query` 내용이 결정. → [[spring-data-jpa]]
+
 ## 관련 페이지
 
 - [[jpa]] — JPQL이 봉사하는 표준, "단점과 보완"의 연장
-- [[spring-data-jpa]] — 메서드 이름 쿼리로 부족할 때 JPQL로
+- [[spring-data-jpa]] — 메서드 이름 쿼리로 부족할 때 JPQL로 / @Query 어노테이션
 - [[hibernate]] — JPQL을 실제 SQL로 번역하는 구현체
+- [[n-plus-1-problem]] — fetch join으로 해결하는 N+1 패턴
 - [[mybatis]] — 복잡 쿼리에서 JPA와 공존/혼용
 - [[mybatis-to-jpa]] — 점진적 전환에서 JPQL 한계가 갖는 의미
 - [[querydsl]] — JPQL의 한계(문자열·동적 쿼리)를 타입 세이프하게 해결한 서드파티
-- 출처: [[jpa-lecture]]
+- 출처: [[jpa-lecture]] · [[virtuber-spring-work-2026-06-21]]
