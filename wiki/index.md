@@ -62,6 +62,7 @@ _Last updated: 2026-06-22 (merged: Docker 입문 노트 + Virtuber Spring 프로
 - [[jpa-auditing]] — @EnableJpaAuditing, @MappedSuperclass, BaseEntity 패턴, 자동 타임스탬프
 - [[jpql]] — 엔티티 대상 객체 지향 쿼리, Criteria·QueryDSL·Native SQL 보완
 - [[querydsl]] — 타입 세이프 쿼리 빌더, QType + JPAQueryFactory + BooleanBuilder로 동적 쿼리
+- [[optimistic-pessimistic-lock]] — 낙관적(@Version) vs 비관적(@Lock) 락, 데드락 해결 4가지, ETag 연결
 
 ### Java / 언어 기초
 - [[jvm-memory]] — Method Area / Heap / Stack 3대 메모리 영역
@@ -209,7 +210,7 @@ _Last updated: 2026-06-22 (merged: Docker 입문 노트 + Virtuber Spring 프로
 
 ### 통계
 
-- 개념 페이지: 115
+- 개념 페이지: 116
 - 흐름 페이지: 14
 - 소스 페이지: 32
 - 통합한 원본 수: 32
