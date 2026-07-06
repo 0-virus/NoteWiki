@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [web, http, cache, spring]
-updated: 2026-05-21
-sources: ["raw/notes/Spring Framework.md"]
+updated: 2026-07-03
+sources: ["raw/notes/Spring Framework.md", "raw/notes/🌐 웹 브라우저의 Cache 전략 & 헤더 다루기.md"]
 ---
 
 # ETag (Entity Tag)
@@ -10,6 +10,8 @@ sources: ["raw/notes/Spring Framework.md"]
 ## 한 줄 정의
 
 **리소스의 "버전 도장".** 서버가 응답할 때 `ETag: "abc123"` 같은 식별자를 같이 보내면, 클라이언트는 다음 요청에 그 도장을 들고 가서 "내 도장이랑 같으면 본문 안 줘도 돼"라고 묻는다.
+
+> ETag는 홀로 있는 기능이 아니라 [[http-cache|HTTP 캐시]] 3단계 중 **2단계(만료 후 검증)** 의 정밀 수단이다. 전체 그림은 [[http-cache]], 검증 방식 비교는 [[conditional-request]] 참고.
 
 ## 왜 필요한가
 
@@ -94,9 +96,22 @@ ETag는 **GET 캐싱**을 위한 도구. POST/PUT 응답에 붙이면 의미가 
 - [[equals-hashcode]]를 만든 그 hashCode가 ETag 생성에도 쓰인다 → 해시 안정성이 캐시 정합성으로 이어지는 지점.
 - 큰 응답이 자주 안 바뀌는 API에 적용하면 효과가 즉시 보인다 — 부트캠프 프로젝트의 "글 상세 조회" 같은 API가 좋은 대상.
 
+## Last-Modified 대비 우위 (검증자로서의 ETag)
+
+캐시 검증자는 `Last-Modified`(수정 시각)와 ETag(버전 해시) 둘인데, ETag가 다음 한계를 극복한다.
+
+1. **초 미만 변경** — 시각 방식은 1초 미만 변경을 못 잡지만 해시는 잡는다.
+2. **A→B→A 롤백** — 내용이 같아지면 ETag도 같아져 불필요한 재다운로드를 피한다 (시각은 바뀌어 또 받음).
+3. **세밀한 서버 제어** — 주석·공백처럼 의미 없는 변경은 ETag를 유지하거나, 배포 주기에 맞춰 일괄 갱신하는 등 서버가 캐시 정책을 직접 관리할 수 있다.
+
+클라이언트는 그저 이 값을 되돌려주기만 하면 되고 내부 로직을 몰라도 된다. → 비교 상세는 [[conditional-request]].
+
 ## 관련 페이지
 
+- [[http-cache]]·[[conditional-request]] — ETag가 속한 캐시 전체 그림과 검증 단계
+- [[cache-control]] — `no-cache`가 ETag 검증을 강제
 - [[equals-hashcode]] — ETag 생성에 hashCode를 활용
 - [[restful-api]] — ETag가 빛나는 GET 응답의 무대
 - [[content-negotiation]]·[[http-method-override]] — 같은 묶음의 HTTP 부가 기능
-- 출처: [[spring-framework-1-note]]
+- [[optimistic-pessimistic-lock]] — `If-Match` 조건부 쓰기 = 낙관적 락
+- 출처: [[spring-framework-1-note]]·[[browser-cache-article]]

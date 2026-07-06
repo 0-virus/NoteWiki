@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-06-22 (merged: Docker 입문 노트 + Virtuber Spring 프로젝트 인제스트)_
+_Last updated: 2026-07-03 (ingest: CORS 개념·해결법 + 브라우저 Cache 전략 아티클 2건)_
 
 ---
 
@@ -152,6 +152,14 @@ _Last updated: 2026-06-22 (merged: Docker 입문 노트 + Virtuber Spring 프로
 - [[http-method-override]] — `X-HTTP-Method-Override`, Filter로만 가능한 이유
 - [[etag]] — 리소스 버전 도장, `If-None-Match`·304로 캐싱·동시성 제어
 - [[swagger-oas]] — OpenAPI Spec과 Swagger UI, API 자동 문서화
+- [[http-cache]] — 브라우저 캐시 원리·3단계(유효시간→검증→무효화)·private/public 프록시 캐시
+- [[cache-control]] — 캐시 핵심 헤더: max-age·no-cache·no-store·public/private·must-revalidate
+- [[conditional-request]] — 만료 후 검증: Last-Modified/If-Modified-Since vs ETag/If-None-Match, 304
+
+### 웹 / 브라우저·CORS
+- [[same-origin-policy]] — 브라우저 기본 방어선, 출처=Protocol+Host+Port, 차단 주체는 브라우저
+- [[cors]] — SOP 예외 통로, 3시나리오(단순·예비·인증), Access-Control-* 헤더, Spring 세팅
+- [[preflight-request]] — OPTIONS 사전 확인, Max-Age 캐싱, 대부분의 API가 이 모드
 
 ## 흐름 (Flows) — `flows/`
 
@@ -166,6 +174,7 @@ _Last updated: 2026-06-22 (merged: Docker 입문 노트 + Virtuber Spring 프로
 - [[spring-mvc-request-flow]] — 한 요청의 풀 파이프라인 (Filter → DispatcherServlet → Interceptor → Controller → Service → DAO → DB)
 - [[rag-vs-llm-wiki]] — AI에게 외부 지식을 주는 두 패턴의 트레이드오프 비교
 - [[mybatis-to-jpa]] — SQL Mapper에서 ORM으로의 전환·공존 흐름 (1:1 대응표 + 절차)
+- [[browser-cache-flow]] — 요청→캐시 재사용→만료→조건부 요청→304/200 전체 타임라인
 - [[cookie-session-jwt]] — 쿠키 → 세션 → JWT 인증 발전 흐름, Spring 구현 위치까지
 - [[spring-security-register-flow]] — SecurityConfig → Controller(@Valid) → Service(BCrypt) → Repository 회원가입 전체 파이프라인
 - [[spring-security-jwt-auth-flow]] - login verification, Access Token issue, JWT filter, SecurityContext, AuthorizationFilter flow
@@ -205,12 +214,14 @@ _Last updated: 2026-06-22 (merged: Docker 입문 노트 + Virtuber Spring 프로
 - [[ddl-trap]] — `raw/youtube/(280) 컬럼 하나 추가했는데 서비스가 10분간 멈췄습니다...` (MDL·ALTER TABLE WAITING·pt-osc)
 - [[virtuber-spring-work-2026-06-21]] — `raw/dialogues/2026-06-21 Spring 프로젝트 작업 내용과 알게 된 사실.md` (Virtuber JWT 인증·Refresh Token·계좌 조회·N+1 fetch join)
 - [[docker-note]] — `raw/notes/docker.md` (Docker 입문 독학 노트 — 컨테이너 가상화·구성 요소·이미지·컨테이너)
+- [[cors-article]] — `raw/notes/🌐 악명 높은 CORS 개념 & 해결법…` (Inpa 블로그, SOP·CORS 3시나리오·해결법)
+- [[browser-cache-article]] — `raw/notes/🌐 웹 브라우저의 Cache 전략 & 헤더 다루기…` (Inpa 블로그, Cache-Control·검증·프록시 캐시)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 116
-- 흐름 페이지: 14
-- 소스 페이지: 32
-- 통합한 원본 수: 32
+- 개념 페이지: 122
+- 흐름 페이지: 15
+- 소스 페이지: 34
+- 통합한 원본 수: 34
