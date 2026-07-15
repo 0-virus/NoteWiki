@@ -1,0 +1,290 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1783305369270,
+  "projectRoot": "C:\\Users\\PC\\Desktop\\NoteWiki",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "etc": {
+      "path": "etc",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1783305369139,
+      "keyFiles": []
+    },
+    "graphify-out": {
+      "path": "graphify-out",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1783305369142,
+      "keyFiles": [
+        "cost.json",
+        "graph.html",
+        "graph.json",
+        "GRAPH_REPORT.md",
+        "manifest.json"
+      ]
+    },
+    "Output": {
+      "path": "Output",
+      "purpose": null,
+      "fileCount": 12,
+      "lastAccessed": 1783305369144,
+      "keyFiles": [
+        "2026-05-19-servlet-jdbc-요청처리-흐름.md",
+        "2026-05-21-filter-vs-interceptor-발표.html",
+        "2026-05-21-spring-mvc-도식.html",
+        "2026-05-21-TIL-spring-mvc와-데이터-객체.md",
+        "2026-05-22-filter-vs-interceptor-발표-스크립트.md"
+      ]
+    },
+    "raw": {
+      "path": "raw",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1783305369146,
+      "keyFiles": [
+        "CLAUDE.md"
+      ]
+    },
+    "wiki": {
+      "path": "wiki",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1783305369148,
+      "keyFiles": [
+        "CLAUDE.md",
+        "index.md",
+        "log.md"
+      ]
+    },
+    "raw\\assets": {
+      "path": "raw\\assets",
+      "purpose": "Static assets",
+      "fileCount": 2,
+      "lastAccessed": 1783305369155,
+      "keyFiles": [
+        "jwt.png"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "wiki\\index.md",
+      "accessCount": 6,
+      "lastAccessed": 1783305837663,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\etag.md",
+      "accessCount": 3,
+      "lastAccessed": 1783061692944,
+      "type": "file"
+    },
+    {
+      "path": "raw\\notes\\🌐 악명 높은 CORS 개념 & 해결법 - 정리 끝판왕 👏.md",
+      "accessCount": 2,
+      "lastAccessed": 1783061305903,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\cache-control.md",
+      "accessCount": 2,
+      "lastAccessed": 1783305839008,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\conditional-request.md",
+      "accessCount": 2,
+      "lastAccessed": 1783305839296,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\cors.md",
+      "accessCount": 2,
+      "lastAccessed": 1783305851806,
+      "type": "file"
+    },
+    {
+      "path": "raw\\notes\\🌐 웹 브라우저의 Cache 전략 & 헤더 다루기.md",
+      "accessCount": 1,
+      "lastAccessed": 1783061307316,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\same-origin-policy.md",
+      "accessCount": 1,
+      "lastAccessed": 1783061458676,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\preflight-request.md",
+      "accessCount": 1,
+      "lastAccessed": 1783061513309,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\http-cache.md",
+      "accessCount": 1,
+      "lastAccessed": 1783061552506,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\flows\\browser-cache-flow.md",
+      "accessCount": 1,
+      "lastAccessed": 1783061623441,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\sources\\cors-article.md",
+      "accessCount": 1,
+      "lastAccessed": 1783061646187,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\sources\\browser-cache-article.md",
+      "accessCount": 1,
+      "lastAccessed": 1783061665333,
+      "type": "file"
+    },
+    {
+      "path": "graphify-out\\.tmp_cache.py",
+      "accessCount": 1,
+      "lastAccessed": 1783305749314,
+      "type": "file"
+    },
+    {
+      "path": "graphify-out\\.graphify_uncached.txt",
+      "accessCount": 1,
+      "lastAccessed": 1783305789463,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\CLAUDE.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305837423,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\anonymous-class.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305838048,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\bean-validation.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305839122,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\concurrency-problem.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305839172,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\api-response-wrapper.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305839203,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\log.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305839247,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\aop.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305839324,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\connection-pool.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305845647,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\container-virtualization.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305848767,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\content-negotiation.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305849039,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\cookie.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305850742,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\covering-index.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305852313,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\css-modules.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305855247,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\css-selector.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305855343,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\css-specificity.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305865825,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\docker-image.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305876708,
+      "type": "file"
+    },
+    {
+      "path": "wiki\\concepts\\docker-container.md",
+      "accessCount": 1,
+      "lastAccessed": 1783305878318,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

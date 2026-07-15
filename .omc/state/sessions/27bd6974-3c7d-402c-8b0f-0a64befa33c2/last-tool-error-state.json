@@ -1,0 +1,7 @@
+{
+  "tool_name": "PowerShell",
+  "tool_input_preview": "{\"command\":\"@'\\nimport json\\nfrom graphify.detect import detect\\nfrom pathlib import Path\\nresult = detect(Path('.'))\\nprint(json.dumps(result, ensure_ascii=False))\\n'@ | Out-File -FilePath graphify-o...",
+  "error": "Exit code 1\nTraceback (most recent call last):\r\n  File \"C:\\Users\\PC\\Desktop\\NoteWiki\\graphify-out\\.graphify_step_2_detect_files_3.py\", line 5, in <module>\r\n    print(json.dumps(result, ensure_ascii=False))\r\nUnicodeEncodeError: 'cp949' codec can't encode character '\\u2014' in position 4902: illegal multibyte sequence\r\ndone",
+  "timestamp": "2026-07-06T02:38:13.785Z",
+  "retry_count": 1
+}

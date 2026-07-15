@@ -1,18 +1,18 @@
 {
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\CLAUDE.md": {
-    "mtime": 1779111096.0388014,
-    "ast_hash": "d032449c30acc547191af0e1f254e117",
-    "semantic_hash": "d032449c30acc547191af0e1f254e117"
+    "mtime": 1780365184.3482134,
+    "ast_hash": "534373b3b3e595941f2c57ed5c53320a",
+    "semantic_hash": "534373b3b3e595941f2c57ed5c53320a"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\index.md": {
-    "mtime": 1779116028.620563,
-    "ast_hash": "9ff7620cd279fd7995891be10472e894",
-    "semantic_hash": "9ff7620cd279fd7995891be10472e894"
+    "mtime": 1783061729.253322,
+    "ast_hash": "1f4b8269e79eeabe08c5d3b717aa7242",
+    "semantic_hash": "1f4b8269e79eeabe08c5d3b717aa7242"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\log.md": {
-    "mtime": 1779116029.6272986,
-    "ast_hash": "f2d1155d1a0547a3978dfe6ab73bf693",
-    "semantic_hash": "f2d1155d1a0547a3978dfe6ab73bf693"
+    "mtime": 1783063838.797026,
+    "ast_hash": "9d057abafbac17b52212936eb15faf07",
+    "semantic_hash": "9d057abafbac17b52212936eb15faf07"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\async-await.md": {
     "mtime": 1779115228.730384,
@@ -25,19 +25,19 @@
     "semantic_hash": "0da287c631c4213b57e373cf67e5a9cf"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\css-modules.md": {
-    "mtime": 1779115024.6421845,
-    "ast_hash": "fab9cd5e10ed722dfe5604e71822b7ec",
-    "semantic_hash": "fab9cd5e10ed722dfe5604e71822b7ec"
+    "mtime": 1779248155.5948553,
+    "ast_hash": "f889860483419d309df969af3a557420",
+    "semantic_hash": "f889860483419d309df969af3a557420"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\css-specificity.md": {
-    "mtime": 1779115023.0832603,
-    "ast_hash": "695716c3b39344cac615b046551fd67d",
-    "semantic_hash": "695716c3b39344cac615b046551fd67d"
+    "mtime": 1779248136.1802995,
+    "ast_hash": "93a264324f51ed07ac87a11c4f9b4e8d",
+    "semantic_hash": "93a264324f51ed07ac87a11c4f9b4e8d"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\es-modules.md": {
-    "mtime": 1779115030.0191796,
-    "ast_hash": "2b623b641cf77d6663036ccd628d6e5b",
-    "semantic_hash": "2b623b641cf77d6663036ccd628d6e5b"
+    "mtime": 1779118803.422186,
+    "ast_hash": "56bbf96cc69f8a059a2add30fc55158d",
+    "semantic_hash": "56bbf96cc69f8a059a2add30fc55158d"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\graph-view.md": {
     "mtime": 1779115952.1737866,
@@ -50,9 +50,9 @@
     "semantic_hash": "7931bdae24706bf8fdd507f816eb2ce8"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\n-plus-1-problem.md": {
-    "mtime": 1779115198.6672084,
-    "ast_hash": "3f2232858a556acdedd5b3987bd3ae34",
-    "semantic_hash": "3f2232858a556acdedd5b3987bd3ae34"
+    "mtime": 1782297914.0383892,
+    "ast_hash": "42050530b0488387dce9bdb8cc7ed158",
+    "semantic_hash": "42050530b0488387dce9bdb8cc7ed158"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\node-modules.md": {
     "mtime": 1779115038.4485354,
@@ -65,9 +65,9 @@
     "semantic_hash": "6b3e6286f063107ba962ec3a2c2fc653"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\obsidian-properties.md": {
-    "mtime": 1779115972.207656,
-    "ast_hash": "1f1533271611ac6752d8287d5bff7290",
-    "semantic_hash": "1f1533271611ac6752d8287d5bff7290"
+    "mtime": 1779118797.4592493,
+    "ast_hash": "0c3f652a618851f1b29888486f7071f1",
+    "semantic_hash": "0c3f652a618851f1b29888486f7071f1"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\obsidian-tags.md": {
     "mtime": 1779115962.046446,
@@ -75,19 +75,19 @@
     "semantic_hash": "c45f456dafe603d749c7cf807ee638cb"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\obsidian.md": {
-    "mtime": 1779115922.25247,
-    "ast_hash": "1ac4c746f9eb5900fcb1505f33ac14a7",
-    "semantic_hash": "1ac4c746f9eb5900fcb1505f33ac14a7"
+    "mtime": 1779118792.0936992,
+    "ast_hash": "f0b9eae29ff9fb091c4f388aa79b975d",
+    "semantic_hash": "f0b9eae29ff9fb091c4f388aa79b975d"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\orm.md": {
-    "mtime": 1779115194.641949,
-    "ast_hash": "38500c978c8fd5843c8a9fe6d4aa63d9",
-    "semantic_hash": "38500c978c8fd5843c8a9fe6d4aa63d9"
+    "mtime": 1779865629.8502183,
+    "ast_hash": "e528af103c92349602651480c2fbc20d",
+    "semantic_hash": "e528af103c92349602651480c2fbc20d"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\prisma.md": {
-    "mtime": 1779115196.0106335,
-    "ast_hash": "2841a25218fc005128cff8fdff78cf2a",
-    "semantic_hash": "2841a25218fc005128cff8fdff78cf2a"
+    "mtime": 1780284085.7098935,
+    "ast_hash": "f6bd24f14de0898fdd6695a90c77c9ca",
+    "semantic_hash": "f6bd24f14de0898fdd6695a90c77c9ca"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\promise.md": {
     "mtime": 1779115225.5705116,
@@ -95,14 +95,14 @@
     "semantic_hash": "d8214ccdfe79e89022f4ab93f7b86889"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\web-clipper.md": {
-    "mtime": 1779115985.0289123,
-    "ast_hash": "cfad8d2e43ee6dfa2af461273cee4e7a",
-    "semantic_hash": "cfad8d2e43ee6dfa2af461273cee4e7a"
+    "mtime": 1780365254.9074867,
+    "ast_hash": "a3c31842afe349f3e969bb68be50287e",
+    "semantic_hash": "a3c31842afe349f3e969bb68be50287e"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\wikilink.md": {
-    "mtime": 1779115933.0072887,
-    "ast_hash": "dafa79349550bbefe23445ed4133891c",
-    "semantic_hash": "dafa79349550bbefe23445ed4133891c"
+    "mtime": 1780365254.813965,
+    "ast_hash": "67c2335870970246f77ba5f8ff4915ce",
+    "semantic_hash": "67c2335870970246f77ba5f8ff4915ce"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\js-async-evolution.md": {
     "mtime": 1779115244.2626915,
@@ -140,13 +140,743 @@
     "semantic_hash": "7ad099fdd99540570b1a7f6c6604888d"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\obsidian-basics-video.md": {
-    "mtime": 1779115907.7699397,
-    "ast_hash": "28c46c960f73d62eb91e851580f6e884",
-    "semantic_hash": "28c46c960f73d62eb91e851580f6e884"
+    "mtime": 1779118799.7575884,
+    "ast_hash": "b1af0fae31fb7e5b804113554ac6a2fb",
+    "semantic_hash": "b1af0fae31fb7e5b804113554ac6a2fb"
   },
   "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\prisma-orm.md": {
     "mtime": 1779114984.8511095,
     "ast_hash": "f47353dca488f563e1f5b57c10f47219",
     "semantic_hash": "f47353dca488f563e1f5b57c10f47219"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\.omc\\state\\idle-notif-cooldown.json": {
+    "mtime": 1783063878.8511412,
+    "ast_hash": "e34c7c668dd488e13ad9fdc3d634d6cc",
+    "semantic_hash": "e34c7c668dd488e13ad9fdc3d634d6cc"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\.omc\\state\\sessions\\ae074234-75a7-46e5-9a07-cff0dc09801c\\pre-tool-advisory-throttle.json": {
+    "mtime": 1783061734.4381545,
+    "ast_hash": "4f785361fb4ab3fd6d0aa73cc3cbf674",
+    "semantic_hash": "4f785361fb4ab3fd6d0aa73cc3cbf674"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\anonymous-class.md": {
+    "mtime": 1779191313.6888878,
+    "ast_hash": "7b19366bf03262e8289c889b4bae4f93",
+    "semantic_hash": "7b19366bf03262e8289c889b4bae4f93"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\aop.md": {
+    "mtime": 1779948951.1778283,
+    "ast_hash": "286a889d394b63147ed2c9e0cbed5247",
+    "semantic_hash": "286a889d394b63147ed2c9e0cbed5247"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\api-response-wrapper.md": {
+    "mtime": 1779779892.678787,
+    "ast_hash": "0fff2e2e37f360a4cd05c898f24a5e8c",
+    "semantic_hash": "0fff2e2e37f360a4cd05c898f24a5e8c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\bean-validation.md": {
+    "mtime": 1781005311.1617908,
+    "ast_hash": "445d6e525e8bae219b4ce610d3040664",
+    "semantic_hash": "445d6e525e8bae219b4ce610d3040664"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\cache-control.md": {
+    "mtime": 1783061573.2910545,
+    "ast_hash": "46bb5d86a43be40d009208eb1f20f5fd",
+    "semantic_hash": "46bb5d86a43be40d009208eb1f20f5fd"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\concurrency-problem.md": {
+    "mtime": 1779156182.8533173,
+    "ast_hash": "7b7a658b2cb0d35e4962bd255a54334d",
+    "semantic_hash": "7b7a658b2cb0d35e4962bd255a54334d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\conditional-request.md": {
+    "mtime": 1783061596.498983,
+    "ast_hash": "e8408906d533dc1b9c58d7d029fa393c",
+    "semantic_hash": "e8408906d533dc1b9c58d7d029fa393c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\connection-pool.md": {
+    "mtime": 1779846537.68256,
+    "ast_hash": "beea02a8f030398bfa99b95d76fecca4",
+    "semantic_hash": "beea02a8f030398bfa99b95d76fecca4"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\container-virtualization.md": {
+    "mtime": 1782297914.03139,
+    "ast_hash": "1a20ca7dfc2ed27e1718a83f299bc96d",
+    "semantic_hash": "1a20ca7dfc2ed27e1718a83f299bc96d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\content-negotiation.md": {
+    "mtime": 1779330600.533012,
+    "ast_hash": "ee640f19034f619c65846605de3f1416",
+    "semantic_hash": "ee640f19034f619c65846605de3f1416"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\cookie.md": {
+    "mtime": 1780837078.5512657,
+    "ast_hash": "1aaf5a667c32abdc93b2488a70c2b422",
+    "semantic_hash": "1aaf5a667c32abdc93b2488a70c2b422"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\cors.md": {
+    "mtime": 1783061490.6122158,
+    "ast_hash": "5d4a290ca6e666200a0e10ff45543725",
+    "semantic_hash": "5d4a290ca6e666200a0e10ff45543725"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\covering-index.md": {
+    "mtime": 1781493307.3193169,
+    "ast_hash": "6740631dd42272d0ff6c3eb083afb685",
+    "semantic_hash": "6740631dd42272d0ff6c3eb083afb685"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\css-selector.md": {
+    "mtime": 1779248102.0169072,
+    "ast_hash": "305c48062611919a523b02492fdd433c",
+    "semantic_hash": "305c48062611919a523b02492fdd433c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\dao-pattern.md": {
+    "mtime": 1779865701.4159362,
+    "ast_hash": "7e070236ac680471b2bb5f2030a9e884",
+    "semantic_hash": "7e070236ac680471b2bb5f2030a9e884"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\database-index.md": {
+    "mtime": 1781493307.3218448,
+    "ast_hash": "9245e45fde4a722e9f499378c92841a3",
+    "semantic_hash": "9245e45fde4a722e9f499378c92841a3"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\ddl-lock.md": {
+    "mtime": 1781493307.323843,
+    "ast_hash": "ca790da4063d610e57b706d190e1eb3e",
+    "semantic_hash": "ca790da4063d610e57b706d190e1eb3e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\dependency-injection.md": {
+    "mtime": 1779330272.6299148,
+    "ast_hash": "5baa29296c31508a89c5f1e3ea952c8c",
+    "semantic_hash": "5baa29296c31508a89c5f1e3ea952c8c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\dispatcher-servlet.md": {
+    "mtime": 1779353043.14346,
+    "ast_hash": "0a56d4c5e6fd6739604fd3b294ddc803",
+    "semantic_hash": "0a56d4c5e6fd6739604fd3b294ddc803"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\docker-container.md": {
+    "mtime": 1782297914.0323906,
+    "ast_hash": "f9df4ca0510ce389995859a8ba8bdc00",
+    "semantic_hash": "f9df4ca0510ce389995859a8ba8bdc00"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\docker-image.md": {
+    "mtime": 1782297914.0343888,
+    "ast_hash": "88ddbec9e581ebbc372957e1911d7de6",
+    "semantic_hash": "88ddbec9e581ebbc372957e1911d7de6"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\docker.md": {
+    "mtime": 1782297914.0353894,
+    "ast_hash": "6eefc313b9d6735e7cb92f594e389108",
+    "semantic_hash": "6eefc313b9d6735e7cb92f594e389108"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\domain.md": {
+    "mtime": 1779353279.1562555,
+    "ast_hash": "142b827ad439e756e32aa0b3f493a4ca",
+    "semantic_hash": "142b827ad439e756e32aa0b3f493a4ca"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\dto-vs-entity.md": {
+    "mtime": 1779780031.751601,
+    "ast_hash": "0b776da12bcda9d7bb6ed45637105a10",
+    "semantic_hash": "0b776da12bcda9d7bb6ed45637105a10"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\embedding.md": {
+    "mtime": 1779781383.662744,
+    "ast_hash": "bfcaa98c75a359fa28f98e62f9eb00dd",
+    "semantic_hash": "bfcaa98c75a359fa28f98e62f9eb00dd"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\entity-manager.md": {
+    "mtime": 1779948930.2679741,
+    "ast_hash": "5b694a5921d3b4aede012fef4e768a02",
+    "semantic_hash": "5b694a5921d3b4aede012fef4e768a02"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\equals-hashcode.md": {
+    "mtime": 1779330852.6578543,
+    "ast_hash": "46a79e646b31ffffc41467b99459b2d0",
+    "semantic_hash": "46a79e646b31ffffc41467b99459b2d0"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\etag.md": {
+    "mtime": 1783061692.5231197,
+    "ast_hash": "34dca9dc4fb4808cd14e1c5623218f21",
+    "semantic_hash": "34dca9dc4fb4808cd14e1c5623218f21"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\explain.md": {
+    "mtime": 1781493307.3258426,
+    "ast_hash": "190ce23da06aab6f3936da8d29dd1832",
+    "semantic_hash": "190ce23da06aab6f3936da8d29dd1832"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\filter.md": {
+    "mtime": 1781086115.1376057,
+    "ast_hash": "53416423dc9020e829f0c6c1a49663f2",
+    "semantic_hash": "53416423dc9020e829f0c6c1a49663f2"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\forward-proxy.md": {
+    "mtime": 1779326653.7042103,
+    "ast_hash": "5e7f382b45b0a9b4678f0bfa9c084156",
+    "semantic_hash": "5e7f382b45b0a9b4678f0bfa9c084156"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\forward-vs-redirect.md": {
+    "mtime": 1779156152.1505008,
+    "ast_hash": "929d751dd5d75e10ad21eb7f1eb3e04a",
+    "semantic_hash": "929d751dd5d75e10ad21eb7f1eb3e04a"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\functional-interface.md": {
+    "mtime": 1779849856.942271,
+    "ast_hash": "a0bc9c7afa2ed583a24d479feb924ec8",
+    "semantic_hash": "a0bc9c7afa2ed583a24d479feb924ec8"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\generics.md": {
+    "mtime": 1779191260.0827498,
+    "ast_hash": "347c9e816f6a045ede16370a1f75eb17",
+    "semantic_hash": "347c9e816f6a045ede16370a1f75eb17"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\gradle.md": {
+    "mtime": 1779330440.22703,
+    "ast_hash": "956fb5f0c9f584f3e54b903446e425d2",
+    "semantic_hash": "956fb5f0c9f584f3e54b903446e425d2"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\hibernate.md": {
+    "mtime": 1779865400.936174,
+    "ast_hash": "51d43c870aa864e1b33041e58e34a607",
+    "semantic_hash": "51d43c870aa864e1b33041e58e34a607"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\high-availability.md": {
+    "mtime": 1779326896.8865771,
+    "ast_hash": "e5c6f1c8ba518a71788438e495618138",
+    "semantic_hash": "e5c6f1c8ba518a71788438e495618138"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\hikaricp.md": {
+    "mtime": 1779846599.5222247,
+    "ast_hash": "d5c7a792ff02c0fa8b436d3f9fa5aa1e",
+    "semantic_hash": "d5c7a792ff02c0fa8b436d3f9fa5aa1e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\horizontal-vs-vertical-scaling.md": {
+    "mtime": 1779326851.811852,
+    "ast_hash": "941089f8366a167c925a07fa07c459e2",
+    "semantic_hash": "941089f8366a167c925a07fa07c459e2"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\http-cache.md": {
+    "mtime": 1783061551.795022,
+    "ast_hash": "3d1d66c152a614dc99bd2f3a839b7e5f",
+    "semantic_hash": "3d1d66c152a614dc99bd2f3a839b7e5f"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\http-method-override.md": {
+    "mtime": 1779330630.8743484,
+    "ast_hash": "89368c921110d80a291692cf1862f248",
+    "semantic_hash": "89368c921110d80a291692cf1862f248"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\http-status-codes.md": {
+    "mtime": 1779779905.2792041,
+    "ast_hash": "c350033f8661666c672576ad7064e6d4",
+    "semantic_hash": "c350033f8661666c672576ad7064e6d4"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\interceptor.md": {
+    "mtime": 1779755455.6707575,
+    "ast_hash": "018d3f1dcd6b90379916420d5b12cfb0",
+    "semantic_hash": "018d3f1dcd6b90379916420d5b12cfb0"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\inversion-of-control.md": {
+    "mtime": 1779330299.8470192,
+    "ast_hash": "fa4a30213452f5a076c5d4907ee21e0d",
+    "semantic_hash": "fa4a30213452f5a076c5d4907ee21e0d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\java-buffer.md": {
+    "mtime": 1779849831.197006,
+    "ast_hash": "312caa425aac0063270aae9c8ace40a3",
+    "semantic_hash": "312caa425aac0063270aae9c8ace40a3"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\java-record.md": {
+    "mtime": 1779330535.6059892,
+    "ast_hash": "80ba6d7b954b939a44b7ae41a3599fff",
+    "semantic_hash": "80ba6d7b954b939a44b7ae41a3599fff"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jdbc.md": {
+    "mtime": 1779846632.7517076,
+    "ast_hash": "d95baaa44cf87c5755e301aae3cd7afb",
+    "semantic_hash": "d95baaa44cf87c5755e301aae3cd7afb"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jpa-association.md": {
+    "mtime": 1780365184.5492494,
+    "ast_hash": "e4636e382ec97d4c549f5be0198dbcb5",
+    "semantic_hash": "e4636e382ec97d4c549f5be0198dbcb5"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jpa-auditing.md": {
+    "mtime": 1781005257.2108076,
+    "ast_hash": "980434de36c69c129334a3f510d541d2",
+    "semantic_hash": "980434de36c69c129334a3f510d541d2"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jpa-entity-mapping.md": {
+    "mtime": 1781005354.6510527,
+    "ast_hash": "7dd1a212f8c5c3bcbf66bc467ec23389",
+    "semantic_hash": "7dd1a212f8c5c3bcbf66bc467ec23389"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jpa.md": {
+    "mtime": 1779869539.1237822,
+    "ast_hash": "511fc00c8862d0d0bdaf6e7e91b9e24d",
+    "semantic_hash": "511fc00c8862d0d0bdaf6e7e91b9e24d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jpql.md": {
+    "mtime": 1782297914.0363903,
+    "ast_hash": "17ce7fe901290531d1474da3d93a4558",
+    "semantic_hash": "17ce7fe901290531d1474da3d93a4558"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jsp.md": {
+    "mtime": 1779181234.151697,
+    "ast_hash": "ccb94a9c9c368e0bab97ea9552deeec8",
+    "semantic_hash": "ccb94a9c9c368e0bab97ea9552deeec8"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jstl-el.md": {
+    "mtime": 1779181135.7701385,
+    "ast_hash": "71dbc6c18e5e62392f6ff1d7f1deb6af",
+    "semantic_hash": "71dbc6c18e5e62392f6ff1d7f1deb6af"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jvm-memory.md": {
+    "mtime": 1779849868.9703267,
+    "ast_hash": "21282b195da8716d1cbe97e2dbe6d66b",
+    "semantic_hash": "21282b195da8716d1cbe97e2dbe6d66b"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jwt-claims.md": {
+    "mtime": 1781085898.8359308,
+    "ast_hash": "bc588ceeb0273efcae878ade5fc427a5",
+    "semantic_hash": "bc588ceeb0273efcae878ade5fc427a5"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\jwt.md": {
+    "mtime": 1781086115.1366057,
+    "ast_hash": "8fcb83cef4324745f4435e95c826e885",
+    "semantic_hash": "8fcb83cef4324745f4435e95c826e885"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\lambda.md": {
+    "mtime": 1779191295.97416,
+    "ast_hash": "7e9aef4a5b4fcbb4e7e3a8eb96d93d9e",
+    "semantic_hash": "7e9aef4a5b4fcbb4e7e3a8eb96d93d9e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\llm-wiki-pattern.md": {
+    "mtime": 1779781450.1780775,
+    "ast_hash": "88352d31b055ef1a5891c0e19a5fe4f1",
+    "semantic_hash": "88352d31b055ef1a5891c0e19a5fe4f1"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\load-balancer.md": {
+    "mtime": 1779326747.0596507,
+    "ast_hash": "83fd66c0698461292c457c14dfd7d949",
+    "semantic_hash": "83fd66c0698461292c457c14dfd7d949"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\load-balancing-algorithm.md": {
+    "mtime": 1779326787.0248423,
+    "ast_hash": "4afc14f0bf97fcd2b143319f3259c15c",
+    "semantic_hash": "4afc14f0bf97fcd2b143319f3259c15c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\lombok.md": {
+    "mtime": 1781073528.7482407,
+    "ast_hash": "9217600b5a2f1635fd17c7401ab6d3b7",
+    "semantic_hash": "9217600b5a2f1635fd17c7401ab6d3b7"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\markdown.md": {
+    "mtime": 1779118787.543998,
+    "ast_hash": "dc0d9da5bf1fc60695f4c8056ae3ed73",
+    "semantic_hash": "dc0d9da5bf1fc60695f4c8056ae3ed73"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\maven.md": {
+    "mtime": 1779330415.8387113,
+    "ast_hash": "32bb688ed0f327c12134a9f4c71b120b",
+    "semantic_hash": "32bb688ed0f327c12134a9f4c71b120b"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\mutable-immutable.md": {
+    "mtime": 1779330826.629387,
+    "ast_hash": "ae293b1eeb212a3da89a57bacbbd576c",
+    "semantic_hash": "ae293b1eeb212a3da89a57bacbbd576c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\mvc-pattern.md": {
+    "mtime": 1779353442.990126,
+    "ast_hash": "06fc6583d7e8808971c799f24df3d46a",
+    "semantic_hash": "06fc6583d7e8808971c799f24df3d46a"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\mybatis.md": {
+    "mtime": 1779865644.2842038,
+    "ast_hash": "89948df5b0c9e00fa6acd3b1d67aed4c",
+    "semantic_hash": "89948df5b0c9e00fa6acd3b1d67aed4c"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\nginx.md": {
+    "mtime": 1779326975.2761762,
+    "ast_hash": "0dd9fe81e3251010f2b696e3a9d2de3f",
+    "semantic_hash": "0dd9fe81e3251010f2b696e3a9d2de3f"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\once-per-request-filter.md": {
+    "mtime": 1782297914.0393896,
+    "ast_hash": "2fe6216a2e2e12cd34bae2b3be95440d",
+    "semantic_hash": "2fe6216a2e2e12cd34bae2b3be95440d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\optimistic-pessimistic-lock.md": {
+    "mtime": 1782298246.27396,
+    "ast_hash": "d1d5b91d3385307701d5f777f8d0cfb8",
+    "semantic_hash": "d1d5b91d3385307701d5f777f8d0cfb8"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\persistence-context.md": {
+    "mtime": 1779871265.7412138,
+    "ast_hash": "e8579c7864ecea2ecfafd56183282eb6",
+    "semantic_hash": "e8579c7864ecea2ecfafd56183282eb6"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\pi.md": {
+    "mtime": 1779860520.2241483,
+    "ast_hash": "bb5d9f9356fc94635e67dd7a5992bb75",
+    "semantic_hash": "bb5d9f9356fc94635e67dd7a5992bb75"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\pojo.md": {
+    "mtime": 1779330396.896679,
+    "ast_hash": "447b6728f8d5bf46d835aa401568483b",
+    "semantic_hash": "447b6728f8d5bf46d835aa401568483b"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\preflight-request.md": {
+    "mtime": 1783061512.329298,
+    "ast_hash": "57f5fd86a340a34bc06b4d0297bc2a07",
+    "semantic_hash": "57f5fd86a340a34bc06b4d0297bc2a07"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\prg-pattern.md": {
+    "mtime": 1779156164.9726236,
+    "ast_hash": "8fb9b4b9ad6ddf5b65340945fd31b4b9",
+    "semantic_hash": "8fb9b4b9ad6ddf5b65340945fd31b4b9"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\proxy.md": {
+    "mtime": 1779851075.3856297,
+    "ast_hash": "1888d4f25e0e3f9ea9074c74f8b20cc3",
+    "semantic_hash": "1888d4f25e0e3f9ea9074c74f8b20cc3"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\querydsl.md": {
+    "mtime": 1780364428.0065353,
+    "ast_hash": "c846599dcd7a4df023c91a007c452e2b",
+    "semantic_hash": "c846599dcd7a4df023c91a007c452e2b"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\rag.md": {
+    "mtime": 1779781356.1285458,
+    "ast_hash": "2fc5980cf5f56ec98d93fc271ca64e39",
+    "semantic_hash": "2fc5980cf5f56ec98d93fc271ca64e39"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\restful-api.md": {
+    "mtime": 1779780019.63551,
+    "ast_hash": "d22126bcbd98b3eacf8b7d58c1d5dbb6",
+    "semantic_hash": "d22126bcbd98b3eacf8b7d58c1d5dbb6"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\reverse-proxy.md": {
+    "mtime": 1779326686.4867907,
+    "ast_hash": "53f885ddfcd6cb615a407c64e3f47989",
+    "semantic_hash": "53f885ddfcd6cb615a407c64e3f47989"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\same-origin-policy.md": {
+    "mtime": 1783061458.228534,
+    "ast_hash": "76bea75dd749ae931486d6fffcd36ce3",
+    "semantic_hash": "76bea75dd749ae931486d6fffcd36ce3"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\security-context.md": {
+    "mtime": 1781085898.8369331,
+    "ast_hash": "2c722a8e03556351e850811675239734",
+    "semantic_hash": "2c722a8e03556351e850811675239734"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\serialization.md": {
+    "mtime": 1780837154.3259966,
+    "ast_hash": "cc3c777c57bfdde54ef5d59767f7be50",
+    "semantic_hash": "cc3c777c57bfdde54ef5d59767f7be50"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\servlet-container.md": {
+    "mtime": 1779849888.0050116,
+    "ast_hash": "7157ac13951a3cb710ae70e236be1960",
+    "semantic_hash": "7157ac13951a3cb710ae70e236be1960"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\servlet-lifecycle.md": {
+    "mtime": 1779156066.6159852,
+    "ast_hash": "32636acc8343a32737cd18e4ab4ad365",
+    "semantic_hash": "32636acc8343a32737cd18e4ab4ad365"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\servlet-spec.md": {
+    "mtime": 1779755422.7572165,
+    "ast_hash": "0622aa8db3561d0644ebb6933b7740f9",
+    "semantic_hash": "0622aa8db3561d0644ebb6933b7740f9"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\servlet.md": {
+    "mtime": 1779849882.0295362,
+    "ast_hash": "2a74c241f6b7e5105cb93c064b2d7537",
+    "semantic_hash": "2a74c241f6b7e5105cb93c064b2d7537"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\session-auth.md": {
+    "mtime": 1780837098.4025133,
+    "ast_hash": "f66bd0b996fa1b30d687be713ad29a6e",
+    "semantic_hash": "f66bd0b996fa1b30d687be713ad29a6e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\short-circuit.md": {
+    "mtime": 1779849843.367908,
+    "ast_hash": "32e402a9581c24ff18e2a3c9fb077362",
+    "semantic_hash": "32e402a9581c24ff18e2a3c9fb077362"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\solid-principles.md": {
+    "mtime": 1779330368.9434564,
+    "ast_hash": "591d66bd07e82ca1d0e8ba2a6dd18c9e",
+    "semantic_hash": "591d66bd07e82ca1d0e8ba2a6dd18c9e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\spring-annotations.md": {
+    "mtime": 1781086528.3847115,
+    "ast_hash": "e2548322f1c21f83f39e2ed00a9fd3ab",
+    "semantic_hash": "e2548322f1c21f83f39e2ed00a9fd3ab"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\spring-bean.md": {
+    "mtime": 1779330795.2642488,
+    "ast_hash": "61f6aff9ae7942899e0289ca52503852",
+    "semantic_hash": "61f6aff9ae7942899e0289ca52503852"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\spring-boot.md": {
+    "mtime": 1779846660.8977985,
+    "ast_hash": "5f36b33a230d81c776617ad0a589aea4",
+    "semantic_hash": "5f36b33a230d81c776617ad0a589aea4"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\spring-data-jpa.md": {
+    "mtime": 1782297914.0423894,
+    "ast_hash": "a256b0117b58f512799269ec1d75443f",
+    "semantic_hash": "a256b0117b58f512799269ec1d75443f"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\spring-framework.md": {
+    "mtime": 1779948965.3180263,
+    "ast_hash": "51568572dbcb22d3011e9f410b81b37f",
+    "semantic_hash": "51568572dbcb22d3011e9f410b81b37f"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\spring-security.md": {
+    "mtime": 1782297914.0433903,
+    "ast_hash": "c256a7c0b46065d3022c9a5685b2350d",
+    "semantic_hash": "c256a7c0b46065d3022c9a5685b2350d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\static-keyword.md": {
+    "mtime": 1779191141.2174673,
+    "ast_hash": "dd326c095f3bb87f0082c03ce05f4db3",
+    "semantic_hash": "dd326c095f3bb87f0082c03ce05f4db3"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\string-pool.md": {
+    "mtime": 1779191208.082233,
+    "ast_hash": "25b7e2688251d79f254c678066cbe614",
+    "semantic_hash": "25b7e2688251d79f254c678066cbe614"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\swagger-oas.md": {
+    "mtime": 1782297914.0443895,
+    "ast_hash": "fa6080ca1ec7f565356dff0af66d90c3",
+    "semantic_hash": "fa6080ca1ec7f565356dff0af66d90c3"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\three-tier-architecture.md": {
+    "mtime": 1779780023.986189,
+    "ast_hash": "68b1b3762c4d48d7db029aee3e5b10ff",
+    "semantic_hash": "68b1b3762c4d48d7db029aee3e5b10ff"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\transaction-propagation.md": {
+    "mtime": 1779948449.56666,
+    "ast_hash": "36c902fde1449d059187bd49ebd2efc7",
+    "semantic_hash": "36c902fde1449d059187bd49ebd2efc7"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\transaction.md": {
+    "mtime": 1779948941.3761535,
+    "ast_hash": "0bad8d75ba3d4a5d6e768faee5e16a74",
+    "semantic_hash": "0bad8d75ba3d4a5d6e768faee5e16a74"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\concepts\\vector-database.md": {
+    "mtime": 1779781414.847593,
+    "ast_hash": "cea2ff50cf1840cd512c0745e6b36b54",
+    "semantic_hash": "cea2ff50cf1840cd512c0745e6b36b54"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\anonymous-class-to-lambda.md": {
+    "mtime": 1779191332.1431293,
+    "ast_hash": "5713dbbeabaeb5c1f6b2040207ff7585",
+    "semantic_hash": "5713dbbeabaeb5c1f6b2040207ff7585"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\browser-cache-flow.md": {
+    "mtime": 1783061622.7308242,
+    "ast_hash": "6f3484d5e2dafd7e2b191aa7050f2352",
+    "semantic_hash": "6f3484d5e2dafd7e2b191aa7050f2352"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\cookie-session-jwt.md": {
+    "mtime": 1780837173.8049629,
+    "ast_hash": "d6608f9ca9b17644a8ece4edd05bc586",
+    "semantic_hash": "d6608f9ca9b17644a8ece4edd05bc586"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\filter-vs-interceptor.md": {
+    "mtime": 1779755466.6799283,
+    "ast_hash": "da8e0827d4b6e13bd51900b419b29fa6",
+    "semantic_hash": "da8e0827d4b6e13bd51900b419b29fa6"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\manual-di-to-spring-ioc.md": {
+    "mtime": 1779330756.6475668,
+    "ast_hash": "daf2eb7352185da11493d0cfd4afdb7d",
+    "semantic_hash": "daf2eb7352185da11493d0cfd4afdb7d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\mybatis-to-jpa.md": {
+    "mtime": 1779865607.0878334,
+    "ast_hash": "a85ddd590cb81c671af14a75e54a3705",
+    "semantic_hash": "a85ddd590cb81c671af14a75e54a3705"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\rag-vs-llm-wiki.md": {
+    "mtime": 1779781486.9793239,
+    "ast_hash": "3ca9fc8ab08ae3d4ecf32583c78eff91",
+    "semantic_hash": "3ca9fc8ab08ae3d4ecf32583c78eff91"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\scaling-a-web-app.md": {
+    "mtime": 1779327054.8810797,
+    "ast_hash": "41d236bd7f25854d9eb3202d2d925b6b",
+    "semantic_hash": "41d236bd7f25854d9eb3202d2d925b6b"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\servlet-to-spring-mvc.md": {
+    "mtime": 1779353458.3132744,
+    "ast_hash": "8e2273c49bd84c2658321389fa4fb5aa",
+    "semantic_hash": "8e2273c49bd84c2658321389fa4fb5aa"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\spring-mvc-request-flow.md": {
+    "mtime": 1779353123.843361,
+    "ast_hash": "74fe1b742b4200581a44730506cc67ac",
+    "semantic_hash": "74fe1b742b4200581a44730506cc67ac"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\spring-security-jwt-auth-flow.md": {
+    "mtime": 1781085898.8399305,
+    "ast_hash": "22fb5e9713c3a9b5a93cef83c1ada3a2",
+    "semantic_hash": "22fb5e9713c3a9b5a93cef83c1ada3a2"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\flows\\spring-security-register-flow.md": {
+    "mtime": 1781005331.3334756,
+    "ast_hash": "7f953d63c3c0a394a63f54db63fe6e2f",
+    "semantic_hash": "7f953d63c3c0a394a63f54db63fe6e2f"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\authentication-note.md": {
+    "mtime": 1780837065.2699592,
+    "ast_hash": "242987c768f873425b04f40c4182b4b0",
+    "semantic_hash": "242987c768f873425b04f40c4182b4b0"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\browser-cache-article.md": {
+    "mtime": 1783061664.897483,
+    "ast_hash": "db9734363c08df2a50c7630280a4f533",
+    "semantic_hash": "db9734363c08df2a50c7630280a4f533"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\cors-article.md": {
+    "mtime": 1783061645.644042,
+    "ast_hash": "00fec349c444a2bfdea79f158a0ca923",
+    "semantic_hash": "00fec349c444a2bfdea79f158a0ca923"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\ddl-trap.md": {
+    "mtime": 1781493307.3338418,
+    "ast_hash": "139923fa8d02b09dbd0ea665633c75bd",
+    "semantic_hash": "139923fa8d02b09dbd0ea665633c75bd"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\docker-note.md": {
+    "mtime": 1782297914.0493898,
+    "ast_hash": "3ba1d72bd8888e58569aa3e4bab8b00a",
+    "semantic_hash": "3ba1d72bd8888e58569aa3e4bab8b00a"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\equals-hashcode-note.md": {
+    "mtime": 1779191362.4377544,
+    "ast_hash": "47d973da682b058d9d0c5d3bda05bed7",
+    "semantic_hash": "47d973da682b058d9d0c5d3bda05bed7"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\functional-interface-table.md": {
+    "mtime": 1779191400.6735535,
+    "ast_hash": "f0b6e03f46ca346fca8c42288d5ff90f",
+    "semantic_hash": "f0b6e03f46ca346fca8c42288d5ff90f"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\generics-lambda-note.md": {
+    "mtime": 1779191411.1419458,
+    "ast_hash": "603b073fbadd59b6d94697990cb3dc17",
+    "semantic_hash": "603b073fbadd59b6d94697990cb3dc17"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\index-trap.md": {
+    "mtime": 1781493307.335845,
+    "ast_hash": "dfe6efb1680a98e32d846d9e876886d4",
+    "semantic_hash": "dfe6efb1680a98e32d846d9e876886d4"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\index-what-is-it.md": {
+    "mtime": 1781493307.3378417,
+    "ast_hash": "4068168a6f8c2d2310f7ec1fef6518ae",
+    "semantic_hash": "4068168a6f8c2d2310f7ec1fef6518ae"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\java-buffer-note.md": {
+    "mtime": 1779191383.160991,
+    "ast_hash": "504f720dc692b5deb101809e23de54d9",
+    "semantic_hash": "504f720dc692b5deb101809e23de54d9"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\jpa-lecture.md": {
+    "mtime": 1779865339.0024443,
+    "ast_hash": "34bd632f16c0255f4440624a5a8804d3",
+    "semantic_hash": "34bd632f16c0255f4440624a5a8804d3"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\jvm-memory-note.md": {
+    "mtime": 1779191346.2584205,
+    "ast_hash": "23c3dbf0761540ff0a8543ee15b225c1",
+    "semantic_hash": "23c3dbf0761540ff0a8543ee15b225c1"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\load-balancing-video.md": {
+    "mtime": 1779326574.617285,
+    "ast_hash": "3c9fd59342a1480d68c908737ff1a0cc",
+    "semantic_hash": "3c9fd59342a1480d68c908737ff1a0cc"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\mutable-immutable-note.md": {
+    "mtime": 1779191374.5923264,
+    "ast_hash": "d4dbfbdb86b9e0f208c938ddbb7ec606",
+    "semantic_hash": "d4dbfbdb86b9e0f208c938ddbb7ec606"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\mybatis-practice-debugging.md": {
+    "mtime": 1779779955.1481953,
+    "ast_hash": "160dd423f7ae9659670155894c474272",
+    "semantic_hash": "160dd423f7ae9659670155894c474272"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\pi-dialogue.md": {
+    "mtime": 1779860489.0707736,
+    "ast_hash": "64441d0e4539fe9d121ffbffd9dff20d",
+    "semantic_hash": "64441d0e4539fe9d121ffbffd9dff20d"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\proxy-forward-reverse-video.md": {
+    "mtime": 1779326532.9897032,
+    "ast_hash": "505d6e6b746653d23885f46fdf7293cf",
+    "semantic_hash": "505d6e6b746653d23885f46fdf7293cf"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\querydsl-reference-guide.md": {
+    "mtime": 1780364352.7055612,
+    "ast_hash": "9760deb2a11ae16f9ebd350a23643f0a",
+    "semantic_hash": "9760deb2a11ae16f9ebd350a23643f0a"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\servlet-jdbc-debugging.md": {
+    "mtime": 1779181199.158118,
+    "ast_hash": "a341ec9410c20a65e88d6c2b3cfa5b3a",
+    "semantic_hash": "a341ec9410c20a65e88d6c2b3cfa5b3a"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\servlet-jsp-dialogue.md": {
+    "mtime": 1779156002.6710398,
+    "ast_hash": "ce05299c75f0943c95526a22552e3289",
+    "semantic_hash": "ce05299c75f0943c95526a22552e3289"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\short-circuit-note.md": {
+    "mtime": 1779191390.6399984,
+    "ast_hash": "1d203f4a11a81a2cd7d57cde18ef47dc",
+    "semantic_hash": "1d203f4a11a81a2cd7d57cde18ef47dc"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\spring-component-di-security-dialogue.md": {
+    "mtime": 1781073425.6138906,
+    "ast_hash": "4a728980dfd7657f308d314b28222ed5",
+    "semantic_hash": "4a728980dfd7657f308d314b28222ed5"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\spring-framework-1-note.md": {
+    "mtime": 1779330209.4661262,
+    "ast_hash": "3b16730ba078b9803d79b747ae28c44e",
+    "semantic_hash": "3b16730ba078b9803d79b747ae28c44e"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\spring-transaction-proxy-dialogue.md": {
+    "mtime": 1779948337.3733716,
+    "ast_hash": "f7320156a726402e1a9d8f0919449bbd",
+    "semantic_hash": "f7320156a726402e1a9d8f0919449bbd"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\static-note.md": {
+    "mtime": 1779191354.3459535,
+    "ast_hash": "1419af124ae904a26baebb7e0b677bbb",
+    "semantic_hash": "1419af124ae904a26baebb7e0b677bbb"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\virtuber-spring-work-2026-06-21.md": {
+    "mtime": 1782297914.0513892,
+    "ast_hash": "62ebec74b2cf04b004c70b59d300f447",
+    "semantic_hash": "62ebec74b2cf04b004c70b59d300f447"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\zeroverse-spring-practice.md": {
+    "mtime": 1781005232.993968,
+    "ast_hash": "2a99adf31d934cc4e3073cbfebd68be6",
+    "semantic_hash": "2a99adf31d934cc4e3073cbfebd68be6"
+  },
+  "C:\\Users\\PC\\Desktop\\NoteWiki\\wiki\\sources\\zeroverse-spring-security-jwt-dialogue.md": {
+    "mtime": 1781085898.834932,
+    "ast_hash": "7e84400f218d68f858dd4a5da502d466",
+    "semantic_hash": "7e84400f218d68f858dd4a5da502d466"
   }
 }
