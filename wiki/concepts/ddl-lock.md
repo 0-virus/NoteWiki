@@ -124,5 +124,15 @@ pt-online-schema-change \
 - [ ] 대용량 테이블이면 pt-osc 또는 Online DDL 사용
 - [ ] 복제 구조가 있다면 Replication Lag 모니터링
 
+## 그래서 DDL은 누가 실행하는가
+
+위 체크리스트는 "사람이 콘솔에서 DDL을 친다"는 전제를 깔고 있다. 실무에서는 그 전제 자체를 바꾼다 —
+DDL을 **버전 관리되는 스크립트**로 만들어 배포 파이프라인이 실행하게 한다.
+
+- [[database-migration]] — DB 스키마도 코드처럼 형상 관리한다는 발상
+- [[flyway]] — 그 대표 구현. 단, **Flyway는 실행 순서를 보장할 뿐 무중단을 보장하지 않는다.** 이 페이지의 락 문제는 그대로 남는다
+- [[hibernate-ddl-auto]] — 반대로 Hibernate가 임의 시점에 DDL을 던지게 두면 락을 통제할 수단조차 없다
+- [[entity-to-production-schema]] — 엔티티 변경이 이 락 구간까지 도달하는 전체 경로
+
 → [[database-index]] — 인덱스 DDL(`CREATE INDEX`, `DROP INDEX`)도 동일한 락 문제 적용
 → [[transaction]] — 트랜잭션을 오래 열어두면 DDL 차단 원인이 됨

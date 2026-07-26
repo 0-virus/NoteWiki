@@ -49,9 +49,19 @@ Hibernate는 JPA 표준을 넘는 자체 기능도 제공한다(예: `@Type`, �
 표준만 쓰면 이식성이 좋고, Hibernate 전용 기능을 쓰면 강력하지만 구현체에 묶인다 —
 [[orm]]의 추상화 트레이드오프가 여기서도 반복된다.
 
+## 스키마 자동 생성 — 편리함의 경계
+
+Hibernate는 엔티티 매핑을 보고 DDL을 만들어낼 수 있다(`spring.jpa.hibernate.ddl-auto`).
+로컬 개발에서는 강력하지만, **운영에서는 쓰지 않는다** — 무엇이 실행될지 예측·리뷰할 수 없고 이력도 남지 않기 때문.
+운영에서는 `validate`로 감시자 역할만 시키고, 스키마 변경은 [[flyway]] 같은
+[[database-migration|마이그레이션]] 도구에 맡긴다.
+
+→ 상세: [[hibernate-ddl-auto]]
+
 ## 관련 페이지
 
 - [[jpa]] — Hibernate가 구현하는 표준 명세
+- [[hibernate-ddl-auto]] — Hibernate의 스키마 자동 생성 설정과 그 한계
 - [[orm]] — Hibernate가 속한 기술 카테고리
 - [[spring-data-jpa]] — Hibernate를 기본 구현체로 끌어다 쓰는 Spring 추상화
 - [[jdbc]] — "표준 인터페이스 + 교체 가능한 구현"이라는 동일 구조의 선례

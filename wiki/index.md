@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-07-03 (ingest: CORS 개념·해결법 + 브라우저 Cache 전략 아티클 2건)_
+_Last updated: 2026-07-26 (ingest: Flyway DB 마이그레이션 + 테스트 커버리지 기준 아티클 2건)_
 
 ---
 
@@ -63,6 +63,9 @@ _Last updated: 2026-07-03 (ingest: CORS 개념·해결법 + 브라우저 Cache �
 - [[jpql]] — 엔티티 대상 객체 지향 쿼리, Criteria·QueryDSL·Native SQL 보완
 - [[querydsl]] — 타입 세이프 쿼리 빌더, QType + JPAQueryFactory + BooleanBuilder로 동적 쿼리
 - [[optimistic-pessimistic-lock]] — 낙관적(@Version) vs 비관적(@Lock) 락, 데드락 해결 4가지, ETag 연결
+- [[database-migration]] — DB 스키마도 Git처럼 버전 관리, 환경 간 스키마 드리프트를 없애는 발상
+- [[flyway]] — 대표 마이그레이션 툴, flyway_schema_history 장부·V/U/R 파일명 규칙·체크섬 규율
+- [[hibernate-ddl-auto]] — 엔티티→테이블 자동 생성 설정, `update`가 운영에서 금기인 이유와 `validate` 조합
 
 ### Java / 언어 기초
 - [[jvm-memory]] — Method Area / Heap / Stack 3대 메모리 영역
@@ -139,6 +142,10 @@ _Last updated: 2026-07-03 (ingest: CORS 개념·해결법 + 브라우저 Cache �
 - [[maven]] — XML 기반 Java 빌드 도구, `pom.xml`
 - [[gradle]] — Groovy 기반 Java 빌드 도구, `build.gradle`
 
+### 테스트 / 품질
+- [[test-coverage]] — Line vs Branch 커버리지, 100%가 버그 없음을 뜻하지 않는 이유, 등급별 임계치
+- [[jacoco]] — Java 커버리지 측정(바이트코드 계측), 리포트의 노란 줄, 빌드 실패로 기준 강제
+
 ### Spring / 웹·아키텍처
 - [[three-tier-architecture]] — Web/Service/Repository 계층, MVC와 다른 축
 - [[dto-vs-entity]] — 운반체와 도메인 본체의 분리
@@ -178,6 +185,7 @@ _Last updated: 2026-07-03 (ingest: CORS 개념·해결법 + 브라우저 Cache �
 - [[cookie-session-jwt]] — 쿠키 → 세션 → JWT 인증 발전 흐름, Spring 구현 위치까지
 - [[spring-security-register-flow]] — SecurityConfig → Controller(@Valid) → Service(BCrypt) → Repository 회원가입 전체 파이프라인
 - [[spring-security-jwt-auth-flow]] - login verification, Access Token issue, JWT filter, SecurityContext, AuthorizationFilter flow
+- [[entity-to-production-schema]] — 엔티티 수정 → ddl-auto → 마이그레이션 스크립트 → 배포 → ALTER TABLE 락까지 전체 경로
 
 ## 소스 (Sources) — `sources/`
 
@@ -216,12 +224,14 @@ _Last updated: 2026-07-03 (ingest: CORS 개념·해결법 + 브라우저 Cache �
 - [[docker-note]] — `raw/notes/docker.md` (Docker 입문 독학 노트 — 컨테이너 가상화·구성 요소·이미지·컨테이너)
 - [[cors-article]] — `raw/notes/🌐 악명 높은 CORS 개념 & 해결법…` (Inpa 블로그, SOP·CORS 3시나리오·해결법)
 - [[browser-cache-article]] — `raw/notes/🌐 웹 브라우저의 Cache 전략 & 헤더 다루기…` (Inpa 블로그, Cache-Control·검증·프록시 캐시)
+- [[flyway-article]] — `raw/articles/Flyway 란 무엇일까.md` (코냥이 블로그, DB 형상 관리·동작 3단계·파일명 규칙·Spring 적용)
+- [[coverage-standard]] — `raw/articles/커버리지 기준.md` (Line vs Branch 커버리지, JaCoCo·Vitest 임계치 기준)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 122
-- 흐름 페이지: 15
-- 소스 페이지: 34
-- 통합한 원본 수: 34
+- 개념 페이지: 127
+- 흐름 페이지: 16
+- 소스 페이지: 36
+- 통합한 원본 수: 36

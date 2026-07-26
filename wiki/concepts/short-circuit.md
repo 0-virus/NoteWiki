@@ -50,8 +50,23 @@ i != 0 && console.log(5 / i);   // ✅ 동작 (아무것도 출력 안 함)
 > 그럴 바엔 그냥 `if` 문을 쓰는 게 낫다. **언어마다 "식(expression)"의 규칙이 다르다**는
 > 점이 핵심 교훈.
 
+## 뜻밖의 등장 — 테스트 커버리지
+
+쇼트 서킷은 성능 최적화이자 방어 패턴이지만, **테스트 품질 측정에서는 사각지대를 만든다.**
+
+```java
+if (user.isVip() && user.getOrderCount() > 10) { ... }
+```
+
+`isVip()`가 `false`면 뒤 조건은 **평가조차 되지 않는다** → 그 경로엔 실행 흔적이 안 찍힌다.
+그래서 이 줄이 "실행됨(초록)"으로 보이더라도, 안에 있는 분기 조합 4가지 중 절반만 검증됐을 수 있다.
+**Line Coverage 100%인데 Branch Coverage는 50%** 인 상황이 정확히 이 원리에서 나온다.
+
+→ [[test-coverage]] (Line vs Branch) · [[jacoco]] (리포트의 노란 줄이 이 상태)
+
 ## 관련 페이지
 
+- [[test-coverage]] — `&&`의 단축 평가가 Branch Coverage 사각지대를 만드는 원리
 - [[functional-interface]] — `Predicate.and()` / `Predicate.or()`는 쁜순회로 단라 평가를 구현. `Predicate<T> and(Predicate<? super T> other)`는 `this.test()`가 false면 other를 호출 안 함
 - [[lambda]] — Predicate 람다를 수식으로 쓸 때 실질적으로 숥토회로로 동작
 - [[javascript-async]] — JS에서 `&&`를 조건식려놅기(가등실행)로 웰용하는 패턴 (이 페이지 Java vs JS 유사 하지만 다른 점)

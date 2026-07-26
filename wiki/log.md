@@ -706,3 +706,30 @@ Daker-server 프로젝트를 강의 복습 중 재점검하며 나온 8턴 대�
   - [[http-cache]] public 캐시 ↔ [[proxy]]·[[reverse-proxy]] (CDN)
   - [[cors]] 서버 처리 ↔ [[filter]]·[[spring-security]]·[[proxy]]
 - **보류(TODO)**: CSRF·XSS 독립 페이지 없음(일반 텍스트 처리), CORS 보안 취약점 가이드·크롬 PNA·캐시로 인한 CORS 에러(심화, 원본에서 외부 링크만)
+
+## [2026-07-26] ingest | Flyway DB 마이그레이션 + 테스트 커버리지 기준 (아티클 2건)
+
+- **원본**: `raw/articles/Flyway 란 무엇일까.md` (코냥이, tistory), `raw/articles/커버리지 기준.md` (SonarQube 기준 문서)
+- **맥락**: Flyway = 개인 Spring 프로젝트 배포 대비 / 커버리지 = 검증 축의 첫 페이지. 공통 목표는 "기존 위키와 연결" (인터뷰 모드)
+- **신규 개념(5)**:
+  - [[database-migration]] — DB 형상 관리, 환경별 스키마 드리프트, "상태를 DB 자신이 기록한다"는 원리
+  - [[flyway]] — flyway_schema_history 장부, V/U/R 3타입, 파일명 규칙(언더스코어 2개), 체크섬 불변 규율
+  - [[hibernate-ddl-auto]] — 5가지 옵션, `update`가 운영에서 금기인 5가지 이유, `validate` + Flyway 조합
+  - [[test-coverage]] — Line vs Branch, 100%가 버그 없음을 뜻하지 않는 이유(비대칭성), 결함 파급력별 등급
+  - [[jacoco]] — 바이트코드 계측 원리, report vs verification 태스크 분리, 노란 줄, New Code Coverage
+- **신규 흐름(1)**: [[entity-to-production-schema]] — 엔티티 수정 → ddl-auto → 마이그레이션 스크립트 → validate 전환 → 배포 → ALTER TABLE 락 → validate 검증
+- **신규 소스(2)**: [[flyway-article]], [[coverage-standard]]
+- **보강**:
+  - [[ddl-lock]] — "그래서 DDL은 누가 실행하는가" 섹션 추가, Flyway는 순서만 보장하고 무중단은 보장하지 않음을 명시
+  - [[hibernate]] — 스키마 자동 생성의 경계 섹션 추가
+  - [[short-circuit]] — "뜻밖의 등장: 테스트 커버리지" 섹션 추가 (&&의 단축 평가가 Branch 사각지대를 만드는 원리)
+  - [[gradle]] — 태스크(Task) 섹션 추가, 빌드 실패로 품질 기준을 강제하는 지점
+- **핵심 교차 연결**:
+  - [[flyway]] → [[ddl-lock]] (마이그레이션도 결국 ALTER TABLE — 실행 순서 ≠ 무중단)
+  - [[hibernate-ddl-auto]] ↔ [[flyway]] (두 주체가 스키마를 두고 싸우는 문제 → validate로 역할 분리)
+  - [[short-circuit]] → [[test-coverage]] (Java 연산자 개념이 테스트 품질 맥락에서 재등장 — 위키가 가지를 뻗은 사례)
+  - [[test-coverage]] → [[spring-security]]·[[jwt]]·[[jpa-auditing]] (100% 기준을 요구하는 영역)
+  - [[test-coverage]] → [[solid-principles]] (커버리지 기준이 분기 분할 = SRP 리팩터링 압력으로 작동)
+  - [[gradle]] → [[jacoco]]·[[flyway]] (두 소스가 같은 빌드 도구에서 만남)
+- **보류(TODO)**: Liquibase(Flyway 대안) 독립 페이지 미작성 — 실제 비교 검토 시점에 생성. SonarQube·Vitest도 일반 텍스트로만 언급
+- **범위 판단**: 커버리지 원본 URL은 사내 SonarQube지만 내용이 Line/Branch 일반 개념 + 통용 관행이라 NoteWiki에 수록 (영균 확인). 회사 고유 규칙·시스템 정보는 미수록
