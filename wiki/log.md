@@ -733,3 +733,33 @@ Daker-server 프로젝트를 강의 복습 중 재점검하며 나온 8턴 대�
   - [[gradle]] → [[jacoco]]·[[flyway]] (두 소스가 같은 빌드 도구에서 만남)
 - **보류(TODO)**: Liquibase(Flyway 대안) 독립 페이지 미작성 — 실제 비교 검토 시점에 생성. SonarQube·Vitest도 일반 텍스트로만 언급
 - **범위 판단**: 커버리지 원본 URL은 사내 SonarQube지만 내용이 Line/Branch 일반 개념 + 통용 관행이라 NoteWiki에 수록 (영균 확인). 회사 고유 규칙·시스템 정보는 미수록
+
+## [2026-07-28] ingest | Outbox 패턴 + 스레드 기초 (필기 2건)
+
+- **원본**: `raw/notes/Outbox_패턴_상세_설명.md`, `raw/notes/스레드_개념_기초부터_실무까지.md`
+- **맥락**: 영균이 **금융솔루션 회사에 입사**. Outbox는 실무(배치 실행 시 외부 API 요청과
+  내부 시스템 간 정합성)에서 직접 부딪힌 문제로 메시징/이벤트 아키텍처 첫 진입. 스레드는
+  기존 [[concurrency-problem]]이 Race Condition 현상만 다루고 원리(원자성/가시성/순서성)를
+  안 다뤘던 자리를 채우는 재점검 (인터뷰 모드).
+- **신규 개념(6)**:
+  - [[outbox-pattern]] — 이중 쓰기 문제, 같은 트랜잭션에 메시지 저장하는 핵심 아이디어, 메시지 상태 머신, Polling vs CDC, 재시도(백오프+지터), 흔한 오해
+  - [[idempotency]] — 멱등성, 고유 ID + 처리 기록을 한 트랜잭션으로 묶는 패턴, HTTP 메서드 멱등성 규약
+  - [[eventual-consistency]] — 최종 일관성, 강한 일관성(단일 트랜잭션)과의 대비표
+  - [[thread]] — 프로그램/프로세스/스레드, 공유(Heap)·독립(Stack) 자원, 동시성 vs 병렬성, start/run, 생명주기, CPU/IO 중심 작업
+  - [[thread-safety]] — 원자성·가시성·순서성 3축, synchronized/volatile/Atomic 보장 범위 차이, 데드락·기아
+  - [[thread-pool]] — 스레드 재사용 장치, ExecutorService·Future, connection-pool과 동일 패턴 명시
+- **신규 소스(2)**: [[outbox-pattern-note]], [[thread-basics-note]]
+- **보강**:
+  - [[concurrency-problem]] — [[thread]]·[[thread-safety]]로 원리 링크 보강, 관련 페이지에 [[optimistic-pessimistic-lock]] 추가
+  - [[transaction]] — "트랜잭션과 스레드" 섹션 신설 (ThreadLocal 바인딩, 새 스레드가 트랜잭션 자동 상속 안 함, [[outbox-pattern]]과의 연결)
+  - [[connection-pool]] — 관련 페이지에 [[thread-pool]] 추가 ("같은 패턴, 다른 자원")
+  - [[javascript-async]] — 관련 페이지에 [[thread]] 추가 (싱글 스레드 vs 멀티 스레드 비동기 대비)
+- **핵심 교차 연결**:
+  - [[outbox-pattern]] ↔ [[idempotency]] (발신 최소 한 번 + 수신 멱등 = 사실상 정확히 한 번)
+  - [[outbox-pattern]] ↔ [[eventual-consistency]] (Outbox가 받아들이는 일관성 모델)
+  - [[thread-pool]] ↔ [[connection-pool]] (재사용 자원 캐시 패턴이 스레드에도 그대로 적용됨을 명시)
+  - [[thread]] ↔ [[javascript-async]] (Java 멀티 스레드 비동기 vs JS 싱글 스레드 이벤트 루프 비동기 — "비동기 ≠ 멀티 스레딩" 명제로 연결)
+  - [[transaction]] ↔ [[thread]] ↔ [[outbox-pattern]] (트랜잭션 문맥의 스레드 바인딩이 왜 Outbox 같은 "트랜잭션 밖 시스템" 패턴이 필요한지의 배경)
+  - [[thread-safety]] ↔ [[optimistic-pessimistic-lock]] (애플리케이션 레벨 락 순서/타임아웃 원리가 DB 레벨과 동일)
+- **범주 신설**: "메시징 / 분산 시스템"(outbox-pattern·idempotency·eventual-consistency), "동시성 / 스레드"(thread·thread-safety·thread-pool)
+- `index.md` 갱신: 개념 127→133, 소스 36→38, 통합 원본 36→38.

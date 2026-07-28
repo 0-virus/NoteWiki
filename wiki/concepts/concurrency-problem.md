@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [concurrency, java, database]
-updated: 2026-05-19
-sources: ["raw/dialogues/Servlet과 JSP의 차이 및 활용.md"]
+updated: 2026-07-28
+sources: ["raw/dialogues/Servlet과 JSP의 차이 및 활용.md", "raw/notes/스레드_개념_기초부터_실무까지.md"]
 ---
 
 # 동시성 문제 (Race Condition)
@@ -23,6 +23,10 @@ sources: ["raw/dialogues/Servlet과 JSP의 차이 및 활용.md"]
 ```
 
 둘 다 1을 저장해 카운트가 어긋난다. 이것이 **Race Condition**.
+
+> 왜 "읽기→더하기→쓰기"가 끼어들 수 있는지(원자성), 그리고 값을 안 꼬이게 막는 도구가
+> 뭔지(`synchronized`·`volatile`·원자 클래스)는 → [[thread-safety]]. 스레드가 애초에
+> 무엇을 공유하고 무엇을 독립적으로 갖는지는 → [[thread]].
 
 ## 두 층위에서 같은 문제
 
@@ -54,6 +58,9 @@ sources: ["raw/dialogues/Servlet과 JSP의 차이 및 활용.md"]
 
 ## 관련 페이지
 
+- [[thread]] — 스레드가 무엇을 공유하는지(Race Condition이 왜 애초에 가능한지)
+- [[thread-safety]] — 원자성·가시성·순서성과 이를 막는 도구, 데드락·기아
 - [[servlet-lifecycle]] — 싱글톤이 동시성 문제를 부르는 이유
 - [[spring-bean]] — 같은 원칙 적용
-- 출처: [[servlet-jsp-dialogue]]
+- [[optimistic-pessimistic-lock]] — 같은 문제의 DB 레벨 해법
+- 출처: [[servlet-jsp-dialogue]], [[thread-basics-note]]

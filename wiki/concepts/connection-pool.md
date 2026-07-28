@@ -132,4 +132,5 @@ try (Connection conn = dataSource.getConnection()) {
 - [[hikaricp]] — 가장 널리 쓰이는 Connection Pool 구현체, Spring Boot 기본
 - [[spring-boot]] — `spring.datasource.*` 설정만으로 풀을 자동 등록
 - [[mybatis]] — DataSource로 풀을 받아 SqlSession을 띄움
+- [[thread-pool]] — 같은 "재사용 자원 캐시" 패턴을 스레드에 적용한 버전
 - 출처: [[servlet-jdbc-debugging]] (영균의 JDBC close 디버깅), [[mybatis-practice-debugging]] (의식 못 한 채 풀 사용)
