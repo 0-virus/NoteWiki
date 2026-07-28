@@ -763,3 +763,40 @@ Daker-server 프로젝트를 강의 복습 중 재점검하며 나온 8턴 대�
   - [[thread-safety]] ↔ [[optimistic-pessimistic-lock]] (애플리케이션 레벨 락 순서/타임아웃 원리가 DB 레벨과 동일)
 - **범주 신설**: "메시징 / 분산 시스템"(outbox-pattern·idempotency·eventual-consistency), "동시성 / 스레드"(thread·thread-safety·thread-pool)
 - `index.md` 갱신: 개념 127→133, 소스 36→38, 통합 원본 36→38.
+
+## [2026-07-28] lint | 위키 전체 건강 점검
+
+점검 범위: concepts 133, flows 16, sources 39 (전 188 페이지) + index.md + log.md.
+스크립트 기반 전수 검사(wikilink 추출·백링크 그래프)로 과거 lint보다 엄밀하게 확인.
+
+- 🔴 **고아 페이지 7건 발견 → 전부 수정**: `wiki/log.md`엔 인제스트 당시 개념이 나열돼 있었지만,
+  실제 해당 개념 페이지의 "관련 페이지"에 출처 백링크가 누락돼 있었다 (과거 lint의 "고아 0"
+  판정은 index.md 등록 여부만 봤을 뿐 실제 백링크는 확인하지 않았던 것으로 보임).
+  - [[authentication-note]] → [[cookie-session-jwt]]에 출처 추가
+  - [[ddl-trap]] → [[ddl-lock]]에 출처 추가
+  - [[docker-note]] → [[docker]]에 출처 추가
+  - [[index-trap]]·[[index-what-is-it]] → [[database-index]]에 "관련 페이지" 섹션 신설 + 출처 추가
+  - [[spring-component-di-security-dialogue]] → [[spring-bean]]·[[dependency-injection]]에 출처 추가
+  - [[zeroverse-spring-security-jwt-dialogue]] → [[spring-security-jwt-auth-flow]]에 출처 추가
+- 🔴 **index.md 통계 오류(오래된 버그) → 수정**: "소스 페이지" 카운트가 실제 파일 수보다 항상
+  1개 적었다 (직전 커밋 기준 실제 37개인데 표기는 36 — 훨씬 이전 인제스트에서 최초로 어긋난
+  뒤 계속 이어받은 것으로 추정). 이번 인제스트로 39가 된 실제 개수에 맞춰 정정 (38→39).
+- 🔴 **`wiki/concepts/.omc/`에 위키 콘텐츠가 아닌 파일 발견**: `.omc/state/sessions/.../
+  pre-tool-advisory-throttle.json` — 하네스 내부 상태 파일이 커밋 `94fc981`에서 실수로 이
+  경로에 들어감. `wiki/`는 AI가 관리하는 순수 콘텐츠 영역이어야 하므로 제거를 제안 (사용자
+  확인 후 처리 — lint가 임의로 삭제하지 않음).
+- ⚠️ **`updated` 낡음 11건 → 오늘 수정분 반영해 갱신**: connection-pool, javascript-async,
+  transaction, docker, ddl-lock, database-index, spring-bean, dependency-injection,
+  spring-annotations, cookie-session-jwt(flow), spring-security-jwt-auth-flow(flow).
+- ⚠️ **불필요한 이스케이프 수정**: `spring-annotations.md`의 `[[aop\|AOP 프록시]]`(표 밖,
+  블록인용문) → `[[aop|AOP 프록시]]`로 정정. (같은 페이지 표 안의 `[[persistence-context\|변경
+  감지]]`는 표 셀 안 파이프 충돌 방지용으로 정상 — 그대로 둠.)
+- ✅ 깨진 링크: 실질적으로 0 — 스크립트가 잡은 나머지는 전부 오탐(wikilink.md·
+  obsidian-basics-video.md의 문법 설명용 예시 `[[노트]]`·`[[연결]]`·`[[링크]]` 등, 코드 스팬 안).
+- ✅ 모순: 0 (기존 ⚠️ 플래그들은 모두 의도된 구현 함정 경고, 페이지 간 상충 아님)
+- 💡 **누락 개념 후보**: **CQRS** — [[jpa]]·[[mybatis]]·[[mybatis-to-jpa]] 3곳에서 "쓰기는
+  JPA/읽기는 MyBatis 공존" 맥락으로 반복 언급되지만 독립 페이지 없음. 지금은 얕은 언급뿐이라
+  신설을 사용자에게 제안만 하고 페이지는 만들지 않음.
+- 다음 탐구 후보(기존 TODO 재확인): Kubernetes([[docker]]), Liquibase([[flyway]]),
+  CSRF·XSS 독립 페이지(CORS 인제스트에서 보류).
+- `index.md` 갱신: 소스 페이지 38→39, 통합한 원본 수 38→39 (개념 133·흐름 16은 이미 정확).

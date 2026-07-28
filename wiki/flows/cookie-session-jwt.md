@@ -1,7 +1,7 @@
 ---
 type: flow
 tags: [authentication, cookie, session, jwt, security, spring]
-updated: 2026-06-07
+updated: 2026-07-28
 sources: ["raw/notes/인증.md"]
 ---
 
@@ -102,6 +102,7 @@ Service → Repository → DB
 [[jwt]] — 3단계: 토큰 기반 Stateless 인증
 [[refresh-token]] — JWT의 보완 메커니즘
 [[serialization]] — JWT 토큰 생성의 기반 개념
+- 출처: [[authentication-note]]
 [[filter]] — Spring JWT 검증 위치
 [[interceptor]] — Spring 권한 검사 위치
 [[dispatcher-servlet]] — 요청 처리 파이프라인 중심

@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [database, mysql, ddl, lock, performance]
-updated: 2026-06-13
+updated: 2026-07-28
 sources:
   - raw/youtube/(280) 컬럼 하나 추가했는데 서비스가 10분간 멈췄습니다 (DDL의 함정).md
 ---
@@ -136,3 +136,5 @@ DDL을 **버전 관리되는 스크립트**로 만들어 배포 파이프라인�
 
 → [[database-index]] — 인덱스 DDL(`CREATE INDEX`, `DROP INDEX`)도 동일한 락 문제 적용
 → [[transaction]] — 트랜잭션을 오래 열어두면 DDL 차단 원인이 됨
+
+- 출처: [[ddl-trap]]

@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [javascript, async]
-updated: 2026-05-18
+updated: 2026-07-28
 sources: ["raw/notes/비동기의 모든 것.md"]
 ---
 

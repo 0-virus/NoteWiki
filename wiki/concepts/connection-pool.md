@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [database, jdbc, performance, infrastructure]
-updated: 2026-05-27
+updated: 2026-07-28
 sources: ["wiki/log.md#2026-05-27-hikaricp-query"]
 ---
 

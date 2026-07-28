@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [spring, di, design-pattern]
-updated: 2026-05-21
+updated: 2026-07-28
 sources: ["raw/notes/Spring Framework.md"]
 ---
 
@@ -103,4 +103,4 @@ public class OrderService {
 - [[spring-bean]] — 주입의 대상이 되는 객체
 - [[solid-principles]] — DI는 DIP(의존 역전 원칙)의 구체적 실현
 - 흐름: [[manual-di-to-spring-ioc]] — 직접 `new` → DI → IoC 컨테이너 진화
-- 출처: [[spring-framework-1-note]]
+- 출처: [[spring-framework-1-note]], [[spring-component-di-security-dialogue]]

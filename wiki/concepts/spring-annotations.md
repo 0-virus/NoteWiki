@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [spring, annotation, reference, index, jpa]
-updated: 2026-06-10
+updated: 2026-07-28
 sources: ["raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md"]
 ---
 
@@ -84,7 +84,7 @@ sources: ["raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional �
 | `@Aspect` | 공통 관심사 모듈(Aspect) 선언 | [[aop]] |
 | `@Around`·`@Before`·`@After` | Advice 실행 시점 지정 | [[aop]] |
 
-> `@Transactional`·`@Aspect`는 모두 **[[aop\|AOP 프록시]]**로 동작한다 → 같은 클래스 안
+> `@Transactional`·`@Aspect`는 모두 **[[aop|AOP 프록시]]**로 동작한다 → 같은 클래스 안
 > `this.메서드()` 자기호출이면 프록시를 안 거쳐 **안 먹는다**. 호출 주체/시점은 [[aop]]의
 > "컨테이너 vs 프록시" 절 참고.
 

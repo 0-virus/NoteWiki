@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [spring, database, transaction, jdbc]
-updated: 2026-05-28
+updated: 2026-07-28
 sources: ["raw/notes/Spring Framework.md", "raw/notes/study-notes.md", "raw/lectures/JPA.md", "raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md"]
 ---
 
