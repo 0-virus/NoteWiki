@@ -7,3 +7,6 @@
 # Output files (Except CLAUDE.md)
 Output/*
 !Output/CLAUDE.md
+
+# etc
+**/.omc/*
