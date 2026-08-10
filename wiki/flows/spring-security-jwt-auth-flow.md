@@ -1,7 +1,7 @@
 ---
 type: flow
 tags: [spring, security, jwt, authentication, zeroverse]
-updated: 2026-06-10
+updated: 2026-07-28
 sources: ["raw/dialogues/2026-06-10-zeroverse-spring-security-jwt-auth-practice.md"]
 ---
 
@@ -82,5 +82,6 @@ SecurityContext 없음 -> 인증 실패
 - [[jwt-claims]] - Payload 정보 묶음
 - [[security-context]] - 현재 요청 인증 저장소
 - [[once-per-request-filter]] - JWT 인증 필터 기반 클래스
+- 출처: [[zeroverse-spring-security-jwt-dialogue]]
 - [[session-auth]] - 세션 기반 로그인과 비교
 - [[refresh-token]] - Access Token 만료 후 재발급 단계

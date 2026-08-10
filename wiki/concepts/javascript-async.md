@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [javascript, async]
-updated: 2026-05-18
+updated: 2026-07-28
 sources: ["raw/notes/비동기의 모든 것.md"]
 ---
 
@@ -32,4 +32,5 @@ JS의 비동기는 역사적으로 세 단계로 발전했다:
 
 ## 관련 페이지
 
+- [[thread]] — Java의 멀티 스레드 비동기와의 대비 (JS는 스레드 없이 이벤트 루프로 구현)
 - 출처: [[js-async]]

@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [database, index, btree, performance]
-updated: 2026-06-13
+updated: 2026-07-28
 sources:
   - raw/youtube/index가 뭔지 설명해보세요 (개발면접시간).md
   - raw/youtube/(280) 인덱스 걸었는데 왜 3초나 걸리죠! (인덱스의 함정).md
@@ -147,3 +147,10 @@ SELECT * FROM users IGNORE INDEX (idx_name) WHERE name = '김철수';
 **사용 흐름**: EXPLAIN으로 잘못된 인덱스 탐지 → FORCE INDEX로 교정 → 근본 원인(인덱스 설계·통계 갱신) 별도 해결.
 
 `FORCE INDEX`는 데이터 분포가 바뀌면 오히려 더 느려질 수 있으므로 임시 디버깅 용도로 쓴다.
+
+## 관련 페이지
+
+- [[covering-index]] — 테이블 접근 없이 인덱스만으로 끝내는 최적화
+- [[explain]] — 인덱스가 실제로 타는지 확인하는 도구
+- [[ddl-lock]] — 인덱스 DDL도 겪는 동일한 락 문제
+- 출처: [[index-what-is-it]], [[index-trap]]

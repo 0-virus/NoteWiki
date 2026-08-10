@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [docker, container, devops, deployment]
-updated: 2026-06-15
+updated: 2026-07-28
 sources: [raw/notes/docker.md]
 ---
 
@@ -65,5 +65,6 @@ Docker 초기엔 dockerd 하나가 모든 걸 했다. 컨테이너 실행 책임
 - [[container-virtualization]] — 왜 컨테이너가 VM보다 가벼운지 (네임스페이스·3종 비교)
 - [[docker-image]] — 이미지 개념·구조·명령어
 - [[docker-container]] — 컨테이너 개념·실행 흐름·명령어
+- 출처: [[docker-note]]
 
 TODO: 쿠버네티스(Kubernetes) — 여러 도커 호스트를 오케스트레이션하는 도구. 도커 다음 단계.

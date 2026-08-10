@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [spring, database, transaction, jdbc]
-updated: 2026-05-28
+updated: 2026-07-28
 sources: ["raw/notes/Spring Framework.md", "raw/notes/study-notes.md", "raw/lectures/JPA.md", "raw/dialogues/2026-05-28 Spring 도메인 구조와 @Transactional — 프록시 vs 컨테이너.md"]
 ---
 
@@ -141,6 +141,24 @@ public void doSomething() {
 잡아도 `UnexpectedRollbackException`이 나는 함정, 그리고 진짜 분리(`REQUIRES_NEW`)는
 **→ [[transaction-propagation]]** 에서 도식과 함께 다룬다.
 
+## 트랜잭션과 스레드 — 문맥은 스레드에 묶인다
+
+`@Transactional`의 트랜잭션 문맥(어떤 Connection을 쓸지 등)은 보통 **현재 스레드에
+바인딩**된다 (ThreadLocal). 그래서 트랜잭션 메서드 안에서 **새 스레드를 만들면 그
+트랜잭션이 자동으로 이어지지 않는다** — 새 스레드는 별개의 문맥에서 시작한다.
+
+```
+호출 스레드
+└── Transaction A (아직 커밋 전)
+
+새로 만든 작업 스레드
+└── Transaction A를 자동 상속하지 않음 → 방금 저장한(아직 커밋 안 된) 데이터를 못 볼 수 있음
+```
+
+→ [[thread]]의 "트랜잭션과 스레드" 참고. 안전한 설계는 ①트랜잭션 커밋 후 새 스레드를
+실행하거나 ②[[outbox-pattern]]처럼 같은 트랜잭션에서 영속적인 작업 레코드를 만들어
+별도 프로세스가 나중에 읽게 하는 것.
+
 ## MyBatis에서의 트랜잭션
 
 [[mybatis]]에서 `SqlSession`이 트랜잭션 단위다. Spring과 함께 쓰면 `@Transactional`이 SqlSession을 관리해준다 — 직접 `session.commit()`을 쓸 필요가 없다.
@@ -181,3 +199,5 @@ PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 - [[dao-pattern]] — 트랜잭션 경계는 보통 Service 레이어에서 (@Transactional이 @Service에 붙는 이유)
 - [[three-tier-architecture]] — Service 레이어가 트랜잭션을 책임지는 구조
 - [[spring-bean]] — Proxy 교체로 @Transactional이 가능한 이유
+- [[thread]] — 트랜잭션 문맥이 스레드에 바인딩되는 이유
+- [[outbox-pattern]] — 트랜잭션 경계 밖 시스템과의 정합성을 다루는 실무 패턴

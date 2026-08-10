@@ -1,7 +1,7 @@
 ---
 type: concept
 tags: [java, spring, ioc]
-updated: 2026-05-21
+updated: 2026-07-28
 sources: ["raw/dialogues/Servlet과 JSP의 차이 및 활용.md", "raw/notes/Spring Framework.md"]
 ---
 
@@ -100,4 +100,4 @@ public class OrderService {
 - [[concurrency-problem]] — 싱글톤이 부르는 동시성 주의점
 - [[servlet-to-spring-mvc]] — Spring 진입 흐름 속 Bean의 위치
 - 흐름: [[manual-di-to-spring-ioc]]
-- 출처: [[servlet-jsp-dialogue]], [[spring-framework-1-note]]
+- 출처: [[servlet-jsp-dialogue]], [[spring-framework-1-note]], [[spring-component-di-security-dialogue]]

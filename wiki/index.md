@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-07-26 (ingest: Flyway DB 마이그레이션 + 테스트 커버리지 기준 아티클 2건)_
+_Last updated: 2026-07-28 (ingest: Outbox 패턴 + 스레드 기초 노트 2건)_
 
 ---
 
@@ -67,6 +67,11 @@ _Last updated: 2026-07-26 (ingest: Flyway DB 마이그레이션 + 테스트 커�
 - [[flyway]] — 대표 마이그레이션 툴, flyway_schema_history 장부·V/U/R 파일명 규칙·체크섬 규율
 - [[hibernate-ddl-auto]] — 엔티티→테이블 자동 생성 설정, `update`가 운영에서 금기인 이유와 `validate` 조합
 
+### 메시징 / 분산 시스템
+- [[outbox-pattern]] — DB 변경과 외부 메시지를 같은 트랜잭션에 저장해 이중 쓰기 문제를 우회하는 패턴
+- [[idempotency]] — 같은 요청을 여러 번 처리해도 결과가 같은 성질, Outbox의 At-Least-Once를 보완
+- [[eventual-consistency]] — 즉시는 다르지만 결국 수렴하는 일관성 모델
+
 ### Java / 언어 기초
 - [[jvm-memory]] — Method Area / Heap / Stack 3대 메모리 영역
 - [[static-keyword]] — 객체와 무관하게 클래스에 속하는 멤버
@@ -80,6 +85,11 @@ _Last updated: 2026-07-26 (ingest: Flyway DB 마이그레이션 + 테스트 커�
 - [[lambda]] — 함수형 인터페이스 구현을 짧게 쓰는 문법
 - [[anonymous-class]] — 즉석 구현체, 람다의 전신
 - [[java-record]] — JDK 16+ 불변 데이터 클래스를 한 줄로 정의
+
+### 동시성 / 스레드
+- [[thread]] — 프로세스 안의 실행 흐름, 공유/독립 자원, 생명주기, start vs run
+- [[thread-safety]] — 원자성·가시성·순서성, synchronized·volatile·Atomic, 데드락·기아
+- [[thread-pool]] — 스레드를 재사용하는 풀, ExecutorService·Future (connection-pool과 같은 패턴)
 
 ### 보안 / 인증
 - [[cookie]] — HTTP 쿠키, 무상태 HTTP의 첫 번째 해법, HttpOnly/Secure 옵션
@@ -226,12 +236,14 @@ _Last updated: 2026-07-26 (ingest: Flyway DB 마이그레이션 + 테스트 커�
 - [[browser-cache-article]] — `raw/notes/🌐 웹 브라우저의 Cache 전략 & 헤더 다루기…` (Inpa 블로그, Cache-Control·검증·프록시 캐시)
 - [[flyway-article]] — `raw/articles/Flyway 란 무엇일까.md` (코냥이 블로그, DB 형상 관리·동작 3단계·파일명 규칙·Spring 적용)
 - [[coverage-standard]] — `raw/articles/커버리지 기준.md` (Line vs Branch 커버리지, JaCoCo·Vitest 임계치 기준)
+- [[outbox-pattern-note]] — `raw/notes/Outbox_패턴_상세_설명.md` (입사 후 배치·외부 API 정합성 문제에서 시작, 메시징 첫 진입)
+- [[thread-basics-note]] — `raw/notes/스레드_개념_기초부터_실무까지.md` (동시성 문제 재점검, concurrency-problem 원리 보강)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 127
+- 개념 페이지: 133
 - 흐름 페이지: 16
-- 소스 페이지: 36
-- 통합한 원본 수: 36
+- 소스 페이지: 39
+- 통합한 원본 수: 39

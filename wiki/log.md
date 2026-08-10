@@ -733,3 +733,70 @@ Daker-server 프로젝트를 강의 복습 중 재점검하며 나온 8턴 대�
   - [[gradle]] → [[jacoco]]·[[flyway]] (두 소스가 같은 빌드 도구에서 만남)
 - **보류(TODO)**: Liquibase(Flyway 대안) 독립 페이지 미작성 — 실제 비교 검토 시점에 생성. SonarQube·Vitest도 일반 텍스트로만 언급
 - **범위 판단**: 커버리지 원본 URL은 사내 SonarQube지만 내용이 Line/Branch 일반 개념 + 통용 관행이라 NoteWiki에 수록 (영균 확인). 회사 고유 규칙·시스템 정보는 미수록
+
+## [2026-07-28] ingest | Outbox 패턴 + 스레드 기초 (필기 2건)
+
+- **원본**: `raw/notes/Outbox_패턴_상세_설명.md`, `raw/notes/스레드_개념_기초부터_실무까지.md`
+- **맥락**: 영균이 **금융솔루션 회사에 입사**. Outbox는 실무(배치 실행 시 외부 API 요청과
+  내부 시스템 간 정합성)에서 직접 부딪힌 문제로 메시징/이벤트 아키텍처 첫 진입. 스레드는
+  기존 [[concurrency-problem]]이 Race Condition 현상만 다루고 원리(원자성/가시성/순서성)를
+  안 다뤘던 자리를 채우는 재점검 (인터뷰 모드).
+- **신규 개념(6)**:
+  - [[outbox-pattern]] — 이중 쓰기 문제, 같은 트랜잭션에 메시지 저장하는 핵심 아이디어, 메시지 상태 머신, Polling vs CDC, 재시도(백오프+지터), 흔한 오해
+  - [[idempotency]] — 멱등성, 고유 ID + 처리 기록을 한 트랜잭션으로 묶는 패턴, HTTP 메서드 멱등성 규약
+  - [[eventual-consistency]] — 최종 일관성, 강한 일관성(단일 트랜잭션)과의 대비표
+  - [[thread]] — 프로그램/프로세스/스레드, 공유(Heap)·독립(Stack) 자원, 동시성 vs 병렬성, start/run, 생명주기, CPU/IO 중심 작업
+  - [[thread-safety]] — 원자성·가시성·순서성 3축, synchronized/volatile/Atomic 보장 범위 차이, 데드락·기아
+  - [[thread-pool]] — 스레드 재사용 장치, ExecutorService·Future, connection-pool과 동일 패턴 명시
+- **신규 소스(2)**: [[outbox-pattern-note]], [[thread-basics-note]]
+- **보강**:
+  - [[concurrency-problem]] — [[thread]]·[[thread-safety]]로 원리 링크 보강, 관련 페이지에 [[optimistic-pessimistic-lock]] 추가
+  - [[transaction]] — "트랜잭션과 스레드" 섹션 신설 (ThreadLocal 바인딩, 새 스레드가 트랜잭션 자동 상속 안 함, [[outbox-pattern]]과의 연결)
+  - [[connection-pool]] — 관련 페이지에 [[thread-pool]] 추가 ("같은 패턴, 다른 자원")
+  - [[javascript-async]] — 관련 페이지에 [[thread]] 추가 (싱글 스레드 vs 멀티 스레드 비동기 대비)
+- **핵심 교차 연결**:
+  - [[outbox-pattern]] ↔ [[idempotency]] (발신 최소 한 번 + 수신 멱등 = 사실상 정확히 한 번)
+  - [[outbox-pattern]] ↔ [[eventual-consistency]] (Outbox가 받아들이는 일관성 모델)
+  - [[thread-pool]] ↔ [[connection-pool]] (재사용 자원 캐시 패턴이 스레드에도 그대로 적용됨을 명시)
+  - [[thread]] ↔ [[javascript-async]] (Java 멀티 스레드 비동기 vs JS 싱글 스레드 이벤트 루프 비동기 — "비동기 ≠ 멀티 스레딩" 명제로 연결)
+  - [[transaction]] ↔ [[thread]] ↔ [[outbox-pattern]] (트랜잭션 문맥의 스레드 바인딩이 왜 Outbox 같은 "트랜잭션 밖 시스템" 패턴이 필요한지의 배경)
+  - [[thread-safety]] ↔ [[optimistic-pessimistic-lock]] (애플리케이션 레벨 락 순서/타임아웃 원리가 DB 레벨과 동일)
+- **범주 신설**: "메시징 / 분산 시스템"(outbox-pattern·idempotency·eventual-consistency), "동시성 / 스레드"(thread·thread-safety·thread-pool)
+- `index.md` 갱신: 개념 127→133, 소스 36→38, 통합 원본 36→38.
+
+## [2026-07-28] lint | 위키 전체 건강 점검
+
+점검 범위: concepts 133, flows 16, sources 39 (전 188 페이지) + index.md + log.md.
+스크립트 기반 전수 검사(wikilink 추출·백링크 그래프)로 과거 lint보다 엄밀하게 확인.
+
+- 🔴 **고아 페이지 7건 발견 → 전부 수정**: `wiki/log.md`엔 인제스트 당시 개념이 나열돼 있었지만,
+  실제 해당 개념 페이지의 "관련 페이지"에 출처 백링크가 누락돼 있었다 (과거 lint의 "고아 0"
+  판정은 index.md 등록 여부만 봤을 뿐 실제 백링크는 확인하지 않았던 것으로 보임).
+  - [[authentication-note]] → [[cookie-session-jwt]]에 출처 추가
+  - [[ddl-trap]] → [[ddl-lock]]에 출처 추가
+  - [[docker-note]] → [[docker]]에 출처 추가
+  - [[index-trap]]·[[index-what-is-it]] → [[database-index]]에 "관련 페이지" 섹션 신설 + 출처 추가
+  - [[spring-component-di-security-dialogue]] → [[spring-bean]]·[[dependency-injection]]에 출처 추가
+  - [[zeroverse-spring-security-jwt-dialogue]] → [[spring-security-jwt-auth-flow]]에 출처 추가
+- 🔴 **index.md 통계 오류(오래된 버그) → 수정**: "소스 페이지" 카운트가 실제 파일 수보다 항상
+  1개 적었다 (직전 커밋 기준 실제 37개인데 표기는 36 — 훨씬 이전 인제스트에서 최초로 어긋난
+  뒤 계속 이어받은 것으로 추정). 이번 인제스트로 39가 된 실제 개수에 맞춰 정정 (38→39).
+- 🔴 **`wiki/concepts/.omc/`에 위키 콘텐츠가 아닌 파일 발견**: `.omc/state/sessions/.../
+  pre-tool-advisory-throttle.json` — 하네스 내부 상태 파일이 커밋 `94fc981`에서 실수로 이
+  경로에 들어감. `wiki/`는 AI가 관리하는 순수 콘텐츠 영역이어야 하므로 제거를 제안 (사용자
+  확인 후 처리 — lint가 임의로 삭제하지 않음).
+- ⚠️ **`updated` 낡음 11건 → 오늘 수정분 반영해 갱신**: connection-pool, javascript-async,
+  transaction, docker, ddl-lock, database-index, spring-bean, dependency-injection,
+  spring-annotations, cookie-session-jwt(flow), spring-security-jwt-auth-flow(flow).
+- ⚠️ **불필요한 이스케이프 수정**: `spring-annotations.md`의 `[[aop\|AOP 프록시]]`(표 밖,
+  블록인용문) → `[[aop|AOP 프록시]]`로 정정. (같은 페이지 표 안의 `[[persistence-context\|변경
+  감지]]`는 표 셀 안 파이프 충돌 방지용으로 정상 — 그대로 둠.)
+- ✅ 깨진 링크: 실질적으로 0 — 스크립트가 잡은 나머지는 전부 오탐(wikilink.md·
+  obsidian-basics-video.md의 문법 설명용 예시 `[[노트]]`·`[[연결]]`·`[[링크]]` 등, 코드 스팬 안).
+- ✅ 모순: 0 (기존 ⚠️ 플래그들은 모두 의도된 구현 함정 경고, 페이지 간 상충 아님)
+- 💡 **누락 개념 후보**: **CQRS** — [[jpa]]·[[mybatis]]·[[mybatis-to-jpa]] 3곳에서 "쓰기는
+  JPA/읽기는 MyBatis 공존" 맥락으로 반복 언급되지만 독립 페이지 없음. 지금은 얕은 언급뿐이라
+  신설을 사용자에게 제안만 하고 페이지는 만들지 않음.
+- 다음 탐구 후보(기존 TODO 재확인): Kubernetes([[docker]]), Liquibase([[flyway]]),
+  CSRF·XSS 독립 페이지(CORS 인제스트에서 보류).
+- `index.md` 갱신: 소스 페이지 38→39, 통합한 원본 수 38→39 (개념 133·흐름 16은 이미 정확).
