@@ -800,3 +800,66 @@ Daker-server 프로젝트를 강의 복습 중 재점검하며 나온 8턴 대�
 - 다음 탐구 후보(기존 TODO 재확인): Kubernetes([[docker]]), Liquibase([[flyway]]),
   CSRF·XSS 독립 페이지(CORS 인제스트에서 보류).
 - `index.md` 갱신: 소스 페이지 38→39, 통합한 원본 수 38→39 (개념 133·흐름 16은 이미 정확).
+
+---
+
+## [2026-09-07] ingest | Message Queue 필기 — MQ 기초 · RabbitMQ · Kafka
+
+원본: `raw/notes/Message Queue.md` (약 4,150줄 자가 학습 노트, 3부 구성 — MQ 기초 /
+RabbitMQ 46절 / Kafka 54절). 지금까지 인제스트한 원본 중 가장 크다.
+
+**맥락 (인터뷰)**: 곧 Kafka를 써야 해서 미리 원리를 잡아둔 선행 학습.
+활용 방향은 ① 실무 코드 독해(토픽·Consumer Group·Exchange 이름만 보고 메시지 흐름 추적)
+② 기술 선택 근거(RabbitMQ / Kafka / 직접 호출).
+2026-07-28의 [[outbox-pattern]] 인제스트가 연 "DB 밖 시스템과의 정합성" 문제의 정확한
+연장선 — Outbox Publisher가 메시지를 보내는 "그 외부 시스템"의 정체를 채운 인제스트다.
+
+**회사 지식 경계 판단**: 원본 48~49절에 대출 신청 시스템 예제가 있어 검토함.
+사원명·고객사명·사내 시스템명·실제 승인 로직이 **없고**, 식별자(`A10001`·`C5001`)는
+구조 설명용 가상 값이며, 구조 자체(신청 → 이벤트 발행 → 심사/알림/감사/분석 구독)는
+어느 금융 시스템에나 통하는 일반 EDA 패턴. 영균 확인을 거쳐 **대출 예제 유지**로 결정
+(위키 페이지에는 가상 예시임을 명시). NoteWiki의 "어디서나 통용되는 일반 기술 지식"
+원칙에 저촉되지 않음.
+
+**신규 개념 12**
+- [[message-queue]] — 직접 호출의 3대 결함(장애 전파·용량 불일치·강한 결합)에서 출발
+- [[message-delivery-semantics]] — ACK 시점이 보장 수준을 결정, 실무 표준은 "At-least-once + 멱등 Consumer"
+- [[dead-letter-queue]] — poison message가 큐를 막는 head-of-line blocking과 격리 전략
+- [[rabbitmq]] — 안정성 장치 4겹(Publisher Confirm·Durable·Persistent·ACK), Prefetch
+- [[amqp-exchange]] — Exchange 4종·Binding·Routing Key, "큐 간 복사, 큐 내 분배"
+- [[spring-amqp]] — RabbitTemplate·@RabbitListener, Template/Listener라는 Spring의 반복 패턴
+- [[kafka]] — append-only log가 만드는 Replay·다중 독립 소비, DB와의 역할 구분
+- [[kafka-topic-partition]] — 전역 순서를 포기하고 처리량을 얻는 거래, Message Key와 hot partition
+- [[kafka-consumer-group]] — 병렬성 상한 = 파티션 수, 그룹 ID 오용 함정, 리밸런싱
+- [[kafka-replication]] — Leader/Follower와 acks, 가용성 vs 일관성 절충
+- [[event-driven-architecture]] — 명령 vs 이벤트, 복잡도를 없애는 게 아니라 옮기는 거래
+- [[change-data-capture]] — 트랜잭션 로그 구독의 원리, Outbox + CDC 조합
+
+**신규 흐름 3**
+- [[rabbitmq-message-flow]] — 10단계 + "각 단계에서 죽으면 무엇이 대응 장치인가" 표
+- [[kafka-event-flow]] — 발행 → 파티션 → 다중 그룹 소비 → Replay, 실무 체크 8항목
+- [[rabbitmq-vs-kafka]] — "소비하면 지우는가"에서 전 항목을 재유도하는 비교 + 선택 질문 5개
+
+**신규 소스 1**: [[message-queue-note]]
+
+**갱신 3**
+- [[outbox-pattern]] — "새 가지" 섹션 추가(브로커의 정체·CDC로 Publisher 대체·전달 보장 연결). 기존 서술은 그대로 두고 가지치기만 함
+- [[idempotency]] — 중복이 실제로 발생하는 지점(ACK 직전 다운·리밸런싱 재배정) 링크 보강
+- [[eventual-consistency]] — 메시징·EDA·CDC 연결 추가
+- 세 페이지 모두 frontmatter `updated`·`sources`에 이번 원본 반영
+
+**교차 연결 하이라이트**
+- [[message-queue]] ↔ [[java-buffer]] — "속도 차 나는 두 지점 사이의 완충재"라는 동일 원리, 계층만 다름
+- [[message-queue]] ↔ [[thread-pool]] — Competing Consumers는 워커 스레드 풀이 프로세스·서버 단위로 확장된 형태
+- [[kafka]] ↔ [[database-index]] — 순차 로그(쓰기 최적) vs B+tree(랜덤 읽기 최적), 목적이 반대면 자료구조 선택도 반대
+- [[kafka-topic-partition]] ↔ [[database-index]] — 키 쏠림(hot partition)과 카디널리티 함정의 동형성
+- [[spring-amqp]] ↔ [[inversion-of-control]] — @RabbitListener는 "불려지는 코드", IoC의 재적용
+- [[kafka-replication]] ↔ [[high-availability]]·[[load-balancer]] — 헬스체크·페일오버가 저장 계층에 적용된 형태
+
+**후속 탐구 후보**
+- **Saga 패턴** — 여러 서비스에 걸친 트랜잭션을 이벤트로 조율(보상 트랜잭션). EDA의 자연스러운 다음 단계
+- **Spring Kafka** — 이 원본은 Spring 연동을 RabbitMQ 쪽만 코드로 다룸. `@KafkaListener`·`KafkaTemplate`·`DeadLetterPublishingRecoverer` 미정리
+- **Kafka Streams / Flink** — 원본은 개념만 언급
+- **CQRS** — 2026-07-28 lint에서도 누락 개념으로 지목. EDA와 함께 자주 등장
+
+`index.md` 갱신: 개념 133→145, 흐름 16→19, 소스 39→40, 통합 원본 39→40.

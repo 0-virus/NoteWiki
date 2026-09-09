@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [messaging, distributed-systems, http, backend]
-updated: 2026-07-28
-sources: ["raw/notes/Outbox_패턴_상세_설명.md"]
+updated: 2026-09-07
+sources: ["raw/notes/Outbox_패턴_상세_설명.md", "raw/notes/Message Queue.md"]
 ---
 
 # 멱등성 (Idempotency)
@@ -75,6 +75,9 @@ REST에서는 메서드 자체에 멱등성이 정의돼 있다 — 몇 번을 �
 ## 관련 페이지
 
 - [[outbox-pattern]] — 멱등성이 방어하는 대상(최소 한 번 전달의 중복)
+- [[message-delivery-semantics]] — At-least-once가 왜 표준인지, 멱등성이 왜 짝인지
+- [[message-queue]] · [[kafka]] · [[rabbitmq]] — 중복 전달이 실제로 발생하는 지점
+  (ACK 직전 다운, [[kafka-consumer-group|리밸런싱]] 중 재배정)
 - [[restful-api]] — HTTP 메서드별 멱등성 규약
 - [[transaction]] — "상태 변경 + 처리 기록"을 원자적으로 묶는 근거
-- 출처: [[outbox-pattern-note]]
+- 출처: [[outbox-pattern-note]] · [[message-queue-note]]

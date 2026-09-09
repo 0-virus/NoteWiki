@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [distributed-systems, messaging, database]
-updated: 2026-07-28
-sources: ["raw/notes/Outbox_패턴_상세_설명.md"]
+updated: 2026-09-07
+sources: ["raw/notes/Outbox_패턴_상세_설명.md", "raw/notes/Message Queue.md"]
 ---
 
 # 최종 일관성 (Eventual Consistency)
@@ -55,4 +55,7 @@ sources: ["raw/notes/Outbox_패턴_상세_설명.md"]
 
 - [[outbox-pattern]] — 최종 일관성을 받아들이는 대표 패턴
 - [[transaction]] — 대비되는 강한 일관성 모델
-- 출처: [[outbox-pattern-note]]
+- [[message-queue]] · [[kafka]] — 비동기 전달이 최종 일관성을 만드는 지점
+- [[event-driven-architecture]] — 최종 일관성을 전제로 세워지는 아키텍처
+- [[change-data-capture]] — DB 변경을 비동기로 전파하는 파이프라인
+- 출처: [[outbox-pattern-note]] · [[message-queue-note]]

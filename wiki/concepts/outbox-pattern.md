@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [messaging, distributed-systems, transaction, backend]
-updated: 2026-07-28
-sources: ["raw/notes/Outbox_패턴_상세_설명.md"]
+updated: 2026-09-07
+sources: ["raw/notes/Outbox_패턴_상세_설명.md", "raw/notes/Message Queue.md"]
 ---
 
 # Outbox 패턴
@@ -128,10 +128,41 @@ Worker가 동시에 재시도해 상대 시스템에 부하를 몰아주는 것�
 첫 진입점**이다 — 지금까지의 [[transaction]]·[[jdbc]]·[[jpa]] 학습은 모두 "DB 하나
 안에서의 정합성"이었다면, Outbox는 처음으로 "DB 밖의 시스템과의 정합성"을 다룬다.
 
+## 새 가지 — 그 "외부 시스템"의 정체 (2026-09-07 추가)
+
+이 페이지를 처음 쓸 때 Publisher가 메시지를 보내는 대상은 "외부 시스템 / 메시지 브로커"라고만
+적혀 있었다. 그 브로커의 실체가 [[message-queue|메시지 큐]]이며, 실무에서는 대개
+[[kafka]] 또는 [[rabbitmq]]다.
+
+브로커를 알고 나면 Outbox 패턴의 위치가 더 선명해진다.
+
+```
+BEGIN; INSERT order; INSERT outbox_event; COMMIT;
+              ↓ Publisher (또는 CDC)
+          Kafka / RabbitMQ
+              ↓
+        여러 Consumer
+```
+
+- **왜 브로커를 써도 Outbox가 필요한가** — 브로커 전송은 DB 트랜잭션의 롤백 대상이 아니다.
+  `@Transactional` 메서드 안에서 `rabbitTemplate.convertAndSend()`를 호출해도 이중 쓰기
+  문제는 그대로다. **브로커 종류와 무관한 문제**다 ([[rabbitmq-message-flow]]·[[kafka-event-flow]]).
+- **Publisher 워커를 안 만들 수도 있다** — Outbox 테이블을 [[change-data-capture|CDC]]로
+  구독하면 폴링 워커 없이 트랜잭션 로그에서 곧바로 이벤트를 뽑아낼 수 있다.
+  Outbox의 정합성 + CDC의 누락 없음을 동시에 얻는 조합.
+- **"최소 한 번 + 소비자 멱등성"의 정체** — 이 조합이 왜 표준인지는
+  [[message-delivery-semantics]]에서 정리했다.
+- Outbox가 흘려보낸 이벤트를 여러 시스템이 각자 소비하는 구조가 곧
+  [[event-driven-architecture]]다.
+
 ## 관련 페이지
 
+- [[message-queue]] · [[kafka]] · [[rabbitmq]] — Publisher가 메시지를 보내는 대상
+- [[message-delivery-semantics]] — Outbox가 제공하는 보장 수준(At-least-once)의 정의
+- [[change-data-capture]] — Publisher 워커를 대체할 수 있는 접근
+- [[event-driven-architecture]] — Outbox가 참여하는 상위 아키텍처
 - [[transaction]] — Outbox가 활용하는 "같은 트랜잭션" 원자성의 근거
 - [[idempotency]] — Outbox의 At-Least-Once를 상쇄하는 소비자 쪽 방어선
 - [[eventual-consistency]] — Outbox가 받아들이는 일관성 모델
 - [[connection-pool]] · [[thread-pool]] — Publisher/Worker가 자원을 재사용하는 방식과의 유비
-- 출처: [[outbox-pattern-note]]
+- 출처: [[outbox-pattern-note]] · [[message-queue-note]]

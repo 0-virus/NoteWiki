@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-07-28 (ingest: Outbox 패턴 + 스레드 기초 노트 2건)_
+_Last updated: 2026-09-07 (ingest: Message Queue 필기 — MQ 기초·RabbitMQ·Kafka)_
 
 ---
 
@@ -71,6 +71,18 @@ _Last updated: 2026-07-28 (ingest: Outbox 패턴 + 스레드 기초 노트 2건)
 - [[outbox-pattern]] — DB 변경과 외부 메시지를 같은 트랜잭션에 저장해 이중 쓰기 문제를 우회하는 패턴
 - [[idempotency]] — 같은 요청을 여러 번 처리해도 결과가 같은 성질, Outbox의 At-Least-Once를 보완
 - [[eventual-consistency]] — 즉시는 다르지만 결국 수렴하는 일관성 모델
+- [[message-queue]] — 시스템 사이의 대기열, 비동기·느슨한 결합·트래픽 완충·장애 내성
+- [[message-delivery-semantics]] — At-most/least/Exactly-once와 ACK·NACK, 실무 표준 조합
+- [[dead-letter-queue]] — 반복 실패한 독성 메시지를 격리해 큐를 살리는 장치
+- [[event-driven-architecture]] — 명령 대신 이벤트를 발행·구독하는 아키텍처, 얻는 것과 잃는 것
+- [[change-data-capture]] — 트랜잭션 로그를 읽어 DB 변경을 이벤트로 흘려보내는 기법 (Debezium)
+- [[rabbitmq]] — AMQP 메시지 브로커, 작업 분배·라우팅·안정성 장치 4겹
+- [[amqp-exchange]] — Exchange 4종·Binding·Routing Key, RabbitMQ 라우팅의 원리
+- [[spring-amqp]] — Spring의 RabbitTemplate·@RabbitListener·Queue/Exchange 빈 선언
+- [[kafka]] — 분산 이벤트 스트리밍 플랫폼, append-only log·Retention·Replay
+- [[kafka-topic-partition]] — Topic·Partition·Offset·Message Key, 순서 보장은 파티션 내부만
+- [[kafka-consumer-group]] — 그룹 안은 분배·그룹 밖은 브로드캐스트, 병렬성 상한과 리밸런싱
+- [[kafka-replication]] — Broker·Cluster·Leader/Follower 복제와 acks 설정
 
 ### Java / 언어 기초
 - [[jvm-memory]] — Method Area / Heap / Stack 3대 메모리 영역
@@ -196,6 +208,9 @@ _Last updated: 2026-07-28 (ingest: Outbox 패턴 + 스레드 기초 노트 2건)
 - [[spring-security-register-flow]] — SecurityConfig → Controller(@Valid) → Service(BCrypt) → Repository 회원가입 전체 파이프라인
 - [[spring-security-jwt-auth-flow]] - login verification, Access Token issue, JWT filter, SecurityContext, AuthorizationFilter flow
 - [[entity-to-production-schema]] — 엔티티 수정 → ddl-auto → 마이그레이션 스크립트 → 배포 → ALTER TABLE 락까지 전체 경로
+- [[rabbitmq-message-flow]] — Producer → Exchange → Queue → Consumer → ACK/DLQ, 단계별 "여기서 죽으면?" 대응표
+- [[kafka-event-flow]] — 이벤트 발행 → 파티션 적재 → 다중 Consumer Group 소비 → Replay 전체 경로
+- [[rabbitmq-vs-kafka]] — "지우는가 남기는가"에서 파생되는 전 항목 비교 + 선택 질문 5개
 
 ## 소스 (Sources) — `sources/`
 
@@ -238,12 +253,13 @@ _Last updated: 2026-07-28 (ingest: Outbox 패턴 + 스레드 기초 노트 2건)
 - [[coverage-standard]] — `raw/articles/커버리지 기준.md` (Line vs Branch 커버리지, JaCoCo·Vitest 임계치 기준)
 - [[outbox-pattern-note]] — `raw/notes/Outbox_패턴_상세_설명.md` (입사 후 배치·외부 API 정합성 문제에서 시작, 메시징 첫 진입)
 - [[thread-basics-note]] — `raw/notes/스레드_개념_기초부터_실무까지.md` (동시성 문제 재점검, concurrency-problem 원리 보강)
+- [[message-queue-note]] — `raw/notes/Message Queue.md` (Kafka 투입 대비 선행 학습 — MQ 기초 + RabbitMQ 46절 + Kafka 54절)
 
 ---
 
 ### 통계
 
-- 개념 페이지: 133
-- 흐름 페이지: 16
-- 소스 페이지: 39
-- 통합한 원본 수: 39
+- 개념 페이지: 145
+- 흐름 페이지: 19
+- 소스 페이지: 40
+- 통합한 원본 수: 40
