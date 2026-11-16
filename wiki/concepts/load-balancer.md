@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [system-design, load-balancing, scaling, high-availability]
-updated: 2026-05-21
-sources: ["raw/youtube/Load Balancing 로드 밸런싱이 뭔가요 쉽게 이해하는 로드 밸런서의 기초 개념과 역할 시스템 디자인.md"]
+updated: 2026-09-17
+sources: ["raw/youtube/Load Balancing 로드 밸런싱이 뭔가요 쉽게 이해하는 로드 밸런서의 기초 개념과 역할 시스템 디자인.md", "https://chatgpt.com/share/6aaba6cf-b6a4-83ee-aac2-421db98f1608"]
 ---
 
 # Load Balancer (로드 밸런서)
@@ -70,7 +70,10 @@ LB를 두는 순간 LB 자신이 새로운 [[high-availability|단일 장애점(
 | L7 LB | HTTP 헤더·URL·쿠키까지 본다 | [[nginx]], AWS ALB, HAProxy(HTTP) |
 
 L7은 "이 URL은 A 서버군으로, 이 헤더가 있으면 B 서버군으로" 같은 정교한 라우팅이 가능.
-영상의 모든 알고리즘은 보통 L7 LB에서 다뤄진다.
+Round Robin·Least Connection 등의 분배 알고리즘은 L4와 L7 양쪽에서 사용할 수 있다.
+L4/L7은 알고리즘의 종류보다 **어느 계층의 정보를 보고 분배하는가**의 구분이다.
+계층의 근거는 [[tcp-ip]], 헤더가 붙는 구조는 [[network-encapsulation]] 참고.
+이번 네트워크 연결 보강 출처: [[tcp-ip-dialogue]].
 
 ## 영균의 학습 맥락
 

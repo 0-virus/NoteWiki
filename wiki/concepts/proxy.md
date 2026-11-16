@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [system-design, network, proxy]
-updated: 2026-05-21
-sources: ["raw/youtube/Proxy(프록시)란 Forward vs Reverse Proxy 차이점은 무엇일까 시스템 디자인.md"]
+updated: 2026-09-17
+sources: ["raw/youtube/Proxy(프록시)란 Forward vs Reverse Proxy 차이점은 무엇일까 시스템 디자인.md", "https://chatgpt.com/share/6aaba6cf-b6a4-83ee-aac2-421db98f1608"]
 ---
 
 # Proxy (프록시)
@@ -77,6 +77,13 @@ sources: ["raw/youtube/Proxy(프록시)란 Forward vs Reverse Proxy 차이점은
 이름이 같은 이유: 두 것 모두 "진짜 대상 앞에 서서 대신 받아주는 중간자"라는 골격이 같아서다. 차이는 **적용되는 층**만 다르다.
 
 → [[aop]] 페이지에서 Spring AOP Proxy 동작 원리를 확인할 수 있다.
+
+## 전문을 HTTP/JSON으로 바꾼다면
+
+TCP 위 전용 전문을 받아 필드를 해석하고 HTTP/JSON으로 보내는 시스템은 중계에 더해
+[[protocol-gateway|프로토콜 게이트웨이]] 역할을 한다. 전문 변환은 애플리케이션 계층의
+작업이고, TCP/IP [[network-encapsulation|캡슐화]]는 변환 결과를 전송하는 아래 계층의 작업이다.
+외부와 내부는 별도의 연결로 동작한다 → [[tcp-to-http-gateway-flow]]. 출처: [[tcp-ip-dialogue]].
 
 ## 관련 페이지
 

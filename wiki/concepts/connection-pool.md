@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [database, jdbc, performance, infrastructure]
-updated: 2026-07-28
-sources: ["wiki/log.md#2026-05-27-hikaricp-query"]
+updated: 2026-09-17
+sources: ["wiki/log.md#2026-05-27-hikaricp-query", "https://chatgpt.com/share/6aaba6cf-b6a4-83ee-aac2-421db98f1608"]
 ---
 
 # Connection Pool (커넥션 풀)
@@ -125,6 +125,14 @@ try (Connection conn = dataSource.getConnection()) {
 - [[mybatis]]·[[spring-boot]] 실습 ([[mybatis-practice-debugging]]) 당시 영균이 의식
   못 한 채 이미 [[hikaricp]]를 쓰고 있었다 — Spring Boot가 자동 등록.
 - 다음 단계는 [[hikaricp]] 페이지에서 구현체 디테일로.
+
+## 네트워크 연결 재사용과의 연결
+
+앞서 나온 [[tcp]] 핸드셰이크·TLS 비용은 HTTP 클라이언트에서도 발생한다. HTTP 연결
+재사용은 이 비용을 줄이는 방식이고, TCP keepalive는 유휴 연결의 생존 확인이므로
+목적이 다르다. 풀 획득 대기 시간과 실제 소켓 연결·읽기 제한 시간도 구분해야 한다
+→ [[network-timeout]]. Controller 아래 통신 계층은 [[http-over-tcp-request-flow]] 참고.
+출처: [[tcp-ip-dialogue]].
 
 ## 관련 페이지
 

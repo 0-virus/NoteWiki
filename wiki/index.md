@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-09-07 (ingest: Message Queue 필기 — MQ 기초·RabbitMQ·Kafka)_
+_Last updated: 2026-09-17 (ingest: TCP/IP 공유 대화 — 계층·소켓·전문 ↔ HTTP 연동)_
 
 ---
 
@@ -115,6 +115,16 @@ _Last updated: 2026-09-07 (ingest: Message Queue 필기 — MQ 기초·RabbitMQ�
 - [[once-per-request-filter]] - Spring Web filter base class that runs once per request; useful for JWT filters
 - [[bean-validation]] — @Valid, @NotBlank vs @NotNull, Jakarta Bean Validation 어노테이션 정리
 
+### 네트워크 / TCP·IP·연동
+- [[tcp-ip]] — 4계층·OSI 대응, HTTP/TCP 관계, UDP·DNS와 주소 체계
+- [[tcp]] — 바이트 스트림, 연결·ACK·재전송·흐름/혼잡 제어·종료·keepalive
+- [[socket]] — 앱과 OS 통신의 경계, 포트·4-tuple·리스닝·루프백
+- [[tcp-message-framing]] — 부분 수신·연속 전문에서 한 건의 경계 찾기, 길이·인코딩
+- [[network-encapsulation]] — 계층별 헤더 추가와 전문 파싱·JSON 변환의 차이
+- [[ip-routing]] — 서브넷·다음 홉·ARP/MAC·TTL·NAT·MTU/MSS
+- [[network-timeout]] — 연결·읽기·쓰기·풀 대기 구분, 응답 실패와 업무 결과의 차이
+- [[protocol-gateway]] — 전용 TCP 전문과 HTTP/JSON 사이 변환, 별도 연결과 책임 경계
+
 ### 시스템 디자인 / 인프라
 - [[proxy]] — 네트워크 통신의 중간자, Forward와 Reverse는 위치만 다른 한 쌍
 - [[forward-proxy]] — 클라이언트 측 프록시, 사내망 게이트웨이·콘텐츠 필터링
@@ -192,6 +202,8 @@ _Last updated: 2026-09-07 (ingest: Message Queue 필기 — MQ 기초·RabbitMQ�
 
 ## 흐름 (Flows) — `flows/`
 
+- [[http-over-tcp-request-flow]] — DNS·라우팅·TCP·TLS·HTTP부터 Tomcat·Controller까지
+- [[tcp-to-http-gateway-flow]] — TCP 전문 수신·프레이밍·DTO/JSON 변환·HTTP 호출·응답 역변환
 - [[js-async-evolution]] — Callback → Promise → async/await 발전 흐름
 - [[npm-install-flow]] — package.json → lock → node_modules 설치·동기화
 - [[prisma-workflow]] — 설치 → init → schema → migrate → CRUD
@@ -214,6 +226,7 @@ _Last updated: 2026-09-07 (ingest: Message Queue 필기 — MQ 기초·RabbitMQ�
 
 ## 소스 (Sources) — `sources/`
 
+- [[tcp-ip-dialogue]] — ChatGPT 공유 URL 직접 인제스트 (TCP/IP 78절 + 전문 변환·헤더 추상화 문답)
 - [[css-cascade-priority]] — `raw/notes/CSS 참조 우선순위.md` (해커톤 CSS 우선순위 정리)
 - [[js-import-export]] — `raw/notes/JavaScript - Import와 export.md`
 - [[nodejs-dependency-management]] — `raw/notes/Node.js - node_modules와 의존성 관리.md`
@@ -259,7 +272,7 @@ _Last updated: 2026-09-07 (ingest: Message Queue 필기 — MQ 기초·RabbitMQ�
 
 ### 통계
 
-- 개념 페이지: 145
-- 흐름 페이지: 19
-- 소스 페이지: 40
-- 통합한 원본 수: 40
+- 개념 페이지: 153
+- 흐름 페이지: 21
+- 소스 페이지: 41
+- 통합한 원본 수: 41 (raw 원본 40 + 공유 URL 원본 1)

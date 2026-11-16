@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [serialization, encoding, data, jwt]
-updated: 2026-06-07
-sources: ["raw/notes/인증.md"]
+updated: 2026-09-17
+sources: ["raw/notes/인증.md", "https://chatgpt.com/share/6aaba6cf-b6a4-83ee-aac2-421db98f1608"]
 ---
 
 # 직렬화 (Serialization)
@@ -60,6 +60,13 @@ Base64URL: 바이너리/특수문자가 포함된 JSON을 URL-safe 문자열로 
 | XML | 태그 기반, 무거움 | 레거시 시스템, SOAP |
 | Base64 | 바이너리를 ASCII로 인코딩 | 이진 데이터 HTTP 전송 |
 | Protobuf | 이진 형식, 빠르고 작음 | gRPC, 고성능 시스템 |
+
+## 전문 → DTO → JSON에서의 위치
+
+[[tcp-to-http-gateway-flow]]에서는 먼저 [[tcp-message-framing]]으로 전문 한 건을 확보하고,
+필드를 파싱해 DTO에 매핑한 뒤 JSON으로 직렬화한다. JSON을 HTTP 본문에 넣어 전송할 때
+[[network-encapsulation]]이 그 아래에서 일어난다. **데이터 표현의 변환**과 **전송 계층의
+헤더 추가**는 다른 책임이다. 출처: [[tcp-ip-dialogue]].
 
 ## 관련 페이지
 

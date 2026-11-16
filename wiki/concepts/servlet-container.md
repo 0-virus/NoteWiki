@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [java, servlet, tomcat, web]
-updated: 2026-05-27
-sources: ["raw/dialogues/Servlet과 JSP의 차이 및 활용.md"]
+updated: 2026-09-17
+sources: ["raw/dialogues/Servlet과 JSP의 차이 및 활용.md", "https://chatgpt.com/share/6aaba6cf-b6a4-83ee-aac2-421db98f1608"]
 ---
 
 # Servlet Container (Tomcat)
@@ -59,6 +59,13 @@ Spring Boot는 이를 뒤집어 **Tomcat을 앱 안에 내장**시켰다.
 
 현재 **Tomcat으로 WAS 동작 원리를 실습 중** — 이 페이지가 그 실습의 "왜"에 해당한다.
 Tomcat을 손으로 만져보면, Spring Boot가 "내장 Tomcat"으로 감춘 것이 무엇인지 체감된다.
+
+## TCP 헤더까지 Tomcat이 만드는가
+
+일반적인 TCP 소켓에서는 OS 네트워크 스택이 헤더·ACK·재전송·순서 복원을 맡는다.
+Tomcat은 [[socket]]을 통해 연결을 받고 HTTP를 해석한다. 따라서 “Tomcat이 TCP 연결을
+수락한다”는 말과 “OS가 TCP 프로토콜을 구현한다”는 말은 서로 다른 층의 책임이다.
+Controller 앞의 전체 경로는 [[http-over-tcp-request-flow]], 새 문답 출처는 [[tcp-ip-dialogue]] 참고.
 
 ## 관련 페이지
 
