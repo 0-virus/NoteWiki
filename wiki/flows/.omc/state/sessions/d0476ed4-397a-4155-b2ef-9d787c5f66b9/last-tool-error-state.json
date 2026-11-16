@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"grep -rn \\\"^|.*\\\\[\\\\[[^]]*|\\\" wiki/concepts/message-queue.md wiki/concepts/dead-letter-queue.md wiki/concepts/message-delivery-semantics.md wiki/concepts/rabbitmq.md wiki/concepts/amqp-exc...",
+  "error": "Exit code 2\ngrep: wiki/concepts/message-queue.md: No such file or directory\ngrep: wiki/concepts/dead-letter-queue.md: No such file or directory\ngrep: wiki/concepts/message-delivery-semantics.md: No such file or directory\ngrep: wiki/concepts/rabbitmq.md: No such file or directory\ngrep: wiki/concepts/amqp-exchange.md: No such file or directory\ngrep: wiki/concepts/spring-amqp.md: No such file or directory\ngrep: wiki/concepts/kafka*.md: No such file or directory\ngrep: wiki/concepts/event-driven-arch...",
+  "timestamp": "2026-09-07T13:31:45.083Z",
+  "retry_count": 2
+}

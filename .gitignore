@@ -7,6 +7,3 @@
 # Output files (Except AGENTS.md)
 Output/*
 !Output/AGENTS.md
-
-# etc
-**/.omc/*
