@@ -4,9 +4,9 @@
 # Claude code: machine-local settings (permissions etc.)
 .claude/settings.local.json
 
-# Output files (Except CLAUDE.md)
+# Output files (Except AGENTS.md)
 Output/*
-!Output/CLAUDE.md
+!Output/AGENTS.md
 
 # etc
 **/.omc/*

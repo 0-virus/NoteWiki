@@ -1,6 +1,18 @@
-# Codex Ingest
+---
+name: ingest
+description: NoteWiki의 raw/ 새 원본이나 현재 대화를 wiki/로 인제스트할 때 사용한다. 사용자가 "ingest", "인제스트", "raw 반영", "대화 저장"을 요청하면 이 스킬을 따른다.
+---
+
+# NoteWiki Ingest Skill
 
 `raw/`의 새 원본을 `wiki/`에 반영하는 절차다.
+
+## 전제
+
+- 작업 루트는 NoteWiki 저장소다.
+- `raw/`는 사용자 소유의 불변 원본이므로 읽기만 하고 수정·삭제하지 않는다.
+- `wiki/`와 `Output/` 작업은 각 폴더의 `AGENTS.md` 규칙도 따른다.
+- 새 위키링크를 만들 때는 대상 페이지가 실제로 존재해야 한다.
 
 ## 모드
 
@@ -10,8 +22,8 @@
 
 ## 절차
 
-1. `wiki/index.md`, `wiki/log.md`, `raw/CLAUDE.md`, `wiki/CLAUDE.md`를 읽는다.
-2. `raw/`의 파일을 나열한다. `raw/CLAUDE.md`는 원본 대상에서 제외한다.
+1. `wiki/index.md`, `wiki/log.md`, `raw/AGENTS.md`, `wiki/AGENTS.md`를 읽는다.
+2. `raw/`의 파일을 나열한다. `raw/AGENTS.md`는 원본 대상에서 제외한다.
 3. `wiki/sources/` frontmatter의 `sources:`와 `wiki/log.md` ingest 기록을 대조해 미인제스트 원본을 찾는다.
 4. 대상이 없으면 사용자에게 보고하고 종료한다.
 5. 대상 원본을 읽는다. `raw/` 파일은 절대 수정하지 않는다.
@@ -28,37 +40,38 @@
 13. `wiki/log.md`에 `## [YYYY-MM-DD] ingest | <제목>` 항목을 append한다.
 14. 생성·갱신한 페이지와 핵심 연결을 사용자에게 간결히 보고한다.
 
-## 대화 저장 모드
-
-현재 대화를 원본으로 저장할 때는 아래 형식을 사용한다.
+## 대화 저장 모드 원본 형식
 
 ```markdown
 ---
-source_type: "codex-conversation"
+source_type: "agent-conversation"
 title: "<제목>"
 url: ""
 clipped: <YYYY-MM-DD>
 description: "<한 줄 요약>"
 status: "raw"
 tags:
-  - "clippings/codex"
+  - "clippings/agent"
 ---
+
 > [!info] 원본 대화
-> Codex 세션 — 공유 URL 없음
+> Agent 세션 — 공유 URL 없음
 
 ## 🗂 컨텍스트
+
 <한 줄 요약>
 
 ## 💬 대화 본문
+
 **You**
 
 <사용자 발화>
 
 ---
 
-**Codex**
+**Agent**
 
-<Codex 응답>
+<응답>
 
 ---
 

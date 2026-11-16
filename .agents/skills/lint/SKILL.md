@@ -1,4 +1,9 @@
-# Codex Lint
+---
+name: lint
+description: NoteWiki 전체 건강 점검을 수행할 때 사용한다. 깨진 위키링크, 고아 페이지, index/log 불일치, frontmatter 누락 등을 점검·수정한다.
+---
+
+# NoteWiki Lint Skill
 
 NoteWiki 전체 건강 점검 절차다. `raw/`는 수정하지 않고, 필요한 경우 `wiki/`와 지시 파일만 정리한다.
 
