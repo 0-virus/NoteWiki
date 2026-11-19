@@ -912,3 +912,16 @@ TCP 표준 RFC 9293·HTTP/3 표준 RFC 9114·Java InputStream 공식 문서로 �
 전체 콘텐츠의 index 등재 확인, 이번 log 항목의 링크 대상 확인. 실제 파일 수는
 개념 153·흐름 21·소스 41로 색인 통계와 일치하며 `git diff --check` 오류 없음.
 `raw/` 변경 없음.
+
+---
+
+## [2026-11-19] ingest | HCI 학습 노트 — 3-Tier·CI·HCI와 자원 확장
+
+원본은 `raw/notes/HCI_인프라_학습_정리.md`. 영균이 선택한 3-Tier·CI·HCI 비교를 중심으로, CPU·RAM과 스토리지가 각각 부족할 때의 증설 단위를 정리했다. 인프라 용어와 제품별 지원 조건은 일반적인 범위에서 다뤘다.
+
+- 소스 1개 — [[hci-infrastructure-note]]
+- 개념 8개 — [[data-center]], [[virtual-machine]], [[infrastructure-cluster]], [[software-defined-storage]], [[hyperconverged-infrastructure]], [[network-virtualization]], [[live-migration]], [[cloud-computing]]
+- 흐름 1개 — [[infrastructure-scaling-flow]]. 노드 한 대가 빠진 뒤 VM을 수용할 CPU·RAM과 복제 수준을 회복할 스토리지 용량을 각각 계산하고, 계획 점검과 갑작스러운 고장 시 서비스 복구를 연결했다.
+- 기존 페이지 2개 갱신 — [[high-availability]]에 VM 재시작과 앱 가용성의 차이를 추가하고, Active-Active 전환 시 감지·전환 지연이 생길 수 있다고 정정했다. [[container-virtualization]]에는 VM의 게스트 커널과 컨테이너의 커널 공유 관계를 연결했다.
+
+색인 집계는 개념 161개, 흐름 22개, 소스 42개다. 통합 원본 42건에는 `raw/` 41건과 직접 인제스트한 공유 URL 1건이 포함된다.

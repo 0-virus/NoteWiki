@@ -1,8 +1,8 @@
 ---
 type: concept
 tags: [docker, virtualization, container, os, namespace]
-updated: 2026-06-15
-sources: [raw/notes/docker.md]
+updated: 2026-11-19
+sources: [raw/notes/docker.md, raw/notes/HCI_인프라_학습_정리.md]
 ---
 
 # 컨테이너 가상화
@@ -19,7 +19,7 @@ sources: [raw/notes/docker.md]
 
 ### 왜 컨테이너가 VM보다 가볍나?
 
-VM은 게스트 운영체제 전체를 포함한다. 컨테이너는 호스트 OS 커널을 **공유**하고 프로세스 수준에서만 격리한다. 격리 메커니즘이 바로 **네임스페이스**.
+[[virtual-machine|VM]]은 독립적인 게스트 운영체제를 실행한다. 컨테이너는 호스트 OS 커널을 **공유**하며 프로세스 수준에서 격리한다. 격리 메커니즘 중 하나가 **네임스페이스**다. HCI에서 Docker를 VM 안에 실행하면 컨테이너는 해당 VM의 게스트 커널을 공유한다.
 
 ## 네임스페이스 (Namespace)
 

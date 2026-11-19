@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-09-17 (ingest: TCP/IP 공유 대화 — 계층·소켓·전문 ↔ HTTP 연동)_
+_Last updated: 2026-11-19 (ingest — 3-Tier·CI·HCI와 자원 확장)_
 
 ---
 
@@ -132,8 +132,16 @@ _Last updated: 2026-09-17 (ingest: TCP/IP 공유 대화 — 계층·소켓·전�
 - [[load-balancer]] — 여러 서버 앞단에서 요청을 분산하는 장치, 성능 + 고가용성
 - [[load-balancing-algorithm]] — Round Robin / Weighted RR / Least Connection / IP Hash
 - [[horizontal-vs-vertical-scaling]] — 한 대를 키우기 vs 여러 대로 늘리기
-- [[high-availability]] — SPOF를 없애는 다중화, Active-Active / Active-Passive
+- [[high-availability]] — SPOF·다중화, VM 재시작과 애플리케이션 가용성
 - [[nginx]] — 리버스 프록시·LB 대표 구현, 실습 가능한 설정 예시 수록
+- [[data-center]] — 서버 운영 시설, 전력·냉각·회선·코로케이션
+- [[virtual-machine]] — 하이퍼바이저·게스트 OS·vCPU 스케줄링과 자원 오버커밋
+- [[infrastructure-cluster]] — 호스트별 VM 배치 한계·장애 여유·정족수
+- [[software-defined-storage]] — 스토리지 풀·복제·실사용 용량과 복구 여유
+- [[hyperconverged-infrastructure]] — 3-Tier·CI·HCI 비교와 자원별 증설 단위
+- [[network-virtualization]] — vNIC·가상 스위치·VLAN·VXLAN, 물리 링크의 대역폭 공유
+- [[live-migration]] — VM 실행 상태를 옮기는 원리와 계획 점검의 조건
+- [[cloud-computing]] — 클라우드의 서비스 제공 특성과 HCI의 관계
 
 ### 컨테이너 / 배포 (Docker)
 - [[docker]] — Docker 전체 메타 페이지: 정의·내부 구성(dockerd·containerd·runc)·클라이언트-호스트-레지스트리 구조
@@ -223,9 +231,11 @@ _Last updated: 2026-09-17 (ingest: TCP/IP 공유 대화 — 계층·소켓·전�
 - [[rabbitmq-message-flow]] — Producer → Exchange → Queue → Consumer → ACK/DLQ, 단계별 "여기서 죽으면?" 대응표
 - [[kafka-event-flow]] — 이벤트 발행 → 파티션 적재 → 다중 Consumer Group 소비 → Replay 전체 경로
 - [[rabbitmq-vs-kafka]] — "지우는가 남기는가"에서 파생되는 전 항목 비교 + 선택 질문 5개
+- [[infrastructure-scaling-flow]] — CPU·RAM·스토리지 부족에서 출발해 3-Tier·CI·HCI의 증설과 노드 장애 여유를 계산
 
 ## 소스 (Sources) — `sources/`
 
+- [[hci-infrastructure-note]] — `raw/notes/HCI_인프라_학습_정리.md` (IDC부터 클라우드까지, 3-Tier·CI·HCI와 자원 확장 중심)
 - [[tcp-ip-dialogue]] — ChatGPT 공유 URL 직접 인제스트 (TCP/IP 78절 + 전문 변환·헤더 추상화 문답)
 - [[css-cascade-priority]] — `raw/notes/CSS 참조 우선순위.md` (해커톤 CSS 우선순위 정리)
 - [[js-import-export]] — `raw/notes/JavaScript - Import와 export.md`
@@ -272,7 +282,7 @@ _Last updated: 2026-09-17 (ingest: TCP/IP 공유 대화 — 계층·소켓·전�
 
 ### 통계
 
-- 개념 페이지: 153
-- 흐름 페이지: 21
-- 소스 페이지: 41
-- 통합한 원본 수: 41 (raw 원본 40 + 공유 URL 원본 1)
+- 개념 페이지: 161
+- 흐름 페이지: 22
+- 소스 페이지: 42
+- 통합한 원본 수: 42 (raw 원본 41 + 공유 URL 원본 1)
