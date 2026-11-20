@@ -3,7 +3,7 @@
 > 위키 전체 카탈로그. **Query 시 가장 먼저 읽는 파일.** Ingest/Query마다 AI가 갱신한다.
 > 형식: `- [[page-name]] — 한 줄 요약`
 
-_Last updated: 2026-11-19 (ingest — 3-Tier·CI·HCI와 자원 확장)_
+_Last updated: 2026-11-20 (query — IP 서브넷의 뜻과 같은 망 판단)_
 
 ---
 
@@ -122,6 +122,7 @@ _Last updated: 2026-11-19 (ingest — 3-Tier·CI·HCI와 자원 확장)_
 - [[tcp-message-framing]] — 부분 수신·연속 전문에서 한 건의 경계 찾기, 길이·인코딩
 - [[network-encapsulation]] — 계층별 헤더 추가와 전문 파싱·JSON 변환의 차이
 - [[ip-routing]] — 서브넷·다음 홉·ARP/MAC·TTL·NAT·MTU/MSS
+- [[vlan]] — L2 브로드캐스트 분리, access·trunk·802.1Q, 서브넷과의 차이
 - [[network-timeout]] — 연결·읽기·쓰기·풀 대기 구분, 응답 실패와 업무 결과의 차이
 - [[protocol-gateway]] — 전용 TCP 전문과 HTTP/JSON 사이 변환, 별도 연결과 책임 경계
 
@@ -210,6 +211,7 @@ _Last updated: 2026-11-19 (ingest — 3-Tier·CI·HCI와 자원 확장)_
 
 ## 흐름 (Flows) — `flows/`
 
+- [[vlan-to-routing-flow]] — 단말 access → trunk → L3 게이트웨이, 같은 VLAN·다른 VLAN 통신과 점검 순서
 - [[http-over-tcp-request-flow]] — DNS·라우팅·TCP·TLS·HTTP부터 Tomcat·Controller까지
 - [[tcp-to-http-gateway-flow]] — TCP 전문 수신·프레이밍·DTO/JSON 변환·HTTP 호출·응답 역변환
 - [[js-async-evolution]] — Callback → Promise → async/await 발전 흐름
@@ -235,6 +237,7 @@ _Last updated: 2026-11-19 (ingest — 3-Tier·CI·HCI와 자원 확장)_
 
 ## 소스 (Sources) — `sources/`
 
+- [[vlan-wikipedia-article]] — `raw/notes/가상 랜 - 위키백과, 우리 모두의 백과사전.md` (실무 VLAN·트렁크·라우팅 이해, 원문 보정 포함)
 - [[hci-infrastructure-note]] — `raw/notes/HCI_인프라_학습_정리.md` (IDC부터 클라우드까지, 3-Tier·CI·HCI와 자원 확장 중심)
 - [[tcp-ip-dialogue]] — ChatGPT 공유 URL 직접 인제스트 (TCP/IP 78절 + 전문 변환·헤더 추상화 문답)
 - [[css-cascade-priority]] — `raw/notes/CSS 참조 우선순위.md` (해커톤 CSS 우선순위 정리)
@@ -282,7 +285,7 @@ _Last updated: 2026-11-19 (ingest — 3-Tier·CI·HCI와 자원 확장)_
 
 ### 통계
 
-- 개념 페이지: 161
-- 흐름 페이지: 22
-- 소스 페이지: 42
-- 통합한 원본 수: 42 (raw 원본 41 + 공유 URL 원본 1)
+- 개념 페이지: 162
+- 흐름 페이지: 23
+- 소스 페이지: 43
+- 통합한 원본 수: 43 (raw 원본 42 + 공유 URL 원본 1)
